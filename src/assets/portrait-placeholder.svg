@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1125" fill="none">
+  <defs>
+    <radialGradient id="halo" cx="0" cy="0" r="1" gradientTransform="matrix(0 660 -530 0 450 480)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#d7eaff" stop-opacity=".22"/><stop offset=".48" stop-color="#6c9fff" stop-opacity=".07"/><stop offset="1" stop-color="#090b11" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="dots" width="13" height="13" patternUnits="userSpaceOnUse">
+      <circle cx="1.5" cy="1.5" r="1.15" fill="#eaf2ff" fill-opacity=".7"/>
+    </pattern>
+    <mask id="monogram" maskUnits="userSpaceOnUse" x="78" y="238" width="744" height="590" style="mask-type:luminance">
+      <rect x="78" y="238" width="744" height="590" fill="black"/>
+      <text x="450" y="675" text-anchor="middle" fill="white" font-family="Georgia,serif" font-size="420" font-style="italic" letter-spacing="-52">BH</text>
+    </mask>
+    <linearGradient id="edge" x1="110" y1="180" x2="790" y2="920" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#eaf2ff" stop-opacity=".52"/><stop offset=".52" stop-color="#a9c8ff" stop-opacity=".13"/><stop offset="1" stop-color="#eaf2ff" stop-opacity=".38"/>
+    </linearGradient>
+  </defs>
+  <rect width="900" height="1125" fill="#0b0d13"/>
+  <rect width="900" height="1125" fill="url(#halo)"/>
+  <circle cx="450" cy="510" r="338" stroke="#dce8ff" stroke-opacity=".14"/>
+  <circle cx="450" cy="510" r="284" stroke="#dce8ff" stroke-opacity=".09" stroke-dasharray="1 9"/>
+  <circle cx="450" cy="510" r="363" stroke="#dce8ff" stroke-opacity=".1" stroke-dasharray="1 16"/>
+  <path d="M450 110V910M50 510H850" stroke="#dce8ff" stroke-opacity=".12"/>
+  <path d="M450 142V184M450 836V878M82 510H124M776 510H818" stroke="#b9d0ff" stroke-width="2"/>
+  <rect x="78" y="238" width="744" height="590" fill="url(#dots)" mask="url(#monogram)" opacity=".92"/>
+  <text x="450" y="675" text-anchor="middle" fill="url(#edge)" font-family="Georgia,serif" font-size="420" font-style="italic" letter-spacing="-52">BH</text>
+  <path d="M165 956H735" stroke="#dce8ff" stroke-opacity=".28"/>
+  <path d="M165 956V946M735 956V946" stroke="#dce8ff" stroke-opacity=".5"/>
+  <text x="165" y="989" fill="#eaf2ff" fill-opacity=".62" font-family="monospace" font-size="13" letter-spacing="3">B / H</text>
+  <text x="735" y="989" text-anchor="end" fill="#eaf2ff" fill-opacity=".62" font-family="monospace" font-size="13" letter-spacing="3">KOCHI · INDIA</text>
+</svg>
+
