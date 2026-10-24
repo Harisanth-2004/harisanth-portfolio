@@ -142,7 +142,7 @@ export function Hero() {
       <div data-layer="eng" inert={mode !== "eng"} className="invisible absolute inset-0 z-10">
         <Schematic className="pointer-events-none absolute left-0 top-[10%] h-[42%] w-[min(100%,620px)] text-signal/35 sm:top-[8%] sm:h-[48%] lg:left-[2vw] lg:top-[14%] lg:h-[72%] lg:w-[min(47vw,660px)] lg:text-signal/45" />
         <figure aria-hidden="true" className="hero-portrait hero-portrait-eng">
-          <img src={portrait} alt="" width={1280} height={1280} loading="eager" decoding="async" />
+          <img src={portrait} alt="" width={800} height={800} loading="eager" decoding="async" />
         </figure>
         <div className="hero-scrim absolute inset-x-0 bottom-0 px-5 pb-6 pt-24 sm:px-8 lg:inset-y-0 lg:left-auto lg:right-[5vw] lg:flex lg:w-[min(40vw,560px)] lg:flex-col lg:justify-center lg:bg-none lg:px-0 lg:pb-0">
           <p data-stagger className="t-meta flex items-center gap-3 text-signal">
@@ -184,7 +184,7 @@ export function Hero() {
       {/* MANAGEMENT — enters from the left */}
       <div data-layer="mgmt" inert={mode !== "mgmt"} className="invisible absolute inset-0 z-10">
         <figure aria-hidden="true" className="hero-portrait hero-portrait-mgmt">
-          <img src={portrait} alt="" width={1280} height={1280} loading="eager" decoding="async" />
+          <img src={portrait} alt="" width={800} height={800} loading="eager" decoding="async" />
         </figure>
         <div className="hero-scrim absolute inset-x-0 bottom-0 px-5 pb-6 pt-24 sm:px-8 lg:inset-y-0 lg:left-[20vw] lg:right-auto lg:flex lg:w-[min(42vw,520px)] lg:flex-col lg:justify-center lg:bg-none lg:px-0 lg:pb-0">
           <p data-stagger className="font-sans text-sm text-signal">

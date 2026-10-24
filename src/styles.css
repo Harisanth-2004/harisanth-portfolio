@@ -577,3 +577,8 @@ html.dark[data-mode="mgmt"] {
   .section-top-management .section-strategy { display: none; }
 }
 
+/* Keep the desktop portrait fully visible; the mobile scrim was masking its lower half. */
+@media (min-width: 1024px) {
+  .hero-scrim { background: none; }
+}
+

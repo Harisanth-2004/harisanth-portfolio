@@ -11,7 +11,7 @@
         const theme = localStorage.getItem("bhk-theme");
         document.documentElement.classList.toggle(
           "dark",
-          theme === "dark" || (!theme && matchMedia("(prefers-color-scheme: dark)").matches),
+          theme === "dark",
         );
         const mode = localStorage.getItem("bhk-mode");
         document.documentElement.dataset.mode = mode === "eng" || mode === "mgmt" ? mode : "neutral";
