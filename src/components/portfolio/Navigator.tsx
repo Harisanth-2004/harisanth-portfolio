@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   ArrowUpRight,
   Award,
@@ -20,7 +20,13 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { CONTENT, PERSON, SECTIONS, type Mode, type SectionId } from "@/lib/portfolio-data";
+import {
+  CONTENT,
+  PERSON,
+  SECTIONS,
+  type Mode,
+  type SectionId,
+} from "@/lib/portfolio-data";
 import { scrollToSection, usePortfolio } from "./state";
 
 const SECTION_ICONS: Record<SectionId, LucideIcon> = {
@@ -43,9 +49,18 @@ function sectionIcon(id: SectionId, mode: Mode | "neutral"): LucideIcon {
 }
 
 export function Navigator() {
-  const { mode, setMode, theme, toggleTheme, active, setActive, navExpanded, setNavExpanded } =
-    usePortfolio();
+  const {
+    mode,
+    setMode,
+    theme,
+    toggleTheme,
+    active,
+    setActive,
+    navExpanded,
+    setNavExpanded,
+  } = usePortfolio();
   const menu = useRef<HTMLDivElement>(null);
+  const [mobileNavVisible, setMobileNavVisible] = useState(true);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -56,7 +71,9 @@ export function Navigator() {
       },
       { rootMargin: "-15% 0px -70% 0px", threshold: 0 },
     );
-    document.querySelectorAll("section[id]").forEach((el) => observer.observe(el));
+    document
+      .querySelectorAll("section[id]")
+      .forEach((el) => observer.observe(el));
     return () => observer.disconnect();
   }, [setActive]);
 
@@ -65,7 +82,9 @@ export function Navigator() {
     const close = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         setNavExpanded(false);
-        menu.current?.querySelector<HTMLButtonElement>("[aria-expanded]")?.focus();
+        menu.current
+          ?.querySelector<HTMLButtonElement>("[aria-expanded]")
+          ?.focus();
       }
     };
     const outside = (event: PointerEvent) => {
@@ -80,21 +99,46 @@ export function Navigator() {
     };
   }, [navExpanded, setNavExpanded]);
 
+  useEffect(() => {
+    let previousY = window.scrollY;
+    const onScroll = () => {
+      const currentY = window.scrollY;
+      const delta = currentY - previousY;
+      if (Math.abs(delta) < 6) return;
+      previousY = currentY;
+
+      if (navExpanded || menu.current?.contains(document.activeElement)) {
+        setMobileNavVisible(true);
+        return;
+      }
+      setMobileNavVisible(currentY < 80 || delta < 0);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [navExpanded]);
+
   const jump = (id: string) => {
     setNavExpanded(false);
     scrollToSection(id);
   };
-  const label = active === "achievements" && mode === "mgmt"
-    ? "Campus life"
-    : SECTIONS.find((s) => s.id === active)?.label ?? "Introduction";
-  const visibleSections = SECTIONS
-    .filter((section) => section.id !== "projects" || CONTENT[mode === "mgmt" ? "mgmt" : "eng"].projects.length > 0)
-    .map((section) => section.id === "achievements" && mode === "mgmt"
+  const label =
+    active === "achievements" && mode === "mgmt"
+      ? "Campus life"
+      : (SECTIONS.find((s) => s.id === active)?.label ?? "Introduction");
+  const visibleSections = SECTIONS.filter(
+    (section) =>
+      section.id !== "projects" ||
+      CONTENT[mode === "mgmt" ? "mgmt" : "eng"].projects.length > 0,
+  ).map((section) =>
+    section.id === "achievements" && mode === "mgmt"
       ? { ...section, label: "Campus life" }
-      : section);
+      : section,
+  );
   return (
     <>
-      <header className={`portfolio-header fixed inset-x-0 top-0 z-50 flex h-16 items-center justify-between border-b border-border px-5 sm:px-8 lg:px-[5vw] ${mode === "neutral" && active === "hero" ? "portfolio-header-cover" : ""}`}>
+      <header
+        className={`portfolio-header fixed inset-x-0 top-0 z-50 flex h-16 items-center justify-between border-b border-border px-5 sm:px-8 lg:px-[5vw] ${mode === "neutral" && active === "hero" ? "portfolio-header-cover" : ""}`}
+      >
         <Button
           variant="ghost"
           className="h-11 rounded-none px-0 font-grotesk text-sm hover:bg-transparent"
@@ -109,13 +153,19 @@ export function Navigator() {
           </span>
         </Button>
         <div className="flex shrink-0 items-center gap-1 sm:gap-4">
-          <div role="group" aria-label="Choose portfolio section" className="flex border border-border">
+          <div
+            role="group"
+            aria-label="Choose portfolio"
+            className="flex border border-border"
+          >
             {(["eng", "mgmt"] as const).map((m) => (
               <Button
                 key={m}
                 variant="ghost"
                 aria-pressed={(mode === "neutral" ? "eng" : mode) === m}
-                aria-label={m === "eng" ? "View B.Tech portfolio" : "View PGDM portfolio"}
+                aria-label={
+                  m === "eng" ? "View B.Tech portfolio" : "View PGDM portfolio"
+                }
                 onClick={() => setMode(m)}
                 className={`h-11 rounded-none px-3 font-mono text-[11px] ${mode === m ? "bg-foreground text-background hover:bg-foreground hover:text-background" : "text-muted-foreground"}`}
               >
@@ -127,7 +177,11 @@ export function Navigator() {
             variant="ghost"
             size="icon"
             className="size-11 rounded-none"
-            aria-label={theme === "dark" ? "Switch to light theme" : "Switch to dark theme"}
+            aria-label={
+              theme === "dark"
+                ? "Switch to light theme"
+                : "Switch to dark theme"
+            }
             title={theme === "dark" ? "Light theme" : "Dark theme"}
             onClick={toggleTheme}
           >
@@ -139,28 +193,44 @@ export function Navigator() {
         aria-label="Portfolio sections"
         className="portfolio-desktop-index fixed bottom-10 left-[5vw] z-40 hidden w-44 lg:block"
       >
-        <p className="t-meta mb-4 text-muted-foreground">Index / {mode === "mgmt" ? "02" : "01"}</p>
+        <p className="t-meta mb-4 text-muted-foreground">
+          Index / {mode === "mgmt" ? "02" : "01"}
+        </p>
         {visibleSections.map((section, index) => {
           const Icon = sectionIcon(section.id, mode);
           return (
-          <Button
-            variant="ghost"
-            key={section.id}
-            onClick={() => jump(section.id)}
-            aria-current={active === section.id ? "location" : undefined}
-            className={`group flex h-11 w-full justify-start gap-3 rounded-none px-0 text-xs hover:bg-transparent ${active === section.id ? "text-foreground" : "text-muted-foreground hover:text-foreground"}`}
-          >
-            <span
-              className={`h-px transition-all duration-500 ${active === section.id ? "w-5 bg-signal" : "w-2 bg-border group-hover:w-5"}`}
-            />
-            <Icon aria-hidden="true" size={15} strokeWidth={1.5} className={active === section.id ? "text-signal" : "text-muted-foreground/70 group-hover:text-foreground"} />
-            <span>{String(index + 1).padStart(2, "0")}</span>
-            <span>{section.label}</span>
-          </Button>
+            <Button
+              variant="ghost"
+              key={section.id}
+              onClick={() => jump(section.id)}
+              aria-current={active === section.id ? "location" : undefined}
+              className={`group flex h-11 w-full justify-start gap-3 rounded-none px-0 text-xs hover:bg-transparent ${active === section.id ? "text-foreground" : "text-muted-foreground hover:text-foreground"}`}
+            >
+              <span
+                className={`h-px transition-all duration-500 ${active === section.id ? "w-5 bg-signal" : "w-2 bg-border group-hover:w-5"}`}
+              />
+              <Icon
+                aria-hidden="true"
+                size={15}
+                strokeWidth={1.5}
+                className={
+                  active === section.id
+                    ? "text-signal"
+                    : "text-muted-foreground/70 group-hover:text-foreground"
+                }
+              />
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <span>{section.label}</span>
+            </Button>
           );
         })}
       </nav>
-      <div ref={menu} className="portfolio-mobile-index fixed inset-x-5 bottom-[calc(1rem+env(safe-area-inset-bottom))] z-50 sm:inset-x-8 lg:hidden">
+      <div
+        ref={menu}
+        data-hidden={!mobileNavVisible && !navExpanded ? "true" : undefined}
+        onFocusCapture={() => setMobileNavVisible(true)}
+        className="portfolio-mobile-index fixed inset-x-5 bottom-[calc(1rem+env(safe-area-inset-bottom))] z-50 sm:inset-x-8 lg:hidden"
+      >
         {navExpanded && (
           <nav
             id="mobile-sections"
@@ -171,18 +241,27 @@ export function Navigator() {
               const Icon = sectionIcon(section.id, mode);
               return (
                 <Button
-                key={section.id}
-                variant="ghost"
-                onClick={() => jump(section.id)}
-                aria-current={active === section.id ? "location" : undefined}
-                className={`h-12 justify-start rounded-none ${active === section.id ? "text-signal" : "text-foreground"}`}
-              >
-                <span className="t-meta text-muted-foreground">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <Icon aria-hidden="true" size={16} strokeWidth={1.5} className={active === section.id ? "text-signal" : "text-muted-foreground"} />
-                {section.label}
-                <ArrowUpRight className="ml-auto" />
+                  key={section.id}
+                  variant="ghost"
+                  onClick={() => jump(section.id)}
+                  aria-current={active === section.id ? "location" : undefined}
+                  className={`h-12 justify-start rounded-none ${active === section.id ? "text-signal" : "text-foreground"}`}
+                >
+                  <span className="t-meta text-muted-foreground">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <Icon
+                    aria-hidden="true"
+                    size={16}
+                    strokeWidth={1.5}
+                    className={
+                      active === section.id
+                        ? "text-signal"
+                        : "text-muted-foreground"
+                    }
+                  />
+                  {section.label}
+                  <ArrowUpRight className="ml-auto" />
                 </Button>
               );
             })}
@@ -192,7 +271,10 @@ export function Navigator() {
           variant="outline"
           aria-expanded={navExpanded}
           aria-controls={navExpanded ? "mobile-sections" : undefined}
-          onClick={() => setNavExpanded(!navExpanded)}
+          onClick={() => {
+            setMobileNavVisible(true);
+            setNavExpanded(!navExpanded);
+          }}
           className="portfolio-header h-12 w-full justify-between rounded-none px-4"
         >
           <span className="t-meta text-muted-foreground">Index</span>
@@ -203,4 +285,3 @@ export function Navigator() {
     </>
   );
 }
-

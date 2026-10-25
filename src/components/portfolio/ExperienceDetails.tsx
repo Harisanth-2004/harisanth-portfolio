@@ -61,4 +61,3 @@ export function ExperienceDetails({ open, children }: { open: boolean; children:
     </AccordionPrimitive.Content>
   );
 }
-

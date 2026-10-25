@@ -7,7 +7,13 @@ import { Schematic } from "./Schematic";
 import { scrollToSection, usePortfolio } from "./state";
 import portrait from "@/assets/harisanth-portrait-cutout.png";
 
-function Lines({ lines, className = "" }: { lines: string[]; className?: string }) {
+function Lines({
+  lines,
+  className = "",
+}: {
+  lines: string[];
+  className?: string;
+}) {
   return (
     <>
       {lines.map((l, i) => (
@@ -44,7 +50,9 @@ export function Hero() {
         animation.current?.kill();
         gsap.killTweensOf([
           ...layers,
-          ...q(".line-inner, [data-stagger], [data-path], [data-rule], [data-curtain]"),
+          ...q(
+            ".line-inner, [data-stagger], [data-path], [data-rule], [data-curtain]",
+          ),
         ]);
         // Clear interrupted child reveals before selecting the newest scene.
         gsap.set(q(".line-inner, [data-stagger], [data-rule]"), {
@@ -52,12 +60,19 @@ export function Hero() {
         });
         gsap.set(title, { clearProps: "transform,opacity,visibility" });
         if (intro) {
-          gsap.set(title, { autoAlpha: 0, scale: 0.94, y: 12, transformOrigin: "50% 60%" });
+          gsap.set(title, {
+            autoAlpha: 0,
+            scale: 0.94,
+            y: 12,
+            transformOrigin: "50% 60%",
+          });
         }
         gsap.set(q("[data-path]"), { strokeDashoffset: 0 });
         gsap.set(layers, { autoAlpha: 0, x: 0, y: 0 });
         gsap.set(show, { autoAlpha: 1 });
-        const tl = gsap.timeline({ defaults: { ease: "power2.out", overwrite: "auto" } });
+        const tl = gsap.timeline({
+          defaults: { ease: "power2.out", overwrite: "auto" },
+        });
         animation.current = tl;
         if (first.current && !reduce) {
           tl.to(q("[data-curtain]"), { scaleY: 0, duration: 0.3 }, 0);
@@ -70,7 +85,17 @@ export function Hero() {
             first.current ? 0.08 : 0,
           );
           if (intro) {
-            tl.to(title, { autoAlpha: 1, scale: 1, y: 0, duration: 0.62, ease: "expo.out" }, 0.18);
+            tl.to(
+              title,
+              {
+                autoAlpha: 1,
+                scale: 1,
+                y: 0,
+                duration: 0.62,
+                ease: "expo.out",
+              },
+              0.18,
+            );
           }
         }
         const scrollContext = gsap.context(() => {
@@ -82,7 +107,12 @@ export function Hero() {
                 yPercent: -7,
                 autoAlpha: 0.28,
                 ease: "none",
-                scrollTrigger: { trigger: root.current, start: "top top", end: "bottom top", scrub: 0.4 },
+                scrollTrigger: {
+                  trigger: root.current,
+                  start: "top top",
+                  end: "bottom top",
+                  scrub: 0.4,
+                },
               },
             );
           }
@@ -123,58 +153,104 @@ export function Hero() {
       </div>
 
       {/* NEUTRAL */}
-      <div data-layer="neutral" inert={mode !== "neutral"} className="absolute inset-0 z-10">
+      <div
+        data-layer="neutral"
+        inert={mode !== "neutral"}
+        className="absolute inset-0 z-10"
+      >
         <div className="cover-meta absolute inset-x-5 top-[38%] flex items-center justify-between gap-6 sm:inset-x-8 lg:inset-x-[5vw]">
-          <p data-stagger className="max-w-[38ch] text-sm sm:text-base">Electrical Engineer / Management Student / Project Coordinator</p>
-          <p data-stagger className="hidden text-right text-sm sm:block">{PERSON.location} &nbsp; / &nbsp; Portfolio 2026</p>
+          <p data-stagger className="max-w-[38ch] text-sm sm:text-base">
+            Electrical Engineer / Management Student / Project Coordinator
+          </p>
+          <p data-stagger className="hidden text-right text-sm sm:block">
+            {PERSON.location} &nbsp; / &nbsp; Portfolio 2026
+          </p>
         </div>
 
         <div data-cover-scroll className="absolute inset-x-0 bottom-0">
-          <h1 data-intro-title className="cover-title font-grotesk font-semibold text-foreground">
+          <h1
+            data-intro-title
+            className="cover-title font-grotesk font-semibold text-foreground"
+          >
             <span className="sr-only">Portfolio — {PERSON.name}</span>
             <span aria-hidden="true">PORTFOLIO</span>
           </h1>
         </div>
-
       </div>
 
       {/* ENGINEERING — enters from the right */}
-      <div data-layer="eng" inert={mode !== "eng"} className="invisible absolute inset-0 z-10">
-        <Schematic className="pointer-events-none absolute left-0 top-[10%] h-[42%] w-[min(100%,620px)] text-signal/35 sm:top-[8%] sm:h-[48%] lg:left-[2vw] lg:top-[14%] lg:h-[72%] lg:w-[min(47vw,660px)] lg:text-signal/45" />
+      <div
+        data-layer="eng"
+        inert={mode !== "eng"}
+        className="invisible absolute inset-0 z-10"
+      >
+        <Schematic className="pointer-events-none absolute left-0 top-[10%] h-[42%] w-[min(100%,620px)] text-signal/20 sm:top-[8%] sm:h-[48%] lg:left-[2vw] lg:top-[14%] lg:h-[72%] lg:w-[min(47vw,660px)] lg:text-signal/25" />
         <figure aria-hidden="true" className="hero-portrait hero-portrait-eng">
-          <img src={portrait} alt="" width={800} height={800} loading="eager" decoding="async" />
+          <img
+            src={portrait}
+            alt=""
+            width={800}
+            height={800}
+            loading="eager"
+            decoding="async"
+          />
         </figure>
         <div className="hero-scrim absolute inset-x-0 bottom-0 px-5 pb-6 pt-24 sm:px-8 lg:inset-y-0 lg:left-auto lg:right-[5vw] lg:flex lg:w-[min(40vw,560px)] lg:flex-col lg:justify-center lg:bg-none lg:px-0 lg:pb-0">
-          <p data-stagger className="t-meta flex items-center gap-3 text-signal">
+          <p
+            data-stagger
+            className="t-meta flex items-center gap-3 text-signal"
+          >
             <span className="inline-block h-px w-8 bg-signal" />
             {eng.hero.meta}
           </p>
-          <h2 className="t-headline mt-5 font-grotesk">
+          <h1 className="t-headline mt-5 font-grotesk">
             <Lines lines={eng.hero.lines} />
-          </h2>
-          <p data-stagger className="t-body mt-6 max-w-[42ch] text-muted-foreground">
+          </h1>
+          <p
+            data-stagger
+            className="t-body mt-6 max-w-[42ch] text-muted-foreground"
+          >
             {eng.hero.summary}
           </p>
-          <div data-stagger className="mt-8 flex flex-wrap gap-3">
+          <div
+            data-stagger
+            className="hero-cta-group mt-8 flex flex-wrap gap-3"
+          >
             <HeroCta onClick={() => scrollToSection("about")} primary>
               Explore engineering
             </HeroCta>
-            <HeroCta onClick={() => setMode("mgmt")}>Switch to PGDM →</HeroCta>
+            <HeroCta onClick={() => setMode("mgmt")}>
+              <span className="hero-cta-full">Switch to PGDM →</span>
+              <span className="hero-cta-short">PGDM →</span>
+            </HeroCta>
           </div>
           <dl
             data-stagger
             className="t-meta mt-10 hidden grid-cols-3 gap-6 border-t border-border pt-4 text-muted-foreground lg:grid"
           >
             <div>
-              <dt className="inline-flex items-center gap-2"><CircleDollarSign size={14} strokeWidth={1.5} aria-hidden="true" />Grants</dt>
+              <dt className="inline-flex items-center gap-2">
+                <CircleDollarSign
+                  size={14}
+                  strokeWidth={1.5}
+                  aria-hidden="true"
+                />
+                Grants
+              </dt>
               <dd className="mt-1 text-foreground">$2,500</dd>
             </div>
             <div>
-              <dt className="inline-flex items-center gap-2"><UsersRound size={14} strokeWidth={1.5} aria-hidden="true" />Largest event</dt>
+              <dt className="inline-flex items-center gap-2">
+                <UsersRound size={14} strokeWidth={1.5} aria-hidden="true" />
+                Largest event
+              </dt>
               <dd className="mt-1 text-foreground">4,000+</dd>
             </div>
             <div>
-              <dt className="inline-flex items-center gap-2"><Trophy size={14} strokeWidth={1.5} aria-hidden="true" />SAUVC 2026</dt>
+              <dt className="inline-flex items-center gap-2">
+                <Trophy size={14} strokeWidth={1.5} aria-hidden="true" />
+                SAUVC 2026
+              </dt>
               <dd className="mt-1 text-foreground">Top 8</dd>
             </div>
           </dl>
@@ -182,27 +258,47 @@ export function Hero() {
       </div>
 
       {/* MANAGEMENT — enters from the left */}
-      <div data-layer="mgmt" inert={mode !== "mgmt"} className="invisible absolute inset-0 z-10">
+      <div
+        data-layer="mgmt"
+        inert={mode !== "mgmt"}
+        className="invisible absolute inset-0 z-10"
+      >
         <figure aria-hidden="true" className="hero-portrait hero-portrait-mgmt">
-          <img src={portrait} alt="" width={800} height={800} loading="eager" decoding="async" />
+          <img
+            src={portrait}
+            alt=""
+            width={800}
+            height={800}
+            loading="eager"
+            decoding="async"
+          />
         </figure>
         <div className="hero-scrim absolute inset-x-0 bottom-0 px-5 pb-6 pt-24 sm:px-8 lg:inset-y-0 lg:left-[20vw] lg:right-auto lg:flex lg:w-[min(42vw,520px)] lg:flex-col lg:justify-center lg:bg-none lg:px-0 lg:pb-0">
           <p data-stagger className="font-sans text-sm text-signal">
             {mgmt.hero.meta}
           </p>
           <span data-rule className="mt-4 block h-px w-full bg-foreground/30" />
-          <h2 className="management-headline mt-6 font-grotesk font-medium">
-            <Lines lines={mgmt.hero.lines.slice(0, 2)} />
-            <Lines lines={mgmt.hero.lines.slice(2)} className="text-signal" />
-          </h2>
-          <p data-stagger className="t-body mt-6 max-w-[40ch] text-muted-foreground">
+          <h1 className="management-headline mt-6 font-grotesk font-medium">
+            <Lines lines={mgmt.hero.lines.slice(0, 1)} />
+            <Lines lines={mgmt.hero.lines.slice(1)} className="text-signal" />
+          </h1>
+          <p
+            data-stagger
+            className="t-body mt-6 max-w-[40ch] text-muted-foreground"
+          >
             {mgmt.hero.summary}
           </p>
-          <div data-stagger className="mt-8 flex flex-wrap gap-3">
+          <div
+            data-stagger
+            className="hero-cta-group mt-8 flex flex-wrap gap-3"
+          >
             <HeroCta onClick={() => scrollToSection("about")} primary>
-              Read the profile
+              Read profile
             </HeroCta>
-            <HeroCta onClick={() => setMode("eng")}>← Switch to B.Tech</HeroCta>
+            <HeroCta onClick={() => setMode("eng")}>
+              <span className="hero-cta-full">← Switch to B.Tech</span>
+              <span className="hero-cta-short">← B.Tech</span>
+            </HeroCta>
           </div>
         </div>
       </div>
@@ -239,4 +335,3 @@ function HeroCta({
     </Button>
   );
 }
-

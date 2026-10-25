@@ -36,6 +36,9 @@ export function PortfolioProvider({ children }: { children: ReactNode }) {
   const [navExpanded, setNavExpanded] = useState(false);
   const reading = useRef<{ element: HTMLElement; offset: number } | null>(null);
   const currentMode = useRef<ViewMode>("neutral");
+  const themeTransitionTimer = useRef<ReturnType<typeof setTimeout> | null>(
+    null,
+  );
 
   useEffect(() => {
     const root = document.documentElement;
@@ -51,11 +54,19 @@ export function PortfolioProvider({ children }: { children: ReactNode }) {
   const setMode = useCallback((m: ViewMode) => {
     if (currentMode.current === m) return;
     // Preserve the section-relative reading position when content heights change.
-    const sections = Array.from(document.querySelectorAll<HTMLElement>("section[id]"));
-    const anchor = m === "neutral" ? undefined : sections
-      .map((element) => ({ element, top: element.getBoundingClientRect().top }))
-      .filter(({ top }) => top <= 90)
-      .at(-1);
+    const sections = Array.from(
+      document.querySelectorAll<HTMLElement>("section[id]"),
+    );
+    const anchor =
+      m === "neutral"
+        ? undefined
+        : sections
+            .map((element) => ({
+              element,
+              top: element.getBoundingClientRect().top,
+            }))
+            .filter(({ top }) => top <= 90)
+            .at(-1);
     if (!reading.current && anchor && anchor.element.id !== "hero") {
       reading.current = {
         element: anchor.element,
@@ -80,21 +91,48 @@ export function PortfolioProvider({ children }: { children: ReactNode }) {
     if (!snapshot) return;
     const rect = snapshot.element.getBoundingClientRect();
     const offset = Math.min(snapshot.offset, Math.max(0, rect.height - 120));
-    window.scrollTo({ top: window.scrollY + rect.top + offset - 90, behavior: "instant" });
+    window.scrollTo({
+      top: window.scrollY + rect.top + offset - 90,
+      behavior: "instant",
+    });
   }, [mode, ready]);
 
   const toggleTheme = useCallback(() => {
-    setTheme((t) => {
-      const next = t === "dark" ? "light" : "dark";
-      document.documentElement.classList.toggle("dark", next === "dark");
-      try {
-        localStorage.setItem("bhk-theme", next);
-      } catch {
-        /* Theme still works without storage. */
-      }
-      return next;
-    });
-  }, []);
+    const next = theme === "dark" ? "light" : "dark";
+    const root = document.documentElement;
+    if (themeTransitionTimer.current)
+      clearTimeout(themeTransitionTimer.current);
+
+    const reducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    if (reducedMotion) {
+      delete root.dataset["themeTransitioning"];
+      themeTransitionTimer.current = null;
+    } else {
+      root.dataset["themeTransitioning"] = "true";
+      themeTransitionTimer.current = setTimeout(() => {
+        delete root.dataset["themeTransitioning"];
+        themeTransitionTimer.current = null;
+      }, 360);
+    }
+
+    root.classList.toggle("dark", next === "dark");
+    try {
+      localStorage.setItem("bhk-theme", next);
+    } catch {
+      /* Theme still works without storage. */
+    }
+    setTheme(next);
+  }, [theme]);
+
+  useEffect(
+    () => () => {
+      if (themeTransitionTimer.current)
+        clearTimeout(themeTransitionTimer.current);
+    },
+    [],
+  );
 
   return (
     <PortfolioContext.Provider
@@ -117,7 +155,8 @@ export function PortfolioProvider({ children }: { children: ReactNode }) {
 
 export function usePortfolio() {
   const ctx = useContext(PortfolioContext);
-  if (!ctx) throw new Error("usePortfolio must be used inside PortfolioProvider");
+  if (!ctx)
+    throw new Error("usePortfolio must be used inside PortfolioProvider");
   return ctx;
 }
 
@@ -135,6 +174,8 @@ export function scrollToSection(id: string) {
     top: el.getBoundingClientRect().top + window.scrollY - 80,
     behavior: reduce ? "instant" : "smooth",
   });
-  focusTimer = setTimeout(() => heading?.focus({ preventScroll: true }), reduce ? 0 : 400);
+  focusTimer = setTimeout(
+    () => heading?.focus({ preventScroll: true }),
+    reduce ? 0 : 400,
+  );
 }
-

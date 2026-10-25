@@ -73,10 +73,30 @@ export type Experience = {
   placeholder?: boolean;
 };
 
-export type Education = { degree: string; institution: string; period: string; note?: string };
-export type ClubActivity = { club: string; role: string; period: string; summary: string };
-export type SkillGroup = { group: string; items: string[]; placeholder?: boolean };
-export type Cert = { name: string; issuer: string; issued?: string; note?: string };
+export type Education = {
+  degree: string;
+  institution: string;
+  period: string;
+  note?: string;
+};
+export type ClubActivity = {
+  club: string;
+  role: string;
+  period: string;
+  summary: string;
+};
+export type SkillGroup = {
+  group: string;
+  items: string[];
+  placeholder?: boolean;
+};
+export type Cert = {
+  name: string;
+  issuer: string;
+  issued?: string;
+  note?: string;
+  image?: string;
+};
 export type Achievement = {
   value?: number;
   prefix?: string;
@@ -125,7 +145,8 @@ export const CONTENT: Record<Mode, ModeContent> = {
     education: [
       {
         degree: "B.Tech in Electrical and Electronics Engineering",
-        institution: "Muthoot Institute of Technology and Science (MITS), Varikoli",
+        institution:
+          "Muthoot Institute of Technology and Science (MITS), Varikoli",
         period: "2022 — 2026",
       },
       {
@@ -140,7 +161,8 @@ export const CONTENT: Record<Mode, ModeContent> = {
         title: "Industrial Internships",
         org: "Cochin Shipyard Ltd · KEL, Mamala · KSEB, Mattanchery · FACT",
         date: "2024 — 2025",
-        summary: "Hands-on training across power distribution, electrical manufacturing, high-voltage systems and shipbuilding.",
+        summary:
+          "Hands-on training across power distribution, electrical manufacturing, high-voltage systems and shipbuilding.",
         details: [
           "FACT — Training in high-voltage substations and protection, industrial motors, power-factor correction and capacitor banks, electrical safety, and power purchase and billing. Observed ELCB operation and a 3.3 kV motor test.",
           "KSEB — Exposure to electricity distribution, SCADA, substations and reading single-line diagrams.",
@@ -150,18 +172,49 @@ export const CONTENT: Record<Mode, ModeContent> = {
       },
     ],
     clubs: [
-      { club: "IEEE Robotics and Automation Society SBC, MITS", role: "Technical Coordinator", period: "Feb 2024 — Feb 2025", summary: "Secured $2,500 in grants; coordinated CORE 2024 and Automaze; led the technical team for YESS 2024 (4,000+ participants)." },
-      { club: "IEDC MITS", role: "Chief Marketing Officer", period: "Feb 2025 — Mar 2026", summary: "Secured ₹10,000 in sponsorship; led marketing and built KSUM Calicut and industry relationships." },
-      { club: "National Service Scheme, MITS", role: "Design Team Lead", period: "Apr 2024 — Jun 2025", summary: "Led a team producing posters and digital communication assets." },
-      { club: "SIEP Electric Dirt Bike Challenge", role: "Financial Manager", period: "Oct 2025 — Apr 2026", summary: "Managed the project budget, a €1,000 ESIGELEC grant, sponsorships, procurement and supplier payments." },
-      { club: "SAUVC Competition 2026", role: "Active Mentor", period: "2026", summary: "Mentored a team to a top-eight finish; one of four Indian teams selected." },
+      {
+        club: "IEEE Robotics and Automation Society SBC, MITS",
+        role: "Technical Coordinator",
+        period: "Feb 2024 — Feb 2025",
+        summary:
+          "Secured $2,500 in grants; coordinated CORE 2024 and Automaze; led the technical team for YESS 2024 (4,000+ participants).",
+      },
+      {
+        club: "IEDC MITS",
+        role: "Chief Marketing Officer",
+        period: "Feb 2025 — Mar 2026",
+        summary:
+          "Secured ₹10,000 in sponsorship; led marketing and built KSUM Calicut and industry relationships.",
+      },
+      {
+        club: "National Service Scheme, MITS",
+        role: "Design Team Lead",
+        period: "Apr 2024 — Jun 2025",
+        summary:
+          "Led a team producing posters and digital communication assets.",
+      },
+      {
+        club: "SIEP Electric Dirt Bike Challenge",
+        role: "Financial Manager",
+        period: "Oct 2025 — Apr 2026",
+        summary:
+          "Managed the project budget, a €1,000 ESIGELEC grant, sponsorships, procurement and supplier payments.",
+      },
+      {
+        club: "SAUVC Competition 2026",
+        role: "Active Mentor",
+        period: "2026",
+        summary:
+          "Mentored a team to a top-eight finish; one of four Indian teams selected.",
+      },
     ],
     projects: [
       {
         id: "p1",
         title: "Final-Year Engineering Project",
         kind: "B.Tech capstone · report pending",
-        summary: "A public case study will be added after the final-year project report has been submitted.",
+        summary:
+          "A public case study will be added after the final-year project report has been submitted.",
         points: [],
         status: "Case study after report submission",
       },
@@ -176,7 +229,10 @@ export const CONTENT: Record<Mode, ModeContent> = {
           "Technical Logistics",
         ],
       },
-      { group: "Creative", items: ["Content Creation", "Design", "Visual Communication"] },
+      {
+        group: "Creative",
+        items: ["Content Creation", "Design", "Visual Communication"],
+      },
       { group: "Tools", items: ["Power BI · foundational"] },
       { group: "Languages", items: PERSON.languages },
     ],
@@ -191,6 +247,7 @@ export const CONTENT: Record<Mode, ModeContent> = {
         issuer: "Cambridge English Assessment",
         issued: "Jul 2023",
         note: "Business English · B2 · Overall score 174",
+        image: "/certificates/linguaskill.jpg",
       },
       {
         name: "Career Essentials in Generative AI",
@@ -206,23 +263,27 @@ export const CONTENT: Record<Mode, ModeContent> = {
         name: "Introduction to Soft Computing",
         issuer: "NPTEL · IIT Kharagpur",
         issued: "Jan–Mar 2025",
+        image: "/certificates/soft-computing.jpg",
       },
       {
         name: "EV: Vehicle Dynamics and Electric Motor Drives",
         issuer: "NPTEL · IIT Madras",
         issued: "Jan–Apr 2026",
+        image: "/certificates/ev-motor-drives.jpg",
       },
       {
         name: "Unmanned Aerial Vehicle Technology",
-        issuer: "Fuselage Flying Club · MITS",
+        issuer: "Fuselage Innovations Pvt. Ltd.",
         issued: "Dec 2025",
         note: "Five-day hands-on training in UAV design, assembly and applications.",
+        image: "/certificates/uav-technology.jpg",
       },
       {
         name: "Power BI for Beginners",
         issuer: "Simplilearn SkillUp",
         issued: "Jun 2026",
         note: "Course completion; not an official Microsoft certification.",
+        image: "/certificates/power-bi-beginners.jpg",
       },
     ],
     achievements: [
@@ -237,10 +298,19 @@ export const CONTENT: Record<Mode, ModeContent> = {
         value: 4000,
         suffix: "+",
         label: "Participants · YESS 2024",
-        context: "Led the technical team for the flagship summit of IEEE Kerala Section.",
+        context:
+          "Led the technical team for the flagship summit of IEEE Kerala Section.",
       },
-      { value: 200, label: "Participants · CORE 2024", context: "Technical conclave coordinated." },
-      { value: 50, label: "Students · Automaze", context: "Robotics bootcamp coordinated." },
+      {
+        value: 200,
+        label: "Participants · CORE 2024",
+        context: "Technical conclave coordinated.",
+      },
+      {
+        value: 50,
+        label: "Students · Automaze",
+        context: "Robotics bootcamp coordinated.",
+      },
       {
         value: 8,
         prefix: "Top ",
@@ -254,10 +324,10 @@ export const CONTENT: Record<Mode, ModeContent> = {
     label: "Management",
     short: "MGMT",
     hero: {
-      meta: "Mode 02 — PGDM, Muthoot Business School · 2026–2028",
-      lines: ["Strategy,", "marketing", "& brand."],
+      meta: "Muthoot Business School · 2026–2028",
+      lines: ["PGDM at", "MBS."],
       summary:
-        "PGDM student with experience in MarCom & Brand at Muthoot Finance, now continuing with the same team in a work-integrated role.",
+        "Strategy, marketing & brand, grounded in MarCom & Brand experience at Muthoot Finance.",
     },
     about: ABOUT.mgmt,
     education: [
@@ -339,17 +409,36 @@ export const CONTENT: Record<Mode, ModeContent> = {
           "Stakeholder Engagement",
         ],
       },
-      { group: "Data & Reporting", items: ["Data Reporting", "Financial Record Maintenance"] },
+      {
+        group: "Data & Reporting",
+        items: ["Data Reporting", "Financial Record Maintenance"],
+      },
       { group: "Languages", items: PERSON.languages },
     ],
     certifications: [
-      { name: "Marketing Management I", issuer: "NPTEL · IIT Kanpur", issued: "Aug–Oct 2025", note: "Elite certificate · 84%" },
-      { name: "Marketing Management II", issuer: "NPTEL · IIT Kanpur", issued: "Feb–Apr 2026", note: "Elite certificate · 75%" },
+      {
+        name: "Marketing Management I",
+        issuer: "NPTEL · IIT Kanpur",
+        issued: "Aug–Oct 2025",
+        note: "Elite certificate · 84%",
+        image: "/certificates/marketing-management-i.jpg",
+      },
+      {
+        name: "Marketing Management II",
+        issuer: "NPTEL · IIT Kanpur",
+        issued: "Feb–Apr 2026",
+        note: "Elite certificate · 75%",
+        image: "/certificates/marketing-management-ii.jpg",
+      },
       { name: "Project Management Foundations", issuer: "LinkedIn Learning" },
     ],
     achievements: [],
   },
 };
 
-export const COMPETITORS = ["Manappuram", "IIFL", "Kerala Bank", "Muthoot FinCorp"];
-
+export const COMPETITORS = [
+  "Manappuram",
+  "IIFL",
+  "Kerala Bank",
+  "Muthoot FinCorp",
+];

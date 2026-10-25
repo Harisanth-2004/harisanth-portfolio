@@ -21,4 +21,3 @@ it("restores project trigger focus and prior reading position after closing", as
   await waitFor(() => expect(document.activeElement).toBe(trigger));
   expect(scroll).toHaveBeenCalledWith({ top: 620, behavior: "instant" });
 });
-

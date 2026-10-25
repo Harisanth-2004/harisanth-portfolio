@@ -117,4 +117,3 @@ describe("Independent portfolio switches", () => {
     expect(document.activeElement).toBe(screen.getByText("Last"));
   });
 });
-

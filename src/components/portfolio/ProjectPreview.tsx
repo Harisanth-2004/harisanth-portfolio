@@ -63,4 +63,3 @@ export function ProjectPreview({ project }: { project: Project }) {
     </Dialog>
   );
 }
-
