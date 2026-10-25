@@ -9,6 +9,7 @@ export const SECTIONS = [
   { id: "about", label: "About" },
   { id: "education", label: "Education" },
   { id: "experience", label: "Experience" },
+  { id: "clubs", label: "Club activities" },
   { id: "projects", label: "Projects" },
   { id: "skills", label: "Skills" },
   { id: "certifications", label: "Certifications" },
@@ -35,13 +36,13 @@ const ABOUT = {
   eng: {
     lede: "Electrical and electronics engineer shaped by technical events, robotics programmes and student leadership.",
     body: [
-      "At MITS, I have worked across technical event coordination, robotics initiatives and student teams. I secured $2,500 in grants for robotics programmes and helped deliver events ranging from focused bootcamps to a 3,000+ participant summit.",
+      "At MITS, I have worked across technical event coordination, robotics initiatives and student teams. I secured $2,500 in grants for robotics programmes and led the technical team for YESS 2024, a summit with more than 4,000 participants.",
       "I also mentored a team to a top-eight finish at SAUVC 2026. I enjoy bringing people, logistics and technical goals together to move a project from plan to delivery.",
     ],
     facts: [
       { k: "Degree", v: "B.Tech · Electrical & Electronics" },
       { k: "Focus", v: "Technical programmes & operations" },
-      { k: "Leadership", v: "IEEE · NSS · SAUVC" },
+      { k: "Leadership", v: "IEEE · IEDC · NSS · SIEP" },
       { k: "Based in", v: "Kochi, Kerala" },
     ],
   },
@@ -73,6 +74,7 @@ export type Experience = {
 };
 
 export type Education = { degree: string; institution: string; period: string; note?: string };
+export type ClubActivity = { club: string; role: string; period: string; summary: string };
 export type SkillGroup = { group: string; items: string[]; placeholder?: boolean };
 export type Cert = { name: string; issuer: string; issued?: string; note?: string };
 export type Achievement = {
@@ -100,6 +102,7 @@ export type ModeContent = {
   about: { lede: string; body: string[]; facts: { k: string; v: string }[] };
   education: Education[];
   experience: Experience[];
+  clubs: ClubActivity[];
   projects: Project[];
   skills: SkillGroup[];
   certifications: Cert[];
@@ -132,34 +135,40 @@ export const CONTENT: Record<Mode, ModeContent> = {
     ],
     experience: [
       {
-        id: "ieee",
-        title: "Technical Leadership & Event Management",
-        org: "IEEE Student Branch Chapter, MITS",
-        date: "Dates to be confirmed",
-        summary:
-          "Secured $2,500 in robotics grants and coordinated technical events from 50 to 3,000+ participants.",
+        id: "siep",
+        title: "Financial Manager",
+        org: "SIEP Electric Dirt Bike Challenge",
+        date: "Oct 2025 — Apr 2026",
+        summary: "Managed project budgets, grant and sponsorship funding, procurement, and supplier payments.",
         details: [
-          "Secured $2,500 in grants for student robotics programmes through proposal writing and stakeholder engagement.",
-          "Coordinated CORE 2024, a technical conclave involving 200 participants.",
-          "Coordinated Automaze, a robotics bootcamp involving 50 students.",
-          "Managed technical logistics and event coordination for YESS 2024, the annual flagship summit of IEEE Kerala Section, which engaged more than 3,000 student participants.",
+          "Managed the end-to-end project budget, including ₹10,000 in sponsorships and a €1,000 grant secured from ESIGELEC, France.",
+          "Directed procurement planning, vendor negotiations, and expenditure tracking across the project cycle.",
+          "Maintained financial records and coordinated supplier payments to ensure budget adherence.",
         ],
-        reflection:
-          "Managing technical events, coordinating participants and teams, engaging stakeholders and securing resources — executing activities at very different scales.",
       },
       {
-        id: "sauvc",
-        title: "Active Mentor",
-        org: "SAUVC Competition 2026",
-        date: "2026",
-        summary: "Mentored a team to a top-eight finish — one of four teams from India selected.",
+        id: "iedc",
+        title: "Chief Marketing Officer",
+        org: "IEDC MITS",
+        date: "Feb 2025 — Mar 2026",
+        summary: "Led marketing strategy, brand communication, and digital outreach for the institute’s entrepreneurship cell.",
         details: [
-          "Mentored a team participating in the competition.",
-          "The team achieved a top-eight finish.",
-          "The team was among the four teams from India selected for the competition.",
+          "Secured ₹10,000 in sponsorship for IEDC MITS.",
+          "Built partnerships with Kerala Startup Mission (KSUM), Calicut, and industry stakeholders.",
+          "Led marketing strategy, brand communication, and digital outreach for the entrepreneurship cell.",
         ],
-        reflection:
-          "Supporting a technical team in a competitive environment and helping it prepare for an international competition.",
+      },
+      {
+        id: "ieee-ras",
+        title: "Technical Coordinator",
+        org: "IEEE Robotics and Automation Society SBC, MITS",
+        date: "Feb 2024 — Feb 2025",
+        summary: "Secured $2,500 in robotics grants and led technical delivery for student events, including YESS 2024 with 4,000+ participants.",
+        details: [
+          "Secured $2,500 in grants for student robotics programmes through proposal writing and stakeholder engagement.",
+          "Coordinated CORE 2024, a 200-participant technical conclave, and Automaze, a 50-student robotics bootcamp.",
+          "Led the technical team for YESS 2024, IEEE Kerala Section’s flagship summit, with more than 4,000 participants.",
+        ],
       },
       {
         id: "nss",
@@ -168,12 +177,9 @@ export const CONTENT: Record<Mode, ModeContent> = {
         date: "Apr 2024 — Jun 2025",
         summary: "Led a team of designers producing communication assets across digital platforms.",
         details: [
-          "Led a team of designers.",
-          "Coordinated the production of design assets, including posters.",
-          "Contributed to improving audience engagement across digital platforms.",
+          "Led a team of designers to produce posters and digital communication assets.",
+          "Supported audience engagement across NSS digital platforms.",
         ],
-        reflection:
-          "Combining creative execution with team coordination to produce communication materials for digital channels.",
       },
       {
         id: "industrial",
@@ -181,24 +187,22 @@ export const CONTENT: Record<Mode, ModeContent> = {
         org: "Cochin Shipyard Ltd · KEL, Mamala · KSEB, Mattanchery · FACT",
         date: "2024 — 2025",
         summary: "Internships and industrial exposure across four public-sector organisations.",
-        details: [
-          "Cochin Shipyard Limited",
-          "KEL, Mamala",
-          "KSEB, Mattanchery",
-          "FACT",
-          "Placeholder — individual responsibilities and project descriptions have not been supplied yet.",
-        ],
+        details: ["Cochin Shipyard Limited", "KEL, Mamala", "KSEB, Mattanchery", "FACT"],
       },
       {
-        id: "eng-pending",
-        title: "Additional B.Tech roles",
-        org: "Placeholder",
-        date: "To be supplied",
-        summary:
-          "Further leadership roles from the B.Tech years will be added here once details are confirmed.",
-        details: ["Placeholder — role title, organisation, dates and description pending."],
-        placeholder: true,
+        id: "sauvc",
+        title: "Active Mentor",
+        org: "SAUVC Competition 2026",
+        date: "2026",
+        summary: "Mentored a team to a top-eight finish — one of four teams from India selected.",
+        details: ["Mentored a team participating in the competition.", "The team achieved a top-eight finish and was one of four teams from India selected."],
       },
+    ],
+    clubs: [
+      { club: "IEEE Robotics and Automation Society SBC, MITS", role: "Technical Coordinator", period: "Feb 2024 — Feb 2025", summary: "Robotics programmes, technical events, and student-team coordination." },
+      { club: "IEDC MITS", role: "Chief Marketing Officer", period: "Feb 2025 — Mar 2026", summary: "Entrepreneurship-cell marketing, sponsorship, and KSUM / industry partnerships." },
+      { club: "National Service Scheme, MITS", role: "Design Team Lead", period: "Apr 2024 — Jun 2025", summary: "Led the student design team for digital communication assets." },
+      { club: "SIEP Electric Dirt Bike Challenge", role: "Financial Manager", period: "Oct 2025 — Apr 2026", summary: "Managed project funding, budgets, procurement, and supplier payments." },
     ],
     projects: [
       {
@@ -267,10 +271,10 @@ export const CONTENT: Record<Mode, ModeContent> = {
           "For student robotics programmes, via proposal writing and stakeholder engagement.",
       },
       {
-        value: 3000,
+        value: 4000,
         suffix: "+",
         label: "Participants · YESS 2024",
-        context: "Technical logistics for the flagship summit of IEEE Kerala Section.",
+        context: "Led the technical team for the flagship summit of IEEE Kerala Section.",
       },
       { value: 200, label: "Participants · CORE 2024", context: "Technical conclave coordinated." },
       { value: 50, label: "Students · Automaze", context: "Robotics bootcamp coordinated." },
@@ -327,6 +331,14 @@ export const CONTENT: Record<Mode, ModeContent> = {
           "Analysed social media activities of direct NBFC competitors, including Manappuram, IIFL, Kerala Bank and Muthoot FinCorp.",
           "Examined YouTube engagement, content tone and international NBFC advertisements.",
         ],
+      },
+    ],
+    clubs: [
+      {
+        club: "Muthoot Business School Media Club",
+        role: "Member",
+        period: "Current",
+        summary: "Current member of the MBS Media Club.",
       },
     ],
     projects: [

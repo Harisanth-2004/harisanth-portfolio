@@ -481,7 +481,20 @@ html.dark[data-mode="mgmt"] {
 .milestones-grid { row-gap: 1rem; }
 .tarang-photo { aspect-ratio: 16 / 10; min-height: 15rem; background: var(--surface); }
 .tarang-photo img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center 54%; }
+.siep-photo img { object-position: center 78%; }
+.ksum-gallery, .yess-gallery { display: grid; min-height: 18rem; gap: 2px; background: var(--background); }
+.ksum-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.yess-gallery { grid-template-columns: minmax(0, 1.45fr) minmax(0, .7fr); }
+.ksum-gallery img, .yess-gallery img { display: block; width: 100%; height: 100%; min-height: 18rem; object-fit: cover; }
+.ksum-gallery img:first-child { object-position: 42% center; }
+.ksum-gallery img:last-child { object-position: center 58%; }
+.yess-gallery img:first-child { object-position: center 58%; }
+.yess-gallery img:last-child { object-position: center 50%; }
 .tarang-caption { min-height: 17rem; }
+@media (max-width: 639px) {
+  .ksum-gallery, .yess-gallery { min-height: 13rem; }
+  .ksum-gallery img, .yess-gallery img { min-height: 13rem; }
+}
 .hero-portrait { display: none; }
 .hero-portrait img { display: block; width: 100%; height: 100%; object-fit: contain; object-position: bottom center; }
 .hero-portrait-eng,

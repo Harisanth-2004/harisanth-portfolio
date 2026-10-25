@@ -8,6 +8,11 @@ import { ProjectPreview } from "./ProjectPreview";
 import { ExperienceDetails } from "./ExperienceDetails";
 import { scrollToSection, usePortfolio } from "./state";
 import tarangPhoto from "@/assets/tarang-team.jpeg";
+import siepEbikePhoto from "@/assets/siep-ebike-team.jpeg";
+import yessAudiencePhoto from "@/assets/yess-2024-audience.jpg";
+import yessTeamPhoto from "@/assets/yess-2024-technical-team.jpg";
+import ksumSelfiePhoto from "@/assets/ksum-iedc-team-selfie.jpg";
+import ksumCohortPhoto from "@/assets/ksum-iedc-cohort-jul-2025.jpg";
 
 function CircuitMark({ variant }: { variant: number }) {
   const paths = [
@@ -124,9 +129,10 @@ export function Sections() {
         <nav aria-label="Contents" className="contents-links">
           {([
             ["01", "About me", "about"], ["02", "Career timeline", "experience"],
-            ["03", "Education", "education"], ["04", "Selected work", "projects"],
-            ["05", "What I bring", "skills"], ["06", "Credentials", "certifications"],
-            ["07", "Achievements", "achievements"], ["08", "Contact", "contact"],
+            ["03", "Education", "education"], ["04", "Club activities", "clubs"],
+            ["05", "Selected work", "projects"], ["06", "What I bring", "skills"],
+            ["07", "Credentials", "certifications"], ["08", "Achievements", "achievements"],
+            ["09", "Contact", "contact"],
           ] as const).map(([number, title, id]) => (
             <button key={id} onClick={() => scrollToSection(id)} className="contents-link group">
               <span>{number}.</span><span>{title}</span><span className="contents-page">↘</span>
@@ -223,7 +229,35 @@ export function Sections() {
           ))}
         </Accordion>
       </Section>
-      <Section id="projects" number="04" title="Selected work">
+      <Section id="clubs" number="04" title="Club activities">
+        <div className="club-grid grid gap-3 md:grid-cols-2">
+          {c.clubs.map((activity, index) => (
+            <article key={activity.club} className="club-card border border-border bg-surface/40 p-5 sm:p-6" data-reveal>
+              <p className="t-meta text-signal">{String(index + 1).padStart(2, "0")} / {activity.period}</p>
+              <h3 className="t-title mt-5">{activity.role}</h3>
+              <p className="mt-2 text-sm text-signal">{activity.club}</p>
+              <p className="t-body mt-4 text-muted-foreground">{activity.summary}</p>
+            </article>
+          ))}
+        </div>
+        {selected === "eng" && (
+          <figure className="tarang-feature ksum-feature mt-8 grid overflow-hidden border border-border bg-surface/50 md:grid-cols-[1.45fr_.55fr]" data-reveal>
+            <div className="ksum-gallery overflow-hidden">
+              <img src={ksumSelfiePhoto} alt="IEDC MITS team outside the Kerala Startup Mission building" width={1280} height={960} loading="lazy" decoding="async" />
+              <img src={ksumCohortPhoto} alt="Student group at Kerala Startup Mission, Kochi, in July 2025" width={1280} height={848} loading="lazy" decoding="async" />
+            </div>
+            <figcaption className="tarang-caption flex flex-col justify-between gap-10 p-5 sm:p-7 lg:p-8">
+              <span className="t-meta text-signal">Field note / IEDC MITS</span>
+              <div>
+                <h3 className="font-grotesk text-3xl font-semibold tracking-tight sm:text-4xl">KSUM<span className="text-signal">.</span></h3>
+                <p className="t-body mt-3 text-muted-foreground">Partnership and industry engagement with Kerala Startup Mission and local stakeholders.</p>
+              </div>
+              <p className="t-meta border-t border-border pt-4 text-muted-foreground">Kerala Startup Mission <span className="mx-2 text-signal">/</span> Kochi</p>
+            </figcaption>
+          </figure>
+        )}
+      </Section>
+      <Section id="projects" number="05" title="Selected work">
         {c.projects.map((project, i) => (
           <article
             key={project.id}
@@ -250,7 +284,7 @@ export function Sections() {
           </article>
         ))}
       </Section>
-      <Section id="skills" number="05" title="The toolkit">
+      <Section id="skills" number="06" title="The toolkit">
         <div className="grid gap-x-12 md:grid-cols-2">
           {c.skills.map((group, i) => (
             <article key={group.group} className="border-t border-border py-8" data-reveal>
@@ -268,7 +302,7 @@ export function Sections() {
           ))}
         </div>
       </Section>
-      <Section id="certifications" number="06" title="Credentials">
+      <Section id="certifications" number="07" title="Credentials">
         <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
           <p className="t-meta text-muted-foreground">
             {c.code} / {String(c.certifications.length).padStart(2, "0")} credentials
@@ -304,7 +338,23 @@ export function Sections() {
         ))}
         </div>
       </Section>
-      <Section id="achievements" number="07" title="A few milestones">
+      <Section id="achievements" number="08" title="A few milestones">
+        {selected === "eng" && (
+          <figure className="tarang-feature yess-feature mb-8 grid overflow-hidden border border-border bg-surface/50 md:grid-cols-[1.45fr_.55fr]" data-reveal>
+            <div className="yess-gallery overflow-hidden">
+              <img src={yessAudiencePhoto} alt="YESS 2024 participants gathered at the IEEE Kerala Section summit" width={1280} height={850} loading="lazy" decoding="async" />
+              <img src={yessTeamPhoto} alt="Technical team members at YESS 2024" width={800} height={1200} loading="lazy" decoding="async" />
+            </div>
+            <figcaption className="tarang-caption flex flex-col justify-between gap-10 p-5 sm:p-7 lg:p-8">
+              <span className="t-meta text-signal">Field note / IEEE Kerala Section</span>
+              <div>
+                <h3 className="font-grotesk text-3xl font-semibold tracking-tight sm:text-4xl">YESS 2024<span className="text-signal">.</span></h3>
+                <p className="t-body mt-3 text-muted-foreground">I led the technical team for the summit, which welcomed more than 4,000 participants.</p>
+              </div>
+              <p className="t-meta border-t border-border pt-4 text-muted-foreground">MITS <span className="mx-2 text-signal">/</span> IEEE Kerala Section</p>
+            </figcaption>
+          </figure>
+        )}
         {selected === "mgmt" && (
           <figure className="tarang-feature mb-8 grid overflow-hidden border border-border bg-surface/50 md:grid-cols-[1.45fr_.55fr]" data-reveal>
             <div className="tarang-photo overflow-hidden">
@@ -327,6 +377,28 @@ export function Sections() {
             </figcaption>
           </figure>
         )}
+        {selected === "eng" && (
+          <figure className="tarang-feature siep-feature mb-8 grid overflow-hidden border border-border bg-surface/50 md:grid-cols-[1.45fr_.55fr]" data-reveal>
+            <div className="tarang-photo siep-photo overflow-hidden">
+              <img
+                src={siepEbikePhoto}
+                alt="Students with their e-bike at the SIEP competition at Galgotias University, Noida"
+                width={960}
+                height={1280}
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            <figcaption className="tarang-caption flex flex-col justify-between gap-10 p-5 sm:p-7 lg:p-8">
+              <span className="t-meta text-signal">Field note / B.Tech</span>
+              <div>
+                <h3 className="font-grotesk text-3xl font-semibold tracking-tight sm:text-4xl">SIEP E-Bike Competition<span className="text-signal">.</span></h3>
+                <p className="t-body mt-3 text-muted-foreground">Team and e-bike at the competition.</p>
+              </div>
+              <p className="t-meta border-t border-border pt-4 text-muted-foreground">Galgotias University <span className="mx-2 text-signal">/</span> Noida</p>
+            </figcaption>
+          </figure>
+        )}
         <div className="milestones-grid grid gap-x-10 md:grid-cols-2">
           {c.achievements.map((item) => (
             <article key={item.label} className="milestone-card border border-border bg-surface/40 p-5 sm:p-6" data-reveal>
@@ -343,7 +415,7 @@ export function Sections() {
           ))}
         </div>
       </Section>
-      <Section id="contact" number="08" title="Let’s connect">
+      <Section id="contact" number="09" title="Let’s connect">
         <div data-reveal>
           <p className="t-lede max-w-[34ch]">
             Engineering, management, and the interesting space in between.

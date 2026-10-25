@@ -15,6 +15,7 @@ import {
   Target,
   Trophy,
   UserRound,
+  UsersRound,
   X,
   type LucideIcon,
 } from "lucide-react";
@@ -26,6 +27,7 @@ const SECTION_ICONS: Record<SectionId, LucideIcon> = {
   about: UserRound,
   education: GraduationCap,
   experience: Briefcase,
+  clubs: UsersRound,
   projects: FolderOpen,
   skills: Lightbulb,
   certifications: Award,

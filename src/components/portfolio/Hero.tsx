@@ -171,7 +171,7 @@ export function Hero() {
             </div>
             <div>
               <dt className="inline-flex items-center gap-2"><UsersRound size={14} strokeWidth={1.5} aria-hidden="true" />Largest event</dt>
-              <dd className="mt-1 text-foreground">3,000+</dd>
+              <dd className="mt-1 text-foreground">4,000+</dd>
             </div>
             <div>
               <dt className="inline-flex items-center gap-2"><Trophy size={14} strokeWidth={1.5} aria-hidden="true" />SAUVC 2026</dt>
