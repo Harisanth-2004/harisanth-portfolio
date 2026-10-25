@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import { ArrowDown, ArrowUpRight } from "lucide-react";
+import { ArrowDown, ArrowUpRight, ChevronDown } from "lucide-react";
 import { Accordion, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import { CONTENT, PERSON, type Mode, type SectionId } from "@/lib/portfolio-data";
@@ -79,6 +79,7 @@ export function Sections() {
   const root = useRef<HTMLDivElement>(null);
   // Independent disclosure state survives identity changes.
   const [expanded, setExpanded] = useState<Record<Mode, string[]>>({ eng: [], mgmt: [] });
+  const [credentialsOpen, setCredentialsOpen] = useState<Record<Mode, boolean>>({ eng: false, mgmt: false });
 
   useEffect(() => {
     if (!ready || !root.current) return;
@@ -185,7 +186,7 @@ export function Sections() {
           ))}
         </div>
       </Section>
-      <Section id="experience" number="03" title="In practice">
+      <Section id="experience" number="03" title={selected === "eng" ? "Industrial internships" : "Professional experience"}>
         <Accordion
           type="multiple"
           value={expanded[selected]}
@@ -312,17 +313,30 @@ export function Sections() {
           <p className="t-meta text-muted-foreground">
             {c.code} / {String(c.certifications.length).padStart(2, "0")} credentials
           </p>
-          <a
-            href={`https://${PERSON.linkedin}`}
-            target="_blank"
-            rel="noreferrer"
-            className="link-u inline-flex min-h-11 items-center gap-1 text-sm"
-          >
-            LinkedIn profile <ArrowUpRight size={14} aria-hidden="true" />
-          </a>
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
+            <Button
+              type="button"
+              variant="outline"
+              aria-expanded={credentialsOpen[selected]}
+              aria-controls="credentials-list"
+              onClick={() => setCredentialsOpen((previous) => ({ ...previous, [selected]: !previous[selected] }))}
+              className="min-h-11 rounded-none"
+            >
+              {credentialsOpen[selected] ? "Hide credentials" : "Show credentials"}
+              <ChevronDown className={`transition-transform ${credentialsOpen[selected] ? "rotate-180" : ""}`} aria-hidden="true" />
+            </Button>
+            <a
+              href={`https://${PERSON.linkedin}`}
+              target="_blank"
+              rel="noreferrer"
+              className="link-u inline-flex min-h-11 items-center gap-1 text-sm"
+            >
+              LinkedIn profile <ArrowUpRight size={14} aria-hidden="true" />
+            </a>
+          </div>
         </div>
-        <div className="credentials-list">
-        {c.certifications.map((cert, index) => (
+        <div id="credentials-list" className="credentials-list">
+        {credentialsOpen[selected] && c.certifications.map((cert, index) => (
           <article
             key={cert.name}
             className="credential-row"
@@ -376,7 +390,7 @@ export function Sections() {
               <span className="t-meta text-signal">Field note / PGDM</span>
               <div>
                 <h3 className="font-grotesk text-3xl font-semibold tracking-tight sm:text-4xl">Tarang<span className="text-signal">.</span></h3>
-                <p className="t-body mt-3 text-muted-foreground">A moment from the event.</p>
+                <p className="t-body mt-3 text-muted-foreground">Participated in Tarang’s Best Management Team category.</p>
               </div>
               <p className="t-meta border-t border-border pt-4 text-muted-foreground">Kattangal, Kerala <span className="mx-2 text-signal">/</span> 09 Oct 2026</p>
             </figcaption>

@@ -136,53 +136,6 @@ export const CONTENT: Record<Mode, ModeContent> = {
     ],
     experience: [
       {
-        id: "siep",
-        title: "Financial Manager",
-        org: "SIEP Electric Dirt Bike Challenge",
-        date: "Oct 2025 — Apr 2026",
-        summary: "Managed project budgets, grant and sponsorship funding, procurement, and supplier payments.",
-        details: [
-          "Managed the end-to-end project budget, including ₹10,000 in sponsorships and a €1,000 grant secured from ESIGELEC, France.",
-          "Directed procurement planning, vendor negotiations, and expenditure tracking across the project cycle.",
-          "Maintained financial records and coordinated supplier payments to ensure budget adherence.",
-        ],
-      },
-      {
-        id: "iedc",
-        title: "Chief Marketing Officer",
-        org: "IEDC MITS",
-        date: "Feb 2025 — Mar 2026",
-        summary: "Led marketing strategy, brand communication, and digital outreach for the institute’s entrepreneurship cell.",
-        details: [
-          "Secured ₹10,000 in sponsorship for IEDC MITS.",
-          "Built partnerships with Kerala Startup Mission (KSUM), Calicut, and industry stakeholders.",
-          "Led marketing strategy, brand communication, and digital outreach for the entrepreneurship cell.",
-        ],
-      },
-      {
-        id: "ieee-ras",
-        title: "Technical Coordinator",
-        org: "IEEE Robotics and Automation Society SBC, MITS",
-        date: "Feb 2024 — Feb 2025",
-        summary: "Secured $2,500 in robotics grants and led technical delivery for student events, including YESS 2024 with 4,000+ participants.",
-        details: [
-          "Secured $2,500 in grants for student robotics programmes through proposal writing and stakeholder engagement.",
-          "Coordinated CORE 2024, a 200-participant technical conclave, and Automaze, a 50-student robotics bootcamp.",
-          "Led the technical team for YESS 2024, IEEE Kerala Section’s flagship summit, with more than 4,000 participants.",
-        ],
-      },
-      {
-        id: "nss",
-        title: "Design Team Lead",
-        org: "National Service Scheme (NSS), MITS",
-        date: "Apr 2024 — Jun 2025",
-        summary: "Led a team of designers producing communication assets across digital platforms.",
-        details: [
-          "Led a team of designers to produce posters and digital communication assets.",
-          "Supported audience engagement across NSS digital platforms.",
-        ],
-      },
-      {
         id: "industrial",
         title: "Industrial Internships",
         org: "Cochin Shipyard Ltd · KEL, Mamala · KSEB, Mattanchery · FACT",
@@ -192,23 +145,16 @@ export const CONTENT: Record<Mode, ModeContent> = {
           "FACT — Training in high-voltage substations and protection, industrial motors, power-factor correction and capacitor banks, electrical safety, and power purchase and billing. Observed ELCB operation and a 3.3 kV motor test.",
           "KSEB — Exposure to electricity distribution, SCADA, substations and reading single-line diagrams.",
           "KEL, Mamala — Transformer manufacturing, quality checks, and ceramic and oil insulation.",
-          "Cochin Shipyard Ltd — Ship repair, bilge pumps, dry docks, power substations and shipbuilding, with research exposure to water bots, solar boats and Water Metro initiatives.",
+          "Cochin Shipyard Ltd — Ship repair, bilge pumps, dry docks, power substations and shipbuilding, with research exposure to solar boats and Water Metro initiatives.",
         ],
-      },
-      {
-        id: "sauvc",
-        title: "Active Mentor",
-        org: "SAUVC Competition 2026",
-        date: "2026",
-        summary: "Mentored a team to a top-eight finish — one of four teams from India selected.",
-        details: ["Mentored a team participating in the competition.", "The team achieved a top-eight finish and was one of four teams from India selected."],
       },
     ],
     clubs: [
-      { club: "IEEE Robotics and Automation Society SBC, MITS", role: "Technical Coordinator", period: "Feb 2024 — Feb 2025", summary: "Robotics programmes, technical events, and student-team coordination." },
-      { club: "IEDC MITS", role: "Chief Marketing Officer", period: "Feb 2025 — Mar 2026", summary: "Entrepreneurship-cell marketing, sponsorship, and KSUM / industry partnerships." },
-      { club: "National Service Scheme, MITS", role: "Design Team Lead", period: "Apr 2024 — Jun 2025", summary: "Led the student design team for digital communication assets." },
-      { club: "SIEP Electric Dirt Bike Challenge", role: "Financial Manager", period: "Oct 2025 — Apr 2026", summary: "Managed project funding, budgets, procurement, and supplier payments." },
+      { club: "IEEE Robotics and Automation Society SBC, MITS", role: "Technical Coordinator", period: "Feb 2024 — Feb 2025", summary: "Secured $2,500 in grants; coordinated CORE 2024 and Automaze; led the technical team for YESS 2024 (4,000+ participants)." },
+      { club: "IEDC MITS", role: "Chief Marketing Officer", period: "Feb 2025 — Mar 2026", summary: "Secured ₹10,000 in sponsorship; led marketing and built KSUM Calicut and industry relationships." },
+      { club: "National Service Scheme, MITS", role: "Design Team Lead", period: "Apr 2024 — Jun 2025", summary: "Led a team producing posters and digital communication assets." },
+      { club: "SIEP Electric Dirt Bike Challenge", role: "Financial Manager", period: "Oct 2025 — Apr 2026", summary: "Managed the project budget, a €1,000 ESIGELEC grant, sponsorships, procurement and supplier payments." },
+      { club: "SAUVC Competition 2026", role: "Active Mentor", period: "2026", summary: "Mentored a team to a top-eight finish; one of four Indian teams selected." },
     ],
     projects: [
       {
@@ -218,14 +164,6 @@ export const CONTENT: Record<Mode, ModeContent> = {
         summary: "A public case study will be added after the final-year project report has been submitted.",
         points: [],
         status: "Case study after report submission",
-      },
-      {
-        id: "p2",
-        title: "Final-year project — to be supplied",
-        kind: "Placeholder / Electrical",
-        summary: "Details have not been provided yet. This slot is reserved, not invented.",
-        points: ["Objective", "Method", "Outcome"],
-        placeholder: true,
       },
     ],
     skills: [
@@ -239,6 +177,7 @@ export const CONTENT: Record<Mode, ModeContent> = {
         ],
       },
       { group: "Creative", items: ["Content Creation", "Design", "Visual Communication"] },
+      { group: "Tools", items: ["Power BI · foundational"] },
       { group: "Languages", items: PERSON.languages },
     ],
     certifications: [
@@ -250,7 +189,8 @@ export const CONTENT: Record<Mode, ModeContent> = {
       {
         name: "Linguaskill",
         issuer: "Cambridge English Assessment",
-        note: "Verified English proficiency",
+        issued: "Jul 2023",
+        note: "Business English · B2 · Overall score 174",
       },
       {
         name: "Career Essentials in Generative AI",
@@ -265,6 +205,24 @@ export const CONTENT: Record<Mode, ModeContent> = {
       {
         name: "Introduction to Soft Computing",
         issuer: "NPTEL · IIT Kharagpur",
+        issued: "Jan–Mar 2025",
+      },
+      {
+        name: "EV: Vehicle Dynamics and Electric Motor Drives",
+        issuer: "NPTEL · IIT Madras",
+        issued: "Jan–Apr 2026",
+      },
+      {
+        name: "Unmanned Aerial Vehicle Technology",
+        issuer: "Fuselage Flying Club · MITS",
+        issued: "Dec 2025",
+        note: "Five-day hands-on training in UAV design, assembly and applications.",
+      },
+      {
+        name: "Power BI for Beginners",
+        issuer: "Simplilearn SkillUp",
+        issued: "Jun 2026",
+        note: "Course completion; not an official Microsoft certification.",
       },
     ],
     achievements: [
@@ -385,8 +343,8 @@ export const CONTENT: Record<Mode, ModeContent> = {
       { group: "Languages", items: PERSON.languages },
     ],
     certifications: [
-      { name: "Marketing Management I", issuer: "NPTEL" },
-      { name: "Marketing Management II", issuer: "NPTEL" },
+      { name: "Marketing Management I", issuer: "NPTEL · IIT Kanpur", issued: "Aug–Oct 2025", note: "Elite certificate · 84%" },
+      { name: "Marketing Management II", issuer: "NPTEL · IIT Kanpur", issued: "Feb–Apr 2026", note: "Elite certificate · 75%" },
       { name: "Project Management Foundations", issuer: "LinkedIn Learning" },
     ],
     achievements: [],

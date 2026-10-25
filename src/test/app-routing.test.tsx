@@ -11,10 +11,16 @@ describe("Portfolio homepage", () => {
     expect(btech).toHaveAttribute("aria-pressed", "true");
     expect(pgdm).toHaveAttribute("aria-pressed", "false");
     expect(screen.queryByText("Project Management Foundations")).not.toBeInTheDocument();
+    expect(screen.queryByText("Linguaskill")).not.toBeInTheDocument();
     expect(screen.getByText(/electrical and electronics engineer shaped by technical events/i)).toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: "Show credentials" }));
+    expect(screen.getByText("Linguaskill")).toBeInTheDocument();
     fireEvent.click(pgdm);
     expect(screen.queryByText(/electrical and electronics engineer shaped by technical events/i)).not.toBeInTheDocument();
+    expect(screen.queryByText("Linguaskill")).not.toBeInTheDocument();
     expect(screen.getByText(/PGDM student at Muthoot Business School exploring the intersection/i)).toBeInTheDocument();
+    expect(screen.queryByText("Project Management Foundations")).not.toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: "Show credentials" }));
     expect(screen.getByText("Project Management Foundations")).toBeInTheDocument();
     expect(pgdm).toHaveAttribute("aria-pressed", "true");
     expect(btech).toHaveAttribute("aria-pressed", "false");
