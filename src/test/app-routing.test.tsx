@@ -14,7 +14,7 @@ describe("Portfolio homepage", () => {
     expect(screen.getByText(/electrical and electronics engineer shaped by technical events/i)).toBeInTheDocument();
     fireEvent.click(pgdm);
     expect(screen.queryByText(/electrical and electronics engineer shaped by technical events/i)).not.toBeInTheDocument();
-    expect(screen.getByText(/PGDM student at Muthoot Business School building a career/i)).toBeInTheDocument();
+    expect(screen.getByText(/PGDM student at Muthoot Business School exploring the intersection/i)).toBeInTheDocument();
     expect(screen.getByText("Project Management Foundations")).toBeInTheDocument();
     expect(pgdm).toHaveAttribute("aria-pressed", "true");
     expect(btech).toHaveAttribute("aria-pressed", "false");

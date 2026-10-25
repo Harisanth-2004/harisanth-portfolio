@@ -20,7 +20,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { PERSON, SECTIONS, type Mode, type SectionId } from "@/lib/portfolio-data";
+import { CONTENT, PERSON, SECTIONS, type Mode, type SectionId } from "@/lib/portfolio-data";
 import { scrollToSection, usePortfolio } from "./state";
 
 const SECTION_ICONS: Record<SectionId, LucideIcon> = {
@@ -84,7 +84,14 @@ export function Navigator() {
     setNavExpanded(false);
     scrollToSection(id);
   };
-  const label = SECTIONS.find((s) => s.id === active)?.label ?? "Introduction";
+  const label = active === "achievements" && mode === "mgmt"
+    ? "Campus life"
+    : SECTIONS.find((s) => s.id === active)?.label ?? "Introduction";
+  const visibleSections = SECTIONS
+    .filter((section) => section.id !== "projects" || CONTENT[mode === "mgmt" ? "mgmt" : "eng"].projects.length > 0)
+    .map((section) => section.id === "achievements" && mode === "mgmt"
+      ? { ...section, label: "Campus life" }
+      : section);
   return (
     <>
       <header className={`portfolio-header fixed inset-x-0 top-0 z-50 flex h-16 items-center justify-between border-b border-border px-5 sm:px-8 lg:px-[5vw] ${mode === "neutral" && active === "hero" ? "portfolio-header-cover" : ""}`}>
@@ -133,7 +140,7 @@ export function Navigator() {
         className="portfolio-desktop-index fixed bottom-10 left-[5vw] z-40 hidden w-44 lg:block"
       >
         <p className="t-meta mb-4 text-muted-foreground">Index / {mode === "mgmt" ? "02" : "01"}</p>
-        {SECTIONS.map((section, index) => {
+        {visibleSections.map((section, index) => {
           const Icon = sectionIcon(section.id, mode);
           return (
           <Button
@@ -160,7 +167,7 @@ export function Navigator() {
             aria-label="Mobile portfolio sections"
             className="mb-2 grid grid-cols-2 border border-border bg-background p-3 shadow-lg"
           >
-            {SECTIONS.map((section, i) => {
+            {visibleSections.map((section, i) => {
               const Icon = sectionIcon(section.id, mode);
               return (
                 <Button

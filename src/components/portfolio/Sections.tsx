@@ -131,9 +131,10 @@ export function Sections() {
             ["01", "About me", "about"], ["02", "Career timeline", "experience"],
             ["03", "Education", "education"], ["04", "Club activities", "clubs"],
             ["05", "Selected work", "projects"], ["06", "What I bring", "skills"],
-            ["07", "Credentials", "certifications"], ["08", "Achievements", "achievements"],
+            ["07", "Credentials", "certifications"],
+            ["08", selected === "mgmt" ? "Campus life" : "Achievements", "achievements"],
             ["09", "Contact", "contact"],
-          ] as const).map(([number, title, id]) => (
+          ] as const).filter(([, , id]) => id !== "projects" || c.projects.length > 0).map(([number, title, id]) => (
             <button key={id} onClick={() => scrollToSection(id)} className="contents-link group">
               <span>{number}.</span><span>{title}</span><span className="contents-page">↘</span>
             </button>
@@ -243,16 +244,16 @@ export function Sections() {
         {selected === "eng" && (
           <figure className="tarang-feature ksum-feature mt-8 grid overflow-hidden border border-border bg-surface/50 md:grid-cols-[1.45fr_.55fr]" data-reveal>
             <div className="ksum-gallery overflow-hidden">
-              <img src={ksumSelfiePhoto} alt="IEDC MITS team outside the Kerala Startup Mission building" width={1280} height={960} loading="lazy" decoding="async" />
-              <img src={ksumCohortPhoto} alt="Student group at Kerala Startup Mission, Kochi, in July 2025" width={1280} height={848} loading="lazy" decoding="async" />
+              <img src={ksumSelfiePhoto} alt="IEDC MITS team on an invited innovation tour at Kerala Startup Mission, Calicut" width={1280} height={960} loading="lazy" decoding="async" />
+              <img src={ksumCohortPhoto} alt="Student group at Kerala Startup Mission, Kochi, during a visit connected to IEEE CORE" width={1280} height={848} loading="lazy" decoding="async" />
             </div>
             <figcaption className="tarang-caption flex flex-col justify-between gap-10 p-5 sm:p-7 lg:p-8">
-              <span className="t-meta text-signal">Field note / IEDC MITS</span>
+                <span className="t-meta text-signal">Field note / IEDC MITS · IEEE</span>
               <div>
-                <h3 className="font-grotesk text-3xl font-semibold tracking-tight sm:text-4xl">KSUM<span className="text-signal">.</span></h3>
-                <p className="t-body mt-3 text-muted-foreground">Partnership and industry engagement with Kerala Startup Mission and local stakeholders.</p>
+                  <h3 className="font-grotesk text-3xl font-semibold tracking-tight sm:text-4xl">Innovation tours<span className="text-signal">.</span></h3>
+                  <p className="t-body mt-3 text-muted-foreground">An invited IEDC MITS innovation tour at KSUM Calicut, and a separate KSUM Kochi visit connected with CORE, organised by IEEE.</p>
               </div>
-              <p className="t-meta border-t border-border pt-4 text-muted-foreground">Kerala Startup Mission <span className="mx-2 text-signal">/</span> Kochi</p>
+                <p className="t-meta border-t border-border pt-4 text-muted-foreground">KSUM Calicut <span className="mx-2 text-signal">/</span> KSUM Kochi</p>
             </figcaption>
           </figure>
         )}
@@ -268,18 +269,22 @@ export function Sections() {
               <p className="t-meta mb-6 text-signal">P / {String(i + 1).padStart(2, "0")}</p>
               <h3 className="t-title max-w-[26ch]">{project.title}</h3>
               <p className="t-meta mt-4 text-muted-foreground">{project.kind}</p>
-              <ProjectPreview project={project} />
+              {project.status ? (
+                <p className="t-caption mt-6 border-l border-signal pl-4">{project.status}</p>
+              ) : (
+                <ProjectPreview project={project} />
+              )}
             </div>
             <div>
               <p className="t-body text-muted-foreground">{project.summary}</p>
-              <ol className="mt-6 space-y-3">
+              {project.points.length > 0 && <ol className="mt-6 space-y-3">
                 {project.points.map((point, n) => (
                   <li key={point} className="flex gap-4 border-t border-border pt-3 text-sm">
                     <span className="t-meta text-signal">{String(n + 1).padStart(2, "0")}</span>
                     {point}
                   </li>
                 ))}
-              </ol>
+              </ol>}
             </div>
           </article>
         ))}
@@ -338,7 +343,7 @@ export function Sections() {
         ))}
         </div>
       </Section>
-      <Section id="achievements" number="08" title="A few milestones">
+      <Section id="achievements" number="08" title={selected === "mgmt" ? "Campus & community" : "A few milestones"}>
         {selected === "eng" && (
           <figure className="tarang-feature yess-feature mb-8 grid overflow-hidden border border-border bg-surface/50 md:grid-cols-[1.45fr_.55fr]" data-reveal>
             <div className="yess-gallery overflow-hidden">

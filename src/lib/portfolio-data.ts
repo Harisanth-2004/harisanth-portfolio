@@ -47,10 +47,10 @@ const ABOUT = {
     ],
   },
   mgmt: {
-    lede: "PGDM student at Muthoot Business School building a career across marketing, brand communication and business strategy.",
+    lede: "PGDM student at Muthoot Business School exploring the intersection of marketing, customer insight and financial services.",
     body: [
-      "I completed a marketing internship with Muthoot Finance’s MarCom & Brand department, studying competitor activity, customer profiling and brand communication in the NBFC sector.",
-      "I have recently joined the same department in a work-integrated role. I’m interested in how clear positioning, useful customer insight and consistent communication support business growth.",
+      "During a 12-week internship with Muthoot Finance’s MarCom & Brand team, I worked across competitor research, customer-profile fieldwork and campaign analysis. The experience gave me a practical view of how marketing connects to business decisions in financial services.",
+      "I have recently joined the same department through MBS’s work-integrated learning programme. As I continue the PGDM, I’m especially interested in evidence-led marketing, customer insight and fintech.",
     ],
     facts: [
       { k: "Currently", v: "PGDM · Muthoot Business School" },
@@ -92,6 +92,7 @@ export type Project = {
   summary: string;
   points: string[];
   placeholder?: boolean;
+  status?: string;
 };
 
 export type ModeContent = {
@@ -183,11 +184,16 @@ export const CONTENT: Record<Mode, ModeContent> = {
       },
       {
         id: "industrial",
-        title: "Industrial Exposure",
+        title: "Industrial Internships",
         org: "Cochin Shipyard Ltd · KEL, Mamala · KSEB, Mattanchery · FACT",
         date: "2024 — 2025",
-        summary: "Internships and industrial exposure across four public-sector organisations.",
-        details: ["Cochin Shipyard Limited", "KEL, Mamala", "KSEB, Mattanchery", "FACT"],
+        summary: "Hands-on training across power distribution, electrical manufacturing, high-voltage systems and shipbuilding.",
+        details: [
+          "FACT — Training in high-voltage substations and protection, industrial motors, power-factor correction and capacitor banks, electrical safety, and power purchase and billing. Observed ELCB operation and a 3.3 kV motor test.",
+          "KSEB — Exposure to electricity distribution, SCADA, substations and reading single-line diagrams.",
+          "KEL, Mamala — Transformer manufacturing, quality checks, and ceramic and oil insulation.",
+          "Cochin Shipyard Ltd — Ship repair, bilge pumps, dry docks, power substations and shipbuilding, with research exposure to water bots, solar boats and Water Metro initiatives.",
+        ],
       },
       {
         id: "sauvc",
@@ -207,11 +213,11 @@ export const CONTENT: Record<Mode, ModeContent> = {
     projects: [
       {
         id: "p1",
-        title: "Engineering project — to be supplied",
-        kind: "Placeholder / Systems",
-        summary: "Title, problem, approach and outcome for a B.Tech project will appear here.",
-        points: ["Problem statement", "System architecture", "Results"],
-        placeholder: true,
+        title: "Final-Year Engineering Project",
+        kind: "B.Tech capstone · report pending",
+        summary: "A public case study will be added after the final-year project report has been submitted.",
+        points: [],
+        status: "Case study after report submission",
       },
       {
         id: "p2",
@@ -234,7 +240,6 @@ export const CONTENT: Record<Mode, ModeContent> = {
       },
       { group: "Creative", items: ["Content Creation", "Design", "Visual Communication"] },
       { group: "Languages", items: PERSON.languages },
-      { group: "Technical tools", items: ["To be supplied"], placeholder: true },
     ],
     certifications: [
       {
@@ -344,14 +349,15 @@ export const CONTENT: Record<Mode, ModeContent> = {
     projects: [
       {
         id: "nbfc",
-        title: "Strategic Marketing in the NBFC Sector",
+        title: "Marketing Research & Campaign Analysis",
         kind: "Internship study · Muthoot Finance",
         summary:
-          "A study on strategic marketing, competitive analysis, customer profiling and brand communication in the NBFC sector.",
+          "A 12-week MarCom & Brand internship combining competitor research, customer-profile fieldwork and structured analysis of public campaigns.",
         points: [
-          "Social media activity of direct competitors",
-          "YouTube engagement and content tone",
-          "International NBFC advertisements",
+          "Compared competitor positioning and public campaign communication across financial services.",
+          "Collected 104 customer-profile forms across Chennai and Bengaluru. No customer-level information or unverified findings are shared.",
+          "Analyzed approximately 15 public financial-services campaigns using a seven-part agency-brief framework.",
+          "Prepared scoping and presentation materials. Proposals are not presented as launched campaigns or measured results.",
         ],
       },
     ],
@@ -383,14 +389,7 @@ export const CONTENT: Record<Mode, ModeContent> = {
       { name: "Marketing Management II", issuer: "NPTEL" },
       { name: "Project Management Foundations", issuer: "LinkedIn Learning" },
     ],
-    achievements: [
-      {
-        label: "Management achievements — to be supplied",
-        context:
-          "No PGDM-specific achievements have been provided yet. This space is reserved rather than filled with invented results.",
-        placeholder: true,
-      },
-    ],
+    achievements: [],
   },
 };
 
