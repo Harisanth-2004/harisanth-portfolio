@@ -28,6 +28,8 @@ export const PERSON = {
   last: "Krishna",
   initial: "B",
   location: "Kochi, Kerala, India",
+  email: "official.harisanth@gmail.com",
+  phone: "+91 9447250868",
   linkedin: "linkedin.com/in/b-harisanth-krishna",
   languages: ["English", "Malayalam", "Hindi"],
 };
@@ -229,7 +231,7 @@ export const CONTENT: Record<Mode, ModeContent> = {
     projects: [
       {
         id: "pmsm-foc-electric-bike",
-        title: "Field-Oriented Control for a PMSM Electric Bike",
+        title: "Design and Simulation of a Field-Oriented PMSM Drive for Electric Bike Applications",
         kind: "B.Tech final-year team project · Apr 2026",
         summary:
           "Designed and simulated a field-oriented-controlled permanent-magnet synchronous motor drive, then evaluated its application in an electric-bike model.",
@@ -485,7 +487,7 @@ export const CONTENT: Record<Mode, ModeContent> = {
         name: "Power BI for Beginners",
         issuer: "Simplilearn SkillUp",
         issued: "Jun 2026",
-        note: "Course completion; not an official Microsoft certification.",
+        note: "Course completion.",
         image: "/certificates/power-bi-beginners.jpg",
       },
     ],
