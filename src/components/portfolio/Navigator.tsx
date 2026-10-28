@@ -48,6 +48,22 @@ const SECTION_ICONS: Record<SectionId, LucideIcon> = {
   contact: Mail,
 };
 
+const DESKTOP_SECTION_LABELS: Record<SectionId, string> = {
+  about: "Introduction",
+  education: "Education",
+  experience: "Experience",
+  goals: "Career goals",
+  reflections: "Reflection",
+  development: "Development",
+  evaluation: "Rubric",
+  clubs: "Clubs",
+  projects: "Projects",
+  skills: "Skills",
+  certifications: "Credentials",
+  achievements: "Achievements",
+  contact: "Contact",
+};
+
 function sectionIcon(id: SectionId, mode: Mode | "neutral"): LucideIcon {
   if (id === "projects" && mode === "mgmt") return Megaphone;
   if (id === "skills" && mode === "eng") return Cpu;
@@ -237,14 +253,22 @@ export function Navigator() {
                 }
               />
               <span>{String(index + 1).padStart(2, "0")}</span>
-              <span>{section.label}</span>
+              <span className="desktop-index-label">
+                {section.id === "achievements" && mode === "mgmt"
+                  ? "Campus life"
+                  : DESKTOP_SECTION_LABELS[section.id]}
+              </span>
             </Button>
           );
         })}
       </nav>
       <div
         ref={menu}
-        data-hidden={!mobileNavVisible && !navExpanded ? "true" : undefined}
+        data-hidden={
+          !navExpanded && (active === "hero" || !mobileNavVisible)
+            ? "true"
+            : undefined
+        }
         onFocusCapture={() => setMobileNavVisible(true)}
         className="portfolio-mobile-index fixed inset-x-5 bottom-[calc(1rem+env(safe-area-inset-bottom))] z-50 sm:inset-x-8 lg:hidden"
       >

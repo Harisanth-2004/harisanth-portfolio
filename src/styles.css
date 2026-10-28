@@ -737,8 +737,8 @@ html.dark[data-mode="mgmt"] {
     border-bottom: 0;
   }
   .portfolio-hero {
-    min-height: 100svh;
-    height: 100svh;
+    min-height: 42.5rem;
+    height: clamp(42.5rem, calc(100svh - 9rem), 44rem);
   }
   .portfolio-hero [data-layer="eng"] h1 {
     font-size: clamp(2.75rem, 12vw, 4rem);
@@ -758,11 +758,21 @@ html.dark[data-mode="mgmt"] {
     transform: none;
   }
   .hero-scrim {
-    top: 11.125rem;
+    top: 8rem;
     bottom: auto;
     padding-top: 0;
     padding-bottom: 1.25rem;
     background: none;
+  }
+}
+
+@media (min-width: 1024px) {
+  .desktop-index-label {
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 }
 
@@ -1397,7 +1407,7 @@ html.dark[data-mode="mgmt"] {
     opacity: 0.55;
   }
   .hero-scrim {
-    top: 11.125rem;
+    top: 8rem;
     bottom: auto;
     padding-top: 0;
     padding-bottom: 1.25rem;
