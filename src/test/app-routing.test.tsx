@@ -22,6 +22,7 @@ describe("Portfolio homepage", () => {
       screen.getByRole("heading", { name: /Career goals/ }),
     ).toBeInTheDocument();
     expect(screen.getByText("IEDC at MBS")).toBeInTheDocument();
+    expect(screen.getByText("Power BI for Beginners")).toBeInTheDocument();
     fireEvent.click(btech);
     expect(
       screen.getByRole("heading", {
@@ -35,6 +36,8 @@ describe("Portfolio homepage", () => {
       }),
     ).toBeInTheDocument();
     expect(screen.queryByText(/report pending/i)).not.toBeInTheDocument();
+    expect(screen.queryByText("Power BI for Beginners")).not.toBeInTheDocument();
+    expect(screen.getByText("Unmanned Aerial Vehicle Technology")).toBeInTheDocument();
     expect(
       screen.queryByRole("heading", { name: /Career goals/ }),
     ).not.toBeInTheDocument();
@@ -173,20 +176,15 @@ describe("Portfolio homepage", () => {
       "goals",
       "reflections",
       "development",
-      "evaluation",
     ]) {
       expect(document.querySelector(`#${sectionId} [data-section-title]`)).toBeInTheDocument();
     }
+    expect(document.querySelector("#evaluation")).not.toBeInTheDocument();
+    expect(screen.queryByText(/Evaluation Rubric/)).not.toBeInTheDocument();
     expect(screen.getAllByText("Evidence:").length).toBeGreaterThan(0);
-    expect(screen.getByText(/Current work-integrated role/)).toBeInTheDocument();
-    expect(screen.getByRole("table")).toBeInTheDocument();
-    expect(screen.getByText("Content Completeness & Organization")).toBeInTheDocument();
-    expect(screen.getByText("Progress & Initiative")).toBeInTheDocument();
-    expect(screen.getByText("Reflection & Personal Insights")).toBeInTheDocument();
-    expect(screen.getByText("Presentation Quality & Communication Skills")).toBeInTheDocument();
-    expect(screen.getByText("Visual Appeal & Digital Tools Usage")).toBeInTheDocument();
-    expect(screen.getByText("Professionalism & Relevance")).toBeInTheDocument();
-    expect(screen.getByText("Weights retained as provided.")).toBeInTheDocument();
+    expect(screen.getByText(/Strengthen analytical thinking, research methods/)).toBeInTheDocument();
+    expect(screen.getByText(/Build communication, collaboration and leadership/)).toBeInTheDocument();
+    expect(screen.queryByText(/Chennai and Bengaluru field survey/)).not.toBeInTheDocument();
     expect(screen.queryByText(/The toolkit/)).not.toBeInTheDocument();
   }, 10000);
 });
