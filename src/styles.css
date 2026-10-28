@@ -1355,8 +1355,8 @@ html.dark[data-mode="mgmt"] {
 @media (min-width: 1024px) {
   .hero-portrait-mgmt {
     right: 3vw;
-    width: min(50vw, 560px);
-    height: 100%;
+    width: min(34vw, 435px);
+    height: 94%;
   }
 }
 @media (max-width: 639px) {
