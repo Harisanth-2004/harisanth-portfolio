@@ -112,7 +112,12 @@ describe("Portfolio homepage", () => {
     expect(marketingInternship).not.toBeNull();
     fireEvent.click(marketingInternship as HTMLButtonElement);
     expect(reflectionImage).toBeInTheDocument();
-    expect(screen.getByText("What happened")).toBeInTheDocument();
+    expect(screen.queryByText("What happened")).not.toBeInTheDocument();
+    expect(screen.queryByText("My response")).not.toBeInTheDocument();
+    expect(screen.queryByText("The connection")).not.toBeInTheDocument();
+    expect(screen.queryByText("What I learned")).not.toBeInTheDocument();
+    expect(screen.queryByText("Next time")).not.toBeInTheDocument();
+    expect(screen.getByText(/only a few minutes to cover the work of a three-month internship/i)).toBeInTheDocument();
     expect(
       screen.getByText("Project Management Foundations"),
     ).toBeInTheDocument();
@@ -181,7 +186,7 @@ describe("Portfolio homepage", () => {
     }
     expect(document.querySelector("#evaluation")).not.toBeInTheDocument();
     expect(screen.queryByText(/Evaluation Rubric/)).not.toBeInTheDocument();
-    expect(screen.getAllByText("Evidence:").length).toBeGreaterThan(0);
+    expect(screen.queryByText("Evidence:")).not.toBeInTheDocument();
     expect(screen.getByText(/Strengthen analytical thinking, research methods/)).toBeInTheDocument();
     expect(screen.getByText(/Build communication, collaboration and leadership/)).toBeInTheDocument();
     expect(screen.queryByText(/Chennai and Bengaluru field survey/)).not.toBeInTheDocument();
