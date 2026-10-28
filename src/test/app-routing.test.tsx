@@ -132,6 +132,8 @@ describe("Portfolio homepage", () => {
       screen.getByText("Project Management Foundations"),
     ).toBeInTheDocument();
     const reflectionToggle = screen.getByRole("button", { name: "Read reflection" });
+    expect(reflectionToggle.closest("figure")).toBeNull();
+    expect(reflectionToggle.closest("[data-tarang-reflection]")).toBeInTheDocument();
     expect(screen.queryByText(/Tarang had several rounds/)).not.toBeInTheDocument();
     fireEvent.click(reflectionToggle);
     expect(screen.getByText(/Tarang had several rounds/)).toBeInTheDocument();

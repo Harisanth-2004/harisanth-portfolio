@@ -701,7 +701,7 @@ export function Sections() {
         )}
         {selected === "mgmt" && (
           <figure
-            className="tarang-feature mb-8 grid overflow-hidden border border-border bg-surface/50 md:grid-cols-[1.45fr_.55fr]"
+            className="tarang-feature mb-4 grid overflow-hidden border border-border bg-surface/50 md:grid-cols-[1.45fr_.55fr]"
             data-reveal
           >
             <div className="tarang-gallery overflow-hidden">
@@ -736,42 +736,46 @@ export function Sections() {
                 Kattangal, Kerala <span className="mx-2 text-signal">/</span> 09
                 Oct 2026
               </p>
-              <Accordion type="single" collapsible className="border-t border-border">
-                <AccordionItem value="tarang-reflection" className="border-0">
-                  <AccordionTrigger className="min-h-11 py-3 text-sm hover:no-underline">
-                    Read reflection
-                  </AccordionTrigger>
-                  <AccordionContent className="space-y-3 pb-4 text-sm leading-relaxed text-muted-foreground">
-                    <p>
-                      Tarang had several rounds. The first was a marketing quiz,
-                      which went well. In the second, we had to build something
-                      creative from a small kit of coloured paper, plastic
-                      covers, paper cups, a pencil, tape, glue, ice-cream sticks
-                      and a blade.
-                    </p>
-                    <p>
-                      We made a gravity sorter intended to send objects of
-                      different masses along separate paths. We imagined
-                      adapting it for a low-cost rainwater system: channel water
-                      one way and wet leaves another. I liked that the idea
-                      started with a practical problem rather than with how the
-                      model would look on a table.
-                    </p>
-                    <p>
-                      We were eliminated after that round. It stung because I
-                      thought the build challenge suited us. The quiz tested
-                      what we already knew; this round asked us to make
-                      something from the materials in front of us. We ran out
-                      of time to make the sorter work consistently and had not
-                      tested it enough to claim reliability. Next time I’ll make
-                      a rough working version early, test the core mechanism
-                      before adding detail, and keep the pitch concise.
-                    </p>
-                  </AccordionContent>
-                </AccordionItem>
-              </Accordion>
             </figcaption>
           </figure>
+        )}
+        {selected === "mgmt" && (
+          <Accordion
+            type="single"
+            collapsible
+            className="tarang-reflection-panel mb-8 border border-border bg-surface/40"
+            data-tarang-reflection
+          >
+            <AccordionItem value="tarang-reflection" className="border-0">
+              <AccordionTrigger className="min-h-12 px-5 py-3 text-sm hover:no-underline sm:px-7">
+                Read reflection
+              </AccordionTrigger>
+              <AccordionContent className="space-y-3 px-5 pb-5 text-sm leading-relaxed text-muted-foreground sm:px-7 sm:pb-7">
+                <p>
+                  Tarang had several rounds. The first was a marketing quiz,
+                  which went well. In the second, we had to build something
+                  creative from a small kit of coloured paper, plastic covers,
+                  paper cups, a pencil, tape, glue, ice-cream sticks and a blade.
+                </p>
+                <p>
+                  We made a gravity sorter intended to send objects of different
+                  masses along separate paths. We imagined adapting it for a
+                  low-cost rainwater system: channel water one way and wet leaves
+                  another. I liked that the idea started with a practical problem
+                  rather than with how the model would look on a table.
+                </p>
+                <p>
+                  We were eliminated after that round. It stung because I thought
+                  the build challenge suited us. The quiz tested what we already
+                  knew; this round asked us to make something from the materials
+                  in front of us. We ran out of time to make the sorter work
+                  consistently and had not tested it enough to claim reliability.
+                  Next time I’ll make a rough working version early, test the core
+                  mechanism before adding detail, and keep the pitch concise.
+                </p>
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
         )}
         {selected === "eng" && (
           <figure
