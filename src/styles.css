@@ -422,56 +422,6 @@ html.dark[data-mode="mgmt"] {
 .development-plan li > span {
   padding-top: 0.1rem;
 }
-.rubric-wrap {
-  overflow: hidden;
-  border: 1px solid var(--border);
-  background: color-mix(in oklab, var(--surface) 45%, transparent);
-}
-.evaluation-rubric {
-  width: 100%;
-  border-collapse: collapse;
-  text-align: left;
-}
-.evaluation-rubric caption {
-  padding: 1rem 1.25rem;
-  border-bottom: 1px solid var(--border);
-  color: var(--muted-foreground);
-  font-size: 0.82rem;
-  text-align: left;
-}
-.evaluation-rubric th,
-.evaluation-rubric td {
-  padding: 1rem 1.25rem;
-  border-bottom: 1px solid var(--border);
-  vertical-align: top;
-  font-size: 0.9rem;
-  line-height: 1.55;
-}
-.evaluation-rubric thead th {
-  color: var(--signal);
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-.evaluation-rubric tbody th,
-.evaluation-rubric tfoot th {
-  width: 31%;
-  font-weight: 500;
-}
-.evaluation-rubric tbody td:nth-child(2),
-.evaluation-rubric tfoot td:first-of-type {
-  width: 12%;
-  color: var(--signal);
-  font-variant-numeric: tabular-nums;
-  white-space: nowrap;
-}
-.evaluation-rubric tfoot th,
-.evaluation-rubric tfoot td {
-  border-bottom: 0;
-  font-weight: 600;
-}
 .milestone-value {
   font-size: 3.5rem;
   line-height: 1.1;
@@ -661,11 +611,6 @@ html.dark[data-mode="mgmt"] {
   }
 }
 @media (max-width: 639px) {
-  .evaluation-rubric caption {
-    display: block;
-    box-sizing: border-box;
-    width: 100%;
-  }
   .internship-reflection {
     grid-template-columns: minmax(0, 1fr);
   }
@@ -675,66 +620,6 @@ html.dark[data-mode="mgmt"] {
   .reflection-stage {
     grid-template-columns: minmax(0, 1fr);
     gap: 0.45rem;
-  }
-  .evaluation-rubric,
-  .evaluation-rubric tbody,
-  .evaluation-rubric tfoot {
-    display: block;
-  }
-  .evaluation-rubric thead {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-  }
-  .evaluation-rubric tbody tr,
-  .evaluation-rubric tfoot tr {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    gap: 0.4rem 1rem;
-    padding: 1rem 1.1rem;
-    border-bottom: 1px solid var(--border);
-  }
-  .evaluation-rubric tbody th,
-  .evaluation-rubric tfoot th {
-    grid-column: 1 / -1;
-    width: auto;
-    padding: 0;
-    border: 0;
-    font-size: 0.95rem;
-  }
-  .evaluation-rubric tbody td,
-  .evaluation-rubric tfoot td {
-    width: auto !important;
-    padding: 0;
-    border: 0;
-    font-size: 0.85rem;
-    white-space: normal !important;
-  }
-  .evaluation-rubric tbody td:nth-child(2),
-  .evaluation-rubric tfoot td:first-of-type {
-    grid-column: 2;
-    grid-row: 1;
-    align-self: start;
-  }
-  .evaluation-rubric tbody td:last-child,
-  .evaluation-rubric tfoot td:last-child {
-    grid-column: 1 / -1;
-    padding-top: 0.3rem;
-    color: var(--muted-foreground);
-  }
-  .evaluation-rubric tbody td:last-child::before {
-    content: attr(data-label) ": ";
-    color: var(--foreground);
-    font-size: 0.72rem;
-    font-family: var(--font-mono);
-    text-transform: uppercase;
-  }
-  .evaluation-rubric tbody tr:last-child,
-  .evaluation-rubric tfoot tr {
-    border-bottom: 0;
   }
   .portfolio-hero {
     min-height: 42.5rem;
@@ -1265,11 +1150,12 @@ html.dark[data-mode="mgmt"] {
     top: 46%;
   }
   .credential-row {
-    grid-template-columns: 2.5rem minmax(0, 1fr) minmax(11rem, auto);
+    grid-template-columns: 2.5rem minmax(0, 1fr) minmax(11rem, 18rem);
     gap: 1.25rem;
   }
   .credential-meta {
     grid-column: auto;
+    min-width: 0;
     justify-content: flex-end;
     text-align: right;
   }
