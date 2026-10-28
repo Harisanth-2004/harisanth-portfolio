@@ -4,7 +4,6 @@ import {
   Award,
   Briefcase,
   CalendarDays,
-  ClipboardCheck,
   ChevronDown,
   Cpu,
   FolderOpen,
@@ -39,7 +38,6 @@ const SECTION_ICONS: Record<SectionId, LucideIcon> = {
   goals: CalendarDays,
   reflections: Lightbulb,
   development: TrendingUp,
-  evaluation: ClipboardCheck,
   clubs: UsersRound,
   projects: FolderOpen,
   skills: Lightbulb,
@@ -55,7 +53,6 @@ const DESKTOP_SECTION_LABELS: Record<SectionId, string> = {
   goals: "Career goals",
   reflections: "Reflection",
   development: "Development",
-  evaluation: "Rubric",
   clubs: "Clubs",
   projects: "Projects",
   skills: "Skills",
@@ -154,8 +151,7 @@ export function Navigator() {
         CONTENT[mode === "mgmt" ? "mgmt" : "eng"].projects.length > 0) &&
       (section.id !== "goals" || mode === "mgmt") &&
       (section.id !== "reflections" || mode === "mgmt") &&
-      (section.id !== "development" || mode === "mgmt") &&
-      (section.id !== "evaluation" || mode === "mgmt"),
+      (section.id !== "development" || mode === "mgmt"),
   ).map((section) =>
     section.id === "achievements" && mode === "mgmt"
       ? { ...section, label: "Campus life" }
