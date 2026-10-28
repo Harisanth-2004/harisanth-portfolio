@@ -137,7 +137,7 @@ export function Navigator() {
   return (
     <>
       <header
-        className={`portfolio-header fixed inset-x-0 top-0 z-50 flex h-16 items-center justify-between border-b border-border px-5 sm:px-8 lg:px-[5vw] ${mode === "neutral" && active === "hero" ? "portfolio-header-cover" : ""}`}
+        className={`portfolio-header fixed inset-x-0 top-0 z-50 flex h-14 items-center justify-between border-b border-border px-5 sm:px-8 lg:px-[5vw] ${mode === "neutral" && active === "hero" ? "portfolio-header-cover" : ""}`}
       >
         <Button
           variant="ghost"
@@ -162,7 +162,7 @@ export function Navigator() {
               <Button
                 key={m}
                 variant="ghost"
-                aria-pressed={(mode === "neutral" ? "eng" : mode) === m}
+                aria-pressed={mode === m}
                 aria-label={
                   m === "eng" ? "View B.Tech portfolio" : "View PGDM portfolio"
                 }

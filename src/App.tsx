@@ -6,13 +6,18 @@ import { PortfolioProvider } from "@/components/portfolio/state";
 export default function App() {
   return (
     <PortfolioProvider>
-      <a href="#about" className="skip-link">Skip to profile</a>
+      <a href="#main-content" className="skip-link">
+        Skip to main content
+      </a>
       <Navigator />
-      <main className="pb-24 lg:pb-0">
+      <main
+        id="main-content"
+        tabIndex={-1}
+        className="pb-24 outline-none lg:pb-0"
+      >
         <Hero />
         <Sections />
       </main>
     </PortfolioProvider>
   );
 }
-

@@ -63,7 +63,7 @@ describe("Independent portfolio switches", () => {
     expect(screen.getByTestId("state")).toBe(output);
   });
 
-  it("retains the early initialized identity and theme on hydration", () => {
+  it("starts from the introduction while retaining the early initialized theme", () => {
     document.documentElement.dataset["mode"] = "mgmt";
     document.documentElement.classList.add("dark");
     render(
@@ -71,7 +71,8 @@ describe("Independent portfolio switches", () => {
         <Controls />
       </PortfolioProvider>,
     );
-    expect(screen.getByTestId("state")).toHaveTextContent("mgmt/dark");
+    expect(screen.getByTestId("state")).toHaveTextContent("neutral/dark");
+    expect(document.documentElement.dataset["mode"]).toBe("neutral");
   });
 
   it("preserves the reading offset after the identity typography changes", () => {

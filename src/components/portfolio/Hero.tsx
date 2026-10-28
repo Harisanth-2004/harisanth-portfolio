@@ -29,6 +29,7 @@ export function Hero() {
   const { mode, setMode, ready } = usePortfolio();
   const root = useRef<HTMLElement>(null);
   const first = useRef(true);
+  const lastMode = useRef<typeof mode>("neutral");
   const animation = useRef<gsap.core.Timeline | null>(null);
 
   useEffect(() => {
@@ -68,8 +69,23 @@ export function Hero() {
           });
         }
         gsap.set(q("[data-path]"), { strokeDashoffset: 0 });
-        gsap.set(layers, { autoAlpha: 0, x: 0, y: 0 });
-        gsap.set(show, { autoAlpha: 1 });
+        const outgoing = q(`[data-layer=${lastMode.current}]`)[0] as
+          HTMLElement | undefined;
+        if (first.current || reduce) {
+          gsap.set(layers, { autoAlpha: 0, x: 0, y: 0 });
+          gsap.set(show, { autoAlpha: 1, opacity: 1 });
+        } else {
+          // Keep the outgoing scene visible while the selected scene arrives.
+          layers.forEach((layer) => {
+            if (layer !== outgoing && layer !== show)
+              gsap.set(layer, { autoAlpha: 0, x: 0, y: 0 });
+          });
+          gsap.set(show, {
+            autoAlpha: 1,
+            opacity: 0,
+            x: mode === "eng" ? 8 : mode === "mgmt" ? -8 : 0,
+          });
+        }
         const tl = gsap.timeline({
           defaults: { ease: "power2.out", overwrite: "auto" },
         });
@@ -78,10 +94,21 @@ export function Hero() {
           tl.to(q("[data-curtain]"), { scaleY: 0, duration: 0.3 }, 0);
         } else gsap.set(q("[data-curtain]"), { scaleY: 0 });
         if (!reduce) {
-          tl.fromTo(
+          if (!first.current && outgoing) {
+            tl.to(
+              outgoing,
+              { autoAlpha: 0, duration: 0.22, ease: "power2.out" },
+              0,
+            );
+          }
+          tl.to(
             show,
-            { opacity: 0, x: mode === "eng" ? 12 : mode === "mgmt" ? -12 : 0 },
-            { opacity: 1, x: 0, duration: 0.32 },
+            {
+              opacity: 1,
+              x: 0,
+              duration: first.current ? 0.26 : 0.24,
+              ease: "power2.out",
+            },
             first.current ? 0.08 : 0,
           );
           if (intro) {
@@ -118,6 +145,7 @@ export function Hero() {
           }
         }, root);
         first.current = false;
+        lastMode.current = mode;
         return () => {
           tl.kill();
           scrollContext.revert();
@@ -155,6 +183,7 @@ export function Hero() {
       {/* NEUTRAL */}
       <div
         data-layer="neutral"
+        aria-hidden={mode !== "neutral"}
         inert={mode !== "neutral"}
         className="absolute inset-0 z-10"
       >
@@ -181,6 +210,7 @@ export function Hero() {
       {/* ENGINEERING — enters from the right */}
       <div
         data-layer="eng"
+        aria-hidden={mode !== "eng"}
         inert={mode !== "eng"}
         className="invisible absolute inset-0 z-10"
       >
@@ -260,6 +290,7 @@ export function Hero() {
       {/* MANAGEMENT — enters from the left */}
       <div
         data-layer="mgmt"
+        aria-hidden={mode !== "mgmt"}
         inert={mode !== "mgmt"}
         className="invisible absolute inset-0 z-10"
       >
@@ -273,7 +304,7 @@ export function Hero() {
             decoding="async"
           />
         </figure>
-        <div className="hero-scrim absolute inset-x-0 bottom-0 px-5 pb-6 pt-24 sm:px-8 lg:inset-y-0 lg:left-[20vw] lg:right-auto lg:flex lg:w-[min(42vw,520px)] lg:flex-col lg:justify-center lg:bg-none lg:px-0 lg:pb-0">
+        <div className="hero-scrim hero-scrim-management absolute inset-x-0 bottom-0 px-5 pb-6 pt-24 sm:px-8 lg:inset-y-0 lg:left-[20vw] lg:right-auto lg:flex lg:w-[min(42vw,520px)] lg:flex-col lg:justify-center lg:bg-none lg:px-0 lg:pb-0">
           <p data-stagger className="font-sans text-sm text-signal">
             {mgmt.hero.meta}
           </p>

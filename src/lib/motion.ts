@@ -21,4 +21,3 @@ export const prefersReducedMotion = () =>
 export const isLowPower = () =>
   typeof navigator !== "undefined" &&
   ((navigator.hardwareConcurrency ?? 8) <= 4 || window.matchMedia("(pointer: coarse)").matches);
-

@@ -1,5 +1,24 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import { ArrowDown, ArrowUpRight, Eye, EyeOff } from "lucide-react";
+import {
+  ArrowDown,
+  ArrowUpRight,
+  Award,
+  BriefcaseBusiness,
+  Cpu,
+  Eye,
+  EyeOff,
+  FileText,
+  FolderOpen,
+  GraduationCap,
+  Lightbulb,
+  Mail,
+  Megaphone,
+  Target,
+  Trophy,
+  UserRound,
+  UsersRound,
+  type LucideIcon,
+} from "lucide-react";
 import {
   Accordion,
   AccordionItem,
@@ -22,6 +41,25 @@ import yessAudiencePhoto from "@/assets/yess-2024-audience.jpg";
 import yessTeamPhoto from "@/assets/yess-2024-technical-team.jpg";
 import ksumSelfiePhoto from "@/assets/ksum-iedc-team-selfie.jpg";
 import ksumCohortPhoto from "@/assets/ksum-iedc-cohort-jul-2025.jpg";
+
+const CONTENT_ICONS: Record<SectionId, LucideIcon> = {
+  about: UserRound,
+  education: GraduationCap,
+  experience: BriefcaseBusiness,
+  clubs: UsersRound,
+  projects: FolderOpen,
+  skills: Lightbulb,
+  certifications: Award,
+  achievements: Trophy,
+  contact: Mail,
+};
+
+function contentsIcon(id: SectionId, selected: Mode): LucideIcon {
+  if (id === "projects" && selected === "mgmt") return Megaphone;
+  if (id === "skills" && selected === "eng") return Cpu;
+  if (id === "skills" && selected === "mgmt") return Target;
+  return CONTENT_ICONS[id];
+}
 
 function CircuitMark({ variant }: { variant: number }) {
   const paths =
@@ -108,6 +146,10 @@ export function Sections() {
   const [openCredentials, setOpenCredentials] = useState<
     Record<Mode, string[]>
   >({ eng: [], mgmt: [] });
+  const [openReports, setOpenReports] = useState<Record<Mode, string[]>>({
+    eng: [],
+    mgmt: [],
+  });
 
   useEffect(() => {
     if (!ready || !root.current) return;
@@ -146,11 +188,15 @@ export function Sections() {
       },
     );
     return () => media.revert();
-  }, [ready]);
+  }, [mode, ready]);
 
   useEffect(() => {
     ScrollTrigger.refresh();
   }, [mode, expanded]);
+
+  // Keep the introductory cover distinct: a portfolio is revealed only after
+  // the visitor chooses B.Tech or PGDM.
+  if (mode === "neutral") return null;
 
   return (
     <div ref={root} className="portfolio-content">
@@ -187,17 +233,32 @@ export function Sections() {
             ] as const
           )
             .filter(([, , id]) => id !== "projects" || c.projects.length > 0)
-            .map(([number, title, id]) => (
-              <button
-                key={id}
-                onClick={() => scrollToSection(id)}
-                className="contents-link group"
-              >
-                <span>{number}.</span>
-                <span>{title}</span>
-                <span className="contents-page">↘</span>
-              </button>
-            ))}
+            .map(([number, title, id]) => {
+              const Icon = contentsIcon(id, selected);
+              return (
+                <button
+                  key={id}
+                  onClick={() => scrollToSection(id)}
+                  className="contents-link group"
+                  aria-label={`${number}. ${title}`}
+                >
+                  <span className="contents-index">{number}.</span>
+                  <Icon
+                    className="contents-icon"
+                    size={18}
+                    strokeWidth={1.6}
+                    aria-hidden="true"
+                  />
+                  <span className="contents-label">{title}</span>
+                  <ArrowUpRight
+                    className="contents-page"
+                    size={14}
+                    strokeWidth={1.5}
+                    aria-hidden="true"
+                  />
+                </button>
+              );
+            })}
         </nav>
       </div>
       <Section id="about" number="01" title="About me">
@@ -309,9 +370,43 @@ export function Sections() {
                   ))}
                 </ul>
                 {item.reflection && (
-                  <p className="t-body mt-6 border-l border-signal pl-5 italic text-muted-foreground">
-                    {item.reflection}
-                  </p>
+                  <div className="internship-reflection mt-8 border-t border-border pt-6">
+                    <div className="internship-reflection-photo">
+                      {item.reflectionPhoto && (
+                        <img
+                          src={item.reflectionPhoto}
+                          alt="Harisanth with the internship cohort and faculty at the final pre-PGDM presentation"
+                          width={1600}
+                          height={1200}
+                          loading="lazy"
+                          decoding="async"
+                        />
+                      )}
+                    </div>
+                    <div>
+                      <p className="t-meta mb-4 text-signal">
+                        Reflection / five stages
+                      </p>
+                      <dl className="reflection-stages">
+                        {(
+                          [
+                            ["Reporting", item.reflection.reporting],
+                            ["Responding", item.reflection.responding],
+                            ["Relating", item.reflection.relating],
+                            ["Reasoning", item.reflection.reasoning],
+                            ["Reconstructing", item.reflection.reconstructing],
+                          ] as const
+                        ).map(([stage, text], index) => (
+                          <div className="reflection-stage" key={stage}>
+                            <dt className="t-meta text-muted-foreground">
+                              0{index + 1} / {stage}
+                            </dt>
+                            <dd className="text-sm leading-relaxed">{text}</dd>
+                          </div>
+                        ))}
+                      </dl>
+                    </div>
+                  </div>
                 )}
               </ExperienceDetails>
             </AccordionItem>
@@ -382,50 +477,106 @@ export function Sections() {
           </figure>
         )}
       </Section>
-      <Section id="projects" number="05" title="Selected work">
-        {c.projects.map((project, i) => (
-          <article
-            key={project.id}
-            className="project-row grid gap-8 border border-border bg-surface/40 p-5 sm:p-7 md:grid-cols-[1fr_1.3fr]"
-            data-reveal
-          >
-            <div>
-              <p className="t-meta mb-6 text-signal">
-                P / {String(i + 1).padStart(2, "0")}
-              </p>
-              <h3 className="t-title max-w-[26ch]">{project.title}</h3>
-              <p className="t-meta mt-4 text-muted-foreground">
-                {project.kind}
-              </p>
-              {project.status ? (
-                <p className="t-caption mt-6 border-l border-signal pl-4">
-                  {project.status}
+      {c.projects.length > 0 && (
+        <Section id="projects" number="05" title="Selected work">
+          {c.projects.map((project, i) => (
+            <article
+              key={project.id}
+              className="project-row grid gap-8 border border-border bg-surface/40 p-5 sm:p-7 md:grid-cols-[1fr_1.3fr]"
+              data-reveal
+            >
+              <div>
+                <p className="t-meta mb-6 text-signal">
+                  P / {String(i + 1).padStart(2, "0")}
                 </p>
-              ) : (
-                <ProjectPreview project={project} />
-              )}
-            </div>
-            <div>
-              <p className="t-body text-muted-foreground">{project.summary}</p>
-              {project.points.length > 0 && (
-                <ol className="mt-6 space-y-3">
-                  {project.points.map((point, n) => (
-                    <li
-                      key={point}
-                      className="flex gap-4 border-t border-border pt-3 text-sm"
+                <h3 className="t-title max-w-[26ch]">{project.title}</h3>
+                <p className="t-meta mt-4 text-muted-foreground">
+                  {project.kind}
+                </p>
+                {project.report ? (
+                  <div className="mt-6">
+                    <Button
+                      type="button"
+                      variant="outline"
+                      aria-expanded={openReports[selected].includes(project.id)}
+                      aria-controls={`project-report-${project.id}`}
+                      onClick={() =>
+                        setOpenReports((previous) => ({
+                          ...previous,
+                          [selected]: previous[selected].includes(project.id)
+                            ? previous[selected].filter(
+                                (id) => id !== project.id,
+                              )
+                            : [...previous[selected], project.id],
+                        }))
+                      }
+                      className="min-h-11 rounded-none"
                     >
-                      <span className="t-meta text-signal">
-                        {String(n + 1).padStart(2, "0")}
-                      </span>
-                      {point}
-                    </li>
-                  ))}
-                </ol>
-              )}
-            </div>
-          </article>
-        ))}
-      </Section>
+                      <FileText size={15} aria-hidden="true" />
+                      {openReports[selected].includes(project.id)
+                        ? "Hide report"
+                        : "View report"}
+                    </Button>
+                    {openReports[selected].includes(project.id) && (
+                      <div
+                        id={`project-report-${project.id}`}
+                        className="project-report-panel mt-5"
+                      >
+                        <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
+                          <span className="t-meta text-muted-foreground">
+                            Project report · 84 pages
+                          </span>
+                          <a
+                            href={project.report}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="link-u inline-flex min-h-11 items-center gap-1 text-sm"
+                          >
+                            Open in a new tab
+                            <ArrowUpRight size={14} aria-hidden="true" />
+                          </a>
+                        </div>
+                        <iframe
+                          src={`${project.report}#toolbar=1&navpanes=0`}
+                          title={`Project report: ${project.title}`}
+                          className="project-report-frame"
+                          loading="lazy"
+                        />
+                      </div>
+                    )}
+                  </div>
+                ) : project.status ? (
+                  <p className="t-caption mt-6 border-l border-signal pl-4">
+                    {project.status}
+                  </p>
+                ) : (
+                  <ProjectPreview project={project} />
+                )}
+              </div>
+              <div>
+                <p className="t-body text-muted-foreground">
+                  {project.summary}
+                </p>
+                {project.points.length > 0 && (
+                  <ol className="mt-6 space-y-3">
+                    {project.points.map((point, n) => (
+                      <li
+                        key={point}
+                        className="flex gap-4 border-t border-border pt-3 text-sm"
+                      >
+                        <span className="t-meta text-signal">
+                          {String(n + 1).padStart(2, "0")}
+                        </span>
+                        {point}
+                      </li>
+                    ))}
+                  </ol>
+                )}
+              </div>
+            </article>
+          ))}
+        </Section>
+      )}
       <Section id="skills" number="06" title="The toolkit">
         <div className="grid gap-x-12 md:grid-cols-2">
           {c.skills.map((group, i) => (
@@ -671,38 +822,17 @@ export function Sections() {
           <p className="t-lede max-w-[34ch]">
             Engineering, management, and the interesting space in between.
           </p>
-          <a
-            href={`mailto:${PERSON.email}`}
-            className="contact-email link-u mt-10 inline-flex max-w-full flex-wrap items-center gap-3 font-display text-signal"
-          >
-            {PERSON.email}
-            <ArrowUpRight className="size-6 shrink-0" />
-          </a>
-          <div className="mt-10 grid gap-8 sm:grid-cols-2">
-            <div>
-              <p className="t-meta mb-3 text-muted-foreground">Find me</p>
-              <a
-                href={`https://${PERSON.linkedin}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="link-u inline-flex min-h-11 items-center gap-2 text-sm"
-              >
-                LinkedIn <ArrowUpRight className="size-4" />
-              </a>
-              <p className="t-caption mt-3">{PERSON.location}</p>
-            </div>
-            <div>
-              <p className="t-meta mb-3 text-muted-foreground">Call</p>
-              {PERSON.phones.map((phone) => (
-                <a
-                  key={phone}
-                  href={`tel:${phone.replaceAll(" ", "")}`}
-                  className="block min-h-11 text-sm"
-                >
-                  {phone}
-                </a>
-              ))}
-            </div>
+          <div className="mt-10">
+            <p className="t-meta mb-3 text-muted-foreground">Find me</p>
+            <a
+              href={`https://${PERSON.linkedin}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="link-u inline-flex min-h-11 items-center gap-2 text-sm"
+            >
+              LinkedIn <ArrowUpRight className="size-4" />
+            </a>
+            <p className="t-caption mt-3">{PERSON.location}</p>
           </div>
         </div>
       </Section>

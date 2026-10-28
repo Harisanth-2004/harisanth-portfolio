@@ -4,26 +4,28 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#171715" />
-    <meta name="description" content="B Harisanth Krishna — engineering and management, through selected work and experience." />
+    <meta
+      name="description"
+      content="B Harisanth Krishna — engineering and management, through selected work and experience."
+    />
     <title>B Harisanth Krishna — Engineering &amp; Management</title>
     <script>
       try {
         const theme = localStorage.getItem("bhk-theme");
-        document.documentElement.classList.toggle(
-          "dark",
-          theme === "dark",
-        );
-        const mode = localStorage.getItem("bhk-mode");
-        document.documentElement.dataset.mode = mode === "eng" || mode === "mgmt" ? mode : "neutral";
+        document.documentElement.classList.toggle("dark", theme === "dark");
+        // Always enter on the introduction. The visitor chooses a portfolio track.
+        document.documentElement.dataset.mode = "neutral";
       } catch {}
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Geist:wght@400;450;500;600&family=Geist+Mono:wght@400;500&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;450;500;600&family=Geist+Mono:wght@400;500&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
-

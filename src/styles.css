@@ -60,7 +60,6 @@
   --font-display: var(--f-display);
   --font-text: var(--f-text);
   --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, monospace;
-  --font-serif: "Fraunces", "Iowan Old Style", Georgia, serif;
   --font-sans: "Instrument Sans", system-ui, sans-serif;
   --font-grotesk: "Geist", system-ui, sans-serif;
 
@@ -73,16 +72,16 @@
   --f-display: "Geist", system-ui, sans-serif;
   --f-text: "Instrument Sans", system-ui, sans-serif;
 
-  /* neutral light — darkroom paper */
-  --background: oklch(0.955 0.003 90);
-  --foreground: oklch(0.17 0.004 90);
-  --surface: oklch(0.925 0.004 90);
-  --muted-foreground: oklch(0.45 0.005 90);
-  --border: oklch(0.17 0.004 90 / 14%);
-  --signal: oklch(0.17 0.004 90);
-  --signal-soft: oklch(0.17 0.004 90 / 8%);
-  --signal-2: oklch(0.45 0.005 90);
-  --grid: oklch(0.17 0.004 90 / 6%);
+  /* Shared cool-paper and ink foundation across the intro and both tracks. */
+  --background: oklch(0.955 0.004 240);
+  --foreground: oklch(0.19 0.012 250);
+  --surface: oklch(0.925 0.006 240);
+  --muted-foreground: oklch(0.46 0.014 250);
+  --border: oklch(0.19 0.012 250 / 14%);
+  --signal: oklch(0.52 0.2 258);
+  --signal-soft: oklch(0.52 0.2 258 / 10%);
+  --signal-2: oklch(0.42 0.06 250);
+  --grid: oklch(0.52 0.2 258 / 8%);
   --blend: oklch(1 0 0);
   --portrait-bg: oklch(0.16 0 0);
 
@@ -117,22 +116,22 @@
 }
 
 html.dark {
-  --background: oklch(0.145 0.002 90);
-  --foreground: oklch(0.94 0.004 90);
-  --surface: oklch(0.19 0.003 90);
-  --muted-foreground: oklch(0.68 0.005 90);
-  --border: oklch(0.94 0.004 90 / 13%);
-  --signal: oklch(0.94 0.004 90);
-  --signal-soft: oklch(0.94 0.004 90 / 8%);
-  --signal-2: oklch(0.68 0.005 90);
-  --grid: oklch(0.94 0.004 90 / 5%);
-  --portrait-bg: oklch(0.12 0 0);
+  --background: oklch(0.14 0.01 255);
+  --foreground: oklch(0.95 0.006 240);
+  --surface: oklch(0.18 0.012 255);
+  --muted-foreground: oklch(0.7 0.015 245);
+  --border: oklch(0.95 0.006 240 / 12%);
+  --signal: oklch(0.76 0.13 236);
+  --signal-soft: oklch(0.76 0.13 236 / 12%);
+  --signal-2: oklch(0.85 0.03 230);
+  --grid: oklch(0.76 0.13 236 / 7%);
+  --portrait-bg: oklch(0.12 0.01 255);
 }
 
 /* ENGINEERING — instrument panel: cool paper / graphite, electric blue */
 :root[data-mode="eng"] {
   --f-display: "Geist", system-ui, sans-serif;
-  --f-text: "Geist", system-ui, sans-serif;
+  --f-text: "Instrument Sans", system-ui, sans-serif;
   --background: oklch(0.965 0.004 240);
   --foreground: oklch(0.19 0.012 250);
   --surface: oklch(0.935 0.006 240);
@@ -156,31 +155,31 @@ html.dark[data-mode="eng"] {
   --grid: oklch(0.76 0.13 236 / 7%);
 }
 
-/* MANAGEMENT — editorial: ivory / charcoal, bronze + olive */
+/* MANAGEMENT — the same cool paper and ink, with a quieter blue signal. */
 :root[data-mode="mgmt"] {
-  --f-display: "Fraunces", "Iowan Old Style", Georgia, serif;
+  --f-display: "Geist", system-ui, sans-serif;
   --f-text: "Instrument Sans", system-ui, sans-serif;
-  --background: oklch(0.955 0.016 85);
-  --foreground: oklch(0.22 0.01 60);
-  --surface: oklch(0.915 0.02 80);
-  --muted-foreground: oklch(0.47 0.015 65);
-  --border: oklch(0.22 0.01 60 / 16%);
-  --signal: oklch(0.52 0.1 60);
-  --signal-soft: oklch(0.52 0.1 60 / 10%);
-  --signal-2: oklch(0.48 0.07 120);
-  --grid: oklch(0.22 0.01 60 / 5%);
+  --background: oklch(0.955 0.006 246);
+  --foreground: oklch(0.19 0.012 250);
+  --surface: oklch(0.925 0.008 246);
+  --muted-foreground: oklch(0.46 0.014 250);
+  --border: oklch(0.19 0.012 250 / 14%);
+  --signal: oklch(0.54 0.16 252);
+  --signal-soft: oklch(0.54 0.16 252 / 10%);
+  --signal-2: oklch(0.44 0.06 250);
+  --grid: oklch(0.54 0.16 252 / 8%);
   --radius: 0px;
 }
 html.dark[data-mode="mgmt"] {
-  --background: oklch(0.175 0.008 60);
-  --foreground: oklch(0.93 0.02 85);
-  --surface: oklch(0.215 0.01 60);
-  --muted-foreground: oklch(0.72 0.02 75);
-  --border: oklch(0.93 0.02 85 / 14%);
-  --signal: oklch(0.76 0.1 72);
-  --signal-soft: oklch(0.76 0.1 72 / 12%);
-  --signal-2: oklch(0.72 0.07 118);
-  --grid: oklch(0.93 0.02 85 / 4%);
+  --background: oklch(0.15 0.012 252);
+  --foreground: oklch(0.95 0.006 240);
+  --surface: oklch(0.19 0.014 252);
+  --muted-foreground: oklch(0.7 0.015 245);
+  --border: oklch(0.95 0.006 240 / 12%);
+  --signal: oklch(0.74 0.12 242);
+  --signal-soft: oklch(0.74 0.12 242 / 12%);
+  --signal-2: oklch(0.83 0.035 236);
+  --grid: oklch(0.74 0.12 242 / 7%);
 }
 
 @layer base {
@@ -338,7 +337,7 @@ html.dark[data-mode="mgmt"] {
   backdrop-filter: blur(12px);
 }
 .portfolio-hero {
-  height: calc(100svh - 65px);
+  height: calc(100svh - 56px);
   min-height: 670px;
 }
 .hero-name {
@@ -379,14 +378,40 @@ html.dark[data-mode="mgmt"] {
 .experience-details {
   max-width: 68ch;
 }
+.internship-reflection {
+  display: grid;
+  grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+  gap: clamp(1.25rem, 3vw, 2.5rem);
+  max-width: 76rem;
+}
+.internship-reflection-photo {
+  min-width: 0;
+  aspect-ratio: 4 / 3;
+  align-self: start;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+.internship-reflection-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 56%;
+}
+.reflection-stages {
+  border-top: 1px solid var(--border);
+}
+.reflection-stage {
+  display: grid;
+  grid-template-columns: 8.5rem minmax(0, 1fr);
+  gap: 0.75rem;
+  padding-block: 0.85rem;
+  border-bottom: 1px solid var(--border);
+}
 .milestone-value {
   font-size: 3.5rem;
   line-height: 1.1;
-}
-.contact-email {
-  font-size: 1.2rem;
-  line-height: 1.6;
-  overflow-wrap: anywhere;
 }
 .skip-link {
   position: fixed;
@@ -446,9 +471,6 @@ html.dark[data-mode="mgmt"] {
   .education-row {
     grid-template-columns: 140px minmax(0, 1fr) 24px;
     gap: 28px;
-  }
-  .contact-email {
-    font-size: 1.6rem;
   }
 }
 @media (min-width: 1024px) {
@@ -522,9 +544,6 @@ html.dark[data-mode="mgmt"] {
   .portfolio-header [role="group"] button {
     padding-inline: 8px;
   }
-  .contact-email {
-    font-size: 1rem;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -579,9 +598,19 @@ html.dark[data-mode="mgmt"] {
   }
 }
 @media (max-width: 639px) {
+  .internship-reflection {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .internship-reflection-photo {
+    max-height: 19rem;
+  }
+  .reflection-stage {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.45rem;
+  }
   .portfolio-hero {
-    min-height: 700px;
-    height: max(700px, calc(100svh - 60px));
+    min-height: 100svh;
+    height: 100svh;
   }
   .portfolio-hero [data-layer="eng"] h1 {
     font-size: clamp(2.75rem, 12vw, 4rem);
@@ -592,13 +621,13 @@ html.dark[data-mode="mgmt"] {
   }
   .hero-portrait {
     display: block;
-    top: 4rem;
-    right: auto;
-    bottom: auto;
-    left: 50%;
-    width: clamp(6rem, 28vw, 7rem);
-    height: 7rem;
-    transform: translateX(-50%);
+    top: auto;
+    right: 0.75rem;
+    bottom: 0;
+    left: auto;
+    width: clamp(10rem, 43vw, 12rem);
+    height: clamp(11rem, 48vw, 13rem);
+    transform: none;
   }
   .hero-scrim {
     top: 11.125rem;
@@ -615,7 +644,7 @@ html.dark[data-mode="mgmt"] {
   --foreground: #f4f4f1;
   --muted-foreground: #a5a6a3;
   --border: rgb(244 244 241 / 22%);
-  --signal: #f4f4f1;
+  --signal: #75a5ff;
   background: #060807;
   color: #f4f4f1;
 }
@@ -630,7 +659,7 @@ html.dark[data-mode="mgmt"] {
   --foreground: #f4f4f1;
   --muted-foreground: #a5a6a3;
   --border: rgb(244 244 241 / 22%);
-  --signal: #f4f4f1;
+  --signal: #75a5ff;
   background: #060807;
   color: #f4f4f1;
 }
@@ -689,6 +718,10 @@ html.dark[data-mode="mgmt"] {
   color: var(--muted-foreground);
   font-family: var(--font-mono);
   font-size: 0.7rem;
+}
+.contents-icon {
+  display: none;
+  color: var(--signal);
 }
 .experience-list {
   border-top: 0;
@@ -778,6 +811,7 @@ html.dark[data-mode="mgmt"] {
     aspect-ratio: 4 / 3;
   }
 }
+
 .hero-portrait {
   display: none;
 }
@@ -794,9 +828,29 @@ html.dark[data-mode="mgmt"] {
   bottom: 0;
   pointer-events: none;
 }
+@media (max-width: 639px) {
+  .hero-portrait {
+    display: block;
+    top: auto;
+    right: 0.75rem;
+    bottom: 0;
+    left: auto;
+    width: clamp(10rem, 43vw, 12rem);
+    height: clamp(11rem, 48vw, 13rem);
+    transform: none;
+  }
+}
 .milestone-card {
   min-height: 13rem;
   border-top: 2px solid color-mix(in oklab, var(--signal) 55%, var(--border));
+}
+.project-report-frame {
+  display: block;
+  width: 100%;
+  height: min(78svh, 760px);
+  min-height: 520px;
+  border: 1px solid var(--border);
+  background: #fff;
 }
 .credentials-list {
   border-top: 1px solid var(--border);
@@ -991,10 +1045,29 @@ html.dark[data-mode="mgmt"] {
     font-size: 16vw;
   }
   .contents-links {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.5rem;
+  }
+  .contents-link {
+    grid-template-columns: minmax(0, 1fr);
+    align-content: start;
+    justify-items: start;
+    gap: 0.55rem;
+    min-height: 5.25rem;
+    padding: 0.75rem;
+    border: 1px solid var(--border);
+    font-size: 0.74rem;
+    line-height: 1.25;
+  }
+  .contents-icon {
+    display: block;
+  }
+  .contents-index,
+  .contents-page {
+    display: none;
   }
   .contents-title {
-    font-size: 17vw;
+    font-size: clamp(3.75rem, 17vw, 4.5rem);
   }
   #about .section-top h2 {
     font-size: clamp(3.1rem, 12vw, 4.7rem);
@@ -1030,7 +1103,11 @@ html.dark[data-mode="mgmt"] {
     left: 18vw;
   }
   .hero-portrait-mgmt {
-    right: 2vw;
+    right: 5vw;
+  }
+  .hero-scrim-management {
+    justify-content: flex-start;
+    padding-top: clamp(6rem, 13vh, 7.5rem);
   }
   .management-headline {
     font-size: clamp(2.8rem, 4.7vw, 5.1rem);
@@ -1038,16 +1115,20 @@ html.dark[data-mode="mgmt"] {
 }
 @media (max-width: 639px) {
   .section-top-engineering {
-    grid-template-columns: 40px minmax(0, 1fr);
+    grid-template-columns: 40px minmax(0, 1fr) 3rem;
   }
   .section-top-management {
-    grid-template-columns: 40px minmax(0, 1fr);
+    grid-template-columns: 40px minmax(0, 1fr) 3rem;
   }
   .section-top-engineering .section-circuit {
-    display: none;
+    display: block;
+    width: 3rem;
+    height: 1.75rem;
   }
   .section-top-management .section-strategy {
-    display: none;
+    display: block;
+    width: 3rem;
+    height: 1.75rem;
   }
 }
 
@@ -1090,7 +1171,14 @@ html.dark[data-mode="mgmt"] {
 :root[data-theme-transitioning] body::before,
 :root[data-theme-transitioning] body::after,
 :root[data-theme-transitioning] body *::before,
-:root[data-theme-transitioning] body *::after {
+:root[data-theme-transitioning] body *::after,
+:root[data-mode-transitioning],
+:root[data-mode-transitioning] body,
+:root[data-mode-transitioning] body *,
+:root[data-mode-transitioning] body::before,
+:root[data-mode-transitioning] body::after,
+:root[data-mode-transitioning] body *::before,
+:root[data-mode-transitioning] body *::after {
   transition:
     color 320ms cubic-bezier(0.16, 1, 0.3, 1),
     background-color 320ms cubic-bezier(0.16, 1, 0.3, 1),
@@ -1108,7 +1196,14 @@ html.dark[data-mode="mgmt"] {
   :root[data-theme-transitioning] body::before,
   :root[data-theme-transitioning] body::after,
   :root[data-theme-transitioning] body *::before,
-  :root[data-theme-transitioning] body *::after {
+  :root[data-theme-transitioning] body *::after,
+  :root[data-mode-transitioning],
+  :root[data-mode-transitioning] body,
+  :root[data-mode-transitioning] body *,
+  :root[data-mode-transitioning] body::before,
+  :root[data-mode-transitioning] body::after,
+  :root[data-mode-transitioning] body *::before,
+  :root[data-mode-transitioning] body *::after {
     transition: none !important;
   }
 }
@@ -1120,18 +1215,8 @@ html.dark[data-mode="mgmt"] {
   }
 }
 
-/* Keep the portrait visible on phones after the base desktop-hidden rule. */
+/* On phones the portrait fills the former dead zone below the introduction. */
 @media (max-width: 639px) {
-  .hero-portrait {
-    display: block;
-    top: 4rem;
-    right: auto;
-    bottom: auto;
-    left: 50%;
-    width: clamp(6rem, 28vw, 7rem);
-    height: 7rem;
-    transform: translateX(-50%);
-  }
   .portfolio-hero [data-layer="eng"] > svg {
     top: 7%;
     height: 20%;

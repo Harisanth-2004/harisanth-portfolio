@@ -25,8 +25,6 @@ export const PERSON = {
   last: "Krishna",
   initial: "B",
   location: "Kochi, Kerala, India",
-  email: "official.harisanth@gmail.com",
-  phones: ["+91 9447250868", "+91 8075089069"],
   linkedin: "linkedin.com/in/b-harisanth-krishna",
   languages: ["English", "Malayalam", "Hindi"],
 };
@@ -34,10 +32,10 @@ export const PERSON = {
 /** Track-specific profile copy keeps the shared layout relevant to each selected path. */
 const ABOUT = {
   eng: {
-    lede: "Electrical and electronics engineer shaped by technical events, robotics programmes and student leadership.",
+    lede: "Electrical and electronics engineer with experience in technical events, robotics programmes and industrial training.",
     body: [
-      "At MITS, I have worked across technical event coordination, robotics initiatives and student teams. I secured $2,500 in grants for robotics programmes and led the technical team for YESS 2024, a summit with more than 4,000 participants.",
-      "I also mentored a team to a top-eight finish at SAUVC 2026. I enjoy bringing people, logistics and technical goals together to move a project from plan to delivery.",
+      "At MITS, I coordinated robotics programmes and student events, secured $2,500 in grants, and led the technical team for YESS 2024, which welcomed more than 4,000 participants.",
+      "I mentored a team to a top-eight finish at SAUVC 2026; it was one of four teams selected from India.",
     ],
     facts: [
       { k: "Degree", v: "B.Tech · Electrical & Electronics" },
@@ -69,8 +67,18 @@ export type Experience = {
   summary: string;
   location?: string;
   details: string[];
-  reflection?: string;
+  reflection?: Reflection;
+  reflectionPhoto?: string;
   placeholder?: boolean;
+};
+
+/** Five-stage reflective writing framework used for experiential learning. */
+export type Reflection = {
+  reporting: string;
+  responding: string;
+  relating: string;
+  reasoning: string;
+  reconstructing: string;
 };
 
 export type Education = {
@@ -113,6 +121,7 @@ export type Project = {
   points: string[];
   placeholder?: boolean;
   status?: string;
+  report?: string;
 };
 
 export type ModeContent = {
@@ -136,10 +145,10 @@ export const CONTENT: Record<Mode, ModeContent> = {
     label: "Engineering",
     short: "ENG",
     hero: {
-      meta: "Mode 01 / B.Tech — MITS, Varikoli · 2022–2026",
+      meta: "B.Tech · MITS, Varikoli · 2022–2026",
       lines: ["Electrical &", "Electronics", "Engineering"],
       summary:
-        "Technical events, robotics programmes and project coordination — built on an Electrical and Electronics Engineering foundation.",
+        "Electrical and electronics engineer with experience in robotics, technical event delivery and industrial training.",
     },
     about: ABOUT.eng,
     education: [
@@ -210,13 +219,17 @@ export const CONTENT: Record<Mode, ModeContent> = {
     ],
     projects: [
       {
-        id: "p1",
-        title: "Final-Year Engineering Project",
-        kind: "B.Tech capstone · report pending",
+        id: "pmsm-foc-electric-bike",
+        title: "Field-Oriented Control for a PMSM Electric Bike",
+        kind: "B.Tech final-year team project · Apr 2026",
         summary:
-          "A public case study will be added after the final-year project report has been submitted.",
-        points: [],
-        status: "Case study after report submission",
+          "Designed and simulated a field-oriented-controlled permanent-magnet synchronous motor drive, then evaluated its application in an electric-bike model.",
+        points: [
+          "Modelled a 72 V, 2 kW PMSM powertrain with a 30 Ah lithium-ion battery pack.",
+          "Analysed vehicle dynamics across the chassis, braking, suspension and steering systems.",
+          "Applied ANSYS structural analysis to assess the retrofitted chassis and suspension components.",
+        ],
+        report: "/projects/pmsm-field-oriented-control-report.pdf",
       },
     ],
     skills: [
@@ -304,12 +317,13 @@ export const CONTENT: Record<Mode, ModeContent> = {
       {
         value: 200,
         label: "Participants · CORE 2024",
-        context: "Technical conclave coordinated.",
+        context:
+          "Coordinated the 200-participant technical conclave from planning through delivery.",
       },
       {
         value: 50,
         label: "Students · Automaze",
-        context: "Robotics bootcamp coordinated.",
+        context: "Coordinated a robotics bootcamp for 50 students.",
       },
       {
         value: 8,
@@ -364,6 +378,19 @@ export const CONTENT: Record<Mode, ModeContent> = {
           "Analysed social media activities of direct NBFC competitors, including Manappuram, IIFL, Kerala Bank and Muthoot FinCorp.",
           "Examined YouTube engagement, content tone and international NBFC advertisements.",
         ],
+        reflectionPhoto: "/images/muthoot-internship-presentation.jpeg",
+        reflection: {
+          reporting:
+            "In the final presentation before PGDM, we had only a few minutes to cover the work of a three-month internship.",
+          responding:
+            "The tight time limit made the need to choose and communicate the most relevant points immediately clear.",
+          relating:
+            "It reinforced a discipline I use in marketing communication: understand the audience, focus the message and support it with relevant evidence.",
+          reasoning:
+            "Being concise without losing substance depends on prioritising, sequencing and stating each point precisely.",
+          reconstructing:
+            "For future presentations, I will define the main takeaway first, rehearse to the time limit and keep supporting detail ready for questions.",
+        },
       },
     ],
     clubs: [

@@ -6,10 +6,38 @@ describe("Portfolio homepage", () => {
   it("renders the introduction and switches between both portfolios", () => {
     render(<App />);
     expect(
+      screen.getByRole("heading", { level: 1, name: /Portfolio/ }),
+    ).toBeInTheDocument();
+    expect(
+      screen.queryByRole("heading", {
+        level: 1,
+        name: /Electrical & Electronics Engineering/,
+      }),
+    ).not.toBeInTheDocument();
+    const btech = screen.getByRole("button", {
+      name: /view b\.tech portfolio/i,
+    });
+    const pgdm = screen.getByRole("button", { name: /view pgdm portfolio/i });
+    expect(btech).toHaveAttribute("aria-pressed", "false");
+    expect(pgdm).toHaveAttribute("aria-pressed", "false");
+    fireEvent.click(btech);
+    expect(
       screen.getByRole("heading", {
         level: 1,
         name: /Electrical & Electronics Engineering/,
       }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", {
+        name: "Field-Oriented Control for a PMSM Electric Bike",
+      }),
+    ).toBeInTheDocument();
+    expect(screen.queryByText(/report pending/i)).not.toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: "View report" }));
+    expect(
+      screen.getByTitle(
+        "Project report: Field-Oriented Control for a PMSM Electric Bike",
+      ),
     ).toBeInTheDocument();
     const theme = screen.getByRole("button", { name: "Switch to dark theme" });
     fireEvent.click(theme);
@@ -18,10 +46,6 @@ describe("Portfolio homepage", () => {
       "data-theme-transitioning",
       "true",
     );
-    const btech = screen.getByRole("button", {
-      name: /view b\.tech portfolio/i,
-    });
-    const pgdm = screen.getByRole("button", { name: /view pgdm portfolio/i });
     expect(btech).toHaveAttribute("aria-pressed", "true");
     expect(pgdm).toHaveAttribute("aria-pressed", "false");
     expect(
@@ -33,7 +57,7 @@ describe("Portfolio homepage", () => {
     ).not.toBeInTheDocument();
     expect(
       screen.getByText(
-        /electrical and electronics engineer shaped by technical events/i,
+        /electrical and electronics engineer with experience in technical events/i,
       ),
     ).toBeInTheDocument();
     const linguaskill = screen.getByText("Linguaskill").closest("article");
@@ -55,7 +79,7 @@ describe("Portfolio homepage", () => {
     fireEvent.click(pgdm);
     expect(
       screen.queryByText(
-        /electrical and electronics engineer shaped by technical events/i,
+        /electrical and electronics engineer with experience in technical events/i,
       ),
     ).not.toBeInTheDocument();
     expect(
@@ -70,10 +94,34 @@ describe("Portfolio homepage", () => {
       screen.getByRole("heading", { level: 1, name: /PGDM at MBS/ }),
     ).toBeInTheDocument();
     expect(
+      screen.getByText(/In the final presentation before PGDM/),
+    ).toBeInTheDocument();
+    const reflectionImage = screen.getByAltText(/final pre-PGDM presentation/i);
+    expect(reflectionImage.closest('[aria-hidden="true"]')).toBeInTheDocument();
+    const marketingInternship = screen
+      .getByText("Marketing Intern")
+      .closest("button");
+    expect(marketingInternship).not.toBeNull();
+    fireEvent.click(marketingInternship as HTMLButtonElement);
+    expect(
+      reflectionImage.closest('[aria-hidden="true"]'),
+    ).not.toBeInTheDocument();
+    expect(
+      reflectionImage.closest('[aria-hidden="false"]'),
+    ).toBeInTheDocument();
+    expect(screen.getByText(/01 \/ Reporting/)).toBeInTheDocument();
+    expect(
       screen.getByText("Project Management Foundations"),
     ).toBeInTheDocument();
     expect(
       screen.getByRole("heading", { name: /Certifications/ }),
+    ).toBeInTheDocument();
+    expect(screen.queryByText(/@/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/\+91/)).not.toBeInTheDocument();
+    expect(
+      document.querySelector(
+        'a[href="https://linkedin.com/in/b-harisanth-krishna"]',
+      ),
     ).toBeInTheDocument();
     expect(
       screen.queryByAltText(/Marketing Management I certificate/i),

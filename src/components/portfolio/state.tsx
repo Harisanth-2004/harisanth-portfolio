@@ -39,20 +39,30 @@ export function PortfolioProvider({ children }: { children: ReactNode }) {
   const themeTransitionTimer = useRef<ReturnType<typeof setTimeout> | null>(
     null,
   );
+  const modeTransitionTimer = useRef<ReturnType<typeof setTimeout> | null>(
+    null,
+  );
 
   useEffect(() => {
     const root = document.documentElement;
     setTheme(root.classList.contains("dark") ? "dark" : "light");
-    const stored = root.dataset["mode"];
-    if (stored === "eng" || stored === "mgmt") {
-      currentMode.current = stored;
-      setModeState(stored);
-    }
     setReady(true);
   }, []);
 
   const setMode = useCallback((m: ViewMode) => {
     if (currentMode.current === m) return;
+    const root = document.documentElement;
+    if (modeTransitionTimer.current) clearTimeout(modeTransitionTimer.current);
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      delete root.dataset["modeTransitioning"];
+      modeTransitionTimer.current = null;
+    } else {
+      root.dataset["modeTransitioning"] = "true";
+      modeTransitionTimer.current = setTimeout(() => {
+        delete root.dataset["modeTransitioning"];
+        modeTransitionTimer.current = null;
+      }, 340);
+    }
     // Preserve the section-relative reading position when content heights change.
     const sections = Array.from(
       document.querySelectorAll<HTMLElement>("section[id]"),
@@ -75,12 +85,6 @@ export function PortfolioProvider({ children }: { children: ReactNode }) {
     }
     currentMode.current = m;
     setModeState(m);
-    try {
-      if (m === "neutral") localStorage.removeItem("bhk-mode");
-      else localStorage.setItem("bhk-mode", m);
-    } catch {
-      /* Storage may be unavailable in private browsing. */
-    }
   }, []);
 
   useLayoutEffect(() => {
@@ -130,6 +134,8 @@ export function PortfolioProvider({ children }: { children: ReactNode }) {
     () => () => {
       if (themeTransitionTimer.current)
         clearTimeout(themeTransitionTimer.current);
+      if (modeTransitionTimer.current)
+        clearTimeout(modeTransitionTimer.current);
     },
     [],
   );
