@@ -29,13 +29,13 @@ type Ctx = {
 const PortfolioContext = createContext<Ctx | null>(null);
 
 export function PortfolioProvider({ children }: { children: ReactNode }) {
-  const [mode, setModeState] = useState<ViewMode>("neutral");
+  const [mode, setModeState] = useState<ViewMode>("mgmt");
   const [theme, setTheme] = useState<Theme>("light");
   const [ready, setReady] = useState(false);
   const [active, setActive] = useState<ActiveId>("hero");
   const [navExpanded, setNavExpanded] = useState(false);
   const reading = useRef<{ element: HTMLElement; offset: number } | null>(null);
-  const currentMode = useRef<ViewMode>("neutral");
+  const currentMode = useRef<ViewMode>("mgmt");
   const themeTransitionTimer = useRef<ReturnType<typeof setTimeout> | null>(
     null,
   );
@@ -185,3 +185,4 @@ export function scrollToSection(id: string) {
     reduce ? 0 : 400,
   );
 }
+

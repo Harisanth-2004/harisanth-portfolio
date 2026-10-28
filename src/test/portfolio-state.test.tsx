@@ -63,16 +63,16 @@ describe("Independent portfolio switches", () => {
     expect(screen.getByTestId("state")).toBe(output);
   });
 
-  it("starts from the introduction while retaining the early initialized theme", () => {
-    document.documentElement.dataset["mode"] = "mgmt";
+  it("starts in PGDM while retaining the early initialized theme", () => {
+    document.documentElement.dataset["mode"] = "eng";
     document.documentElement.classList.add("dark");
     render(
       <PortfolioProvider>
         <Controls />
       </PortfolioProvider>,
     );
-    expect(screen.getByTestId("state")).toHaveTextContent("neutral/dark");
-    expect(document.documentElement.dataset["mode"]).toBe("neutral");
+    expect(screen.getByTestId("state")).toHaveTextContent("mgmt/dark");
+    expect(document.documentElement.dataset["mode"]).toBe("mgmt");
   });
 
   it("preserves the reading offset after the identity typography changes", () => {
@@ -89,7 +89,7 @@ describe("Independent portfolio switches", () => {
       .mockReturnValueOnce({ top: -210, height: 1000 } as DOMRect)
       .mockReturnValue({ top: 190, height: 1100 } as DOMRect);
     const scroll = vi.spyOn(window, "scrollTo").mockImplementation(() => {});
-    fireEvent.click(screen.getByText("Management"));
+    fireEvent.click(screen.getByText("Engineering"));
     expect(scroll).toHaveBeenCalledWith({ top: 400, behavior: "instant" });
   });
 
@@ -118,3 +118,4 @@ describe("Independent portfolio switches", () => {
     expect(document.activeElement).toBe(screen.getByText("Last"));
   });
 });
+

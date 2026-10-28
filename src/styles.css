@@ -155,7 +155,7 @@ html.dark[data-mode="eng"] {
   --grid: oklch(0.76 0.13 236 / 7%);
 }
 
-/* MANAGEMENT — the same cool paper and ink, with a quieter blue signal. */
+/* MANAGEMENT — the same cool paper and ink, with an accessible Muthoot red signal. */
 :root[data-mode="mgmt"] {
   --f-display: "Geist", system-ui, sans-serif;
   --f-text: "Instrument Sans", system-ui, sans-serif;
@@ -164,10 +164,10 @@ html.dark[data-mode="eng"] {
   --surface: oklch(0.925 0.008 246);
   --muted-foreground: oklch(0.46 0.014 250);
   --border: oklch(0.19 0.012 250 / 14%);
-  --signal: oklch(0.54 0.16 252);
-  --signal-soft: oklch(0.54 0.16 252 / 10%);
-  --signal-2: oklch(0.44 0.06 250);
-  --grid: oklch(0.54 0.16 252 / 8%);
+  --signal: oklch(0.5 0.2 25);
+  --signal-soft: oklch(0.5 0.2 25 / 10%);
+  --signal-2: oklch(0.44 0.1 25);
+  --grid: oklch(0.5 0.2 25 / 8%);
   --radius: 0px;
 }
 html.dark[data-mode="mgmt"] {
@@ -176,10 +176,10 @@ html.dark[data-mode="mgmt"] {
   --surface: oklch(0.19 0.014 252);
   --muted-foreground: oklch(0.7 0.015 245);
   --border: oklch(0.95 0.006 240 / 12%);
-  --signal: oklch(0.74 0.12 242);
-  --signal-soft: oklch(0.74 0.12 242 / 12%);
-  --signal-2: oklch(0.83 0.035 236);
-  --grid: oklch(0.74 0.12 242 / 7%);
+  --signal: oklch(0.72 0.15 25);
+  --signal-soft: oklch(0.72 0.15 25 / 12%);
+  --signal-2: oklch(0.82 0.07 25);
+  --grid: oklch(0.72 0.15 25 / 7%);
 }
 
 @layer base {

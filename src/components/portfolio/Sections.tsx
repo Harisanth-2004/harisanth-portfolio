@@ -388,21 +388,21 @@ export function Sections() {
                     </div>
                     <div>
                       <p className="t-meta mb-4 text-signal">
-                        Reflection / five stages
+                        Internship reflection
                       </p>
                       <dl className="reflection-stages">
                         {(
                           [
-                            ["Reporting", item.reflection.reporting],
-                            ["Responding", item.reflection.responding],
-                            ["Relating", item.reflection.relating],
-                            ["Reasoning", item.reflection.reasoning],
-                            ["Reconstructing", item.reflection.reconstructing],
+                            ["What happened", item.reflection.reporting],
+                            ["My response", item.reflection.responding],
+                            ["The connection", item.reflection.relating],
+                            ["What I learned", item.reflection.reasoning],
+                            ["Next time", item.reflection.reconstructing],
                           ] as const
-                        ).map(([stage, text], index) => (
+                        ).map(([stage, text]) => (
                           <div className="reflection-stage" key={stage}>
                             <dt className="t-meta text-muted-foreground">
-                              0{index + 1} / {stage}
+                              {stage}
                             </dt>
                             <dd className="text-sm leading-relaxed">{text}</dd>
                           </div>

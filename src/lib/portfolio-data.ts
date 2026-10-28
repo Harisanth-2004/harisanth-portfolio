@@ -416,16 +416,17 @@ export const CONTENT: Record<Mode, ModeContent> = {
     ],
     projects: [
       {
-        id: "nbfc",
-        title: "Marketing Research & Campaign Analysis",
-        kind: "Internship study · Muthoot Finance",
+        id: "customer-profiling",
+        title: "Customer Profiling Field Survey",
+        kind: "Special project · Pre-PGDM internship · Muthoot Finance",
         summary:
-          "A 12-week MarCom & Brand internship combining competitor research, customer-profile fieldwork and structured analysis of public campaigns.",
+          "A primary fieldwork project conducted directly under the Managing Director during my pre-PGDM internship, with branch visits in Chennai and Bengaluru to profile customers closing gold loans.",
         points: [
-          "Compared competitor positioning and public campaign communication across financial services.",
-          "Collected 104 customer-profile forms across Chennai and Bengaluru. No customer-level information or unverified findings are shared.",
-          "Analyzed approximately 15 public financial-services campaigns using a seven-part agency-brief framework.",
-          "Prepared scoping and presentation materials. Proposals are not presented as launched campaigns or measured results.",
+          "This special project was directly under the Managing Director; my day-to-day internship reporting line was the MarCom Chief Manager.",
+          "Collected 104 forms: 54 across the Chennai cluster and 50 across the Bengaluru cluster.",
+          "Visited branches and gathered responses from customers closing gold loans, working toward at least ten completed forms per branch visited.",
+          "The form covered age, occupation, reasons for taking a gold loan, prior NBFC relationships and other profile details.",
+          "Built hands-on experience in field coordination and survey administration. Customer-level data are confidential; no standalone analysis or findings are claimed.",
         ],
       },
     ],

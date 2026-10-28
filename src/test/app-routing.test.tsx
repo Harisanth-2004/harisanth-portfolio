@@ -3,23 +3,25 @@ import { describe, expect, it } from "vitest";
 import App from "@/App";
 
 describe("Portfolio homepage", () => {
-  it("renders the introduction and switches between both portfolios", () => {
+  it("starts in PGDM and switches between both portfolios", () => {
     render(<App />);
     expect(
-      screen.getByRole("heading", { level: 1, name: /Portfolio/ }),
+      screen.getByRole("heading", { level: 1, name: /PGDM at MBS/ }),
     ).toBeInTheDocument();
     expect(
-      screen.queryByRole("heading", {
-        level: 1,
-        name: /Electrical & Electronics Engineering/,
-      }),
+      screen.queryByRole("heading", { level: 1, name: /Portfolio/ }),
     ).not.toBeInTheDocument();
     const btech = screen.getByRole("button", {
       name: /view b\.tech portfolio/i,
     });
     const pgdm = screen.getByRole("button", { name: /view pgdm portfolio/i });
     expect(btech).toHaveAttribute("aria-pressed", "false");
-    expect(pgdm).toHaveAttribute("aria-pressed", "false");
+    expect(pgdm).toHaveAttribute("aria-pressed", "true");
+    expect(document.documentElement).toHaveAttribute("data-mode", "mgmt");
+    expect(
+      screen.getByRole("heading", { name: /Career goals/ }),
+    ).toBeInTheDocument();
+    expect(screen.getByText("IEDC at MBS")).toBeInTheDocument();
     fireEvent.click(btech);
     expect(
       screen.getByRole("heading", {
@@ -112,9 +114,22 @@ describe("Portfolio homepage", () => {
     expect(
       reflectionImage.closest('[aria-hidden="false"]'),
     ).toBeInTheDocument();
-    expect(screen.getByText(/01 \/ Reporting/)).toBeInTheDocument();
+    expect(screen.getByText("What happened")).toBeInTheDocument();
     expect(
       screen.getByText("Project Management Foundations"),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { name: "Customer Profiling Field Survey" }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        /This special project was directly under the Managing Director; my day-to-day internship reporting line was the MarCom Chief Manager\./i,
+      ),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        /54 across the Chennai cluster and 50 across the Bengaluru cluster/,
+      ),
     ).toBeInTheDocument();
     expect(
       screen.getByRole("heading", { name: /Certifications/ }),
