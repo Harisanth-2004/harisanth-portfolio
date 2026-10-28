@@ -32,7 +32,7 @@ describe("Portfolio homepage", () => {
     ).toBeInTheDocument();
     expect(
       screen.getByRole("heading", {
-        name: "Field-Oriented Control for a PMSM Electric Bike",
+        name: "Design and Simulation of a Field-Oriented PMSM Drive for Electric Bike Applications",
       }),
     ).toBeInTheDocument();
     expect(screen.queryByText(/report pending/i)).not.toBeInTheDocument();
@@ -44,7 +44,7 @@ describe("Portfolio homepage", () => {
     fireEvent.click(screen.getByRole("button", { name: "View report" }));
     expect(
       screen.getByTitle(
-        "Project report: Field-Oriented Control for a PMSM Electric Bike",
+        "Project report: Design and Simulation of a Field-Oriented PMSM Drive for Electric Bike Applications",
       ),
     ).toBeInTheDocument();
     const theme = screen.getByRole("button", { name: "Switch to dark theme" });
@@ -137,8 +137,9 @@ describe("Portfolio homepage", () => {
     expect(
       screen.getByRole("heading", { name: /Certifications/ }),
     ).toBeInTheDocument();
-    expect(screen.queryByText(/@/)).not.toBeInTheDocument();
-    expect(screen.queryByText(/\+91/)).not.toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "official.harisanth@gmail.com" })).toHaveAttribute("href", "mailto:official.harisanth@gmail.com");
+    expect(screen.getByRole("link", { name: /\+91 9447250868/ })).toHaveAttribute("href", "tel:+919447250868");
+    expect(screen.queryByText(/not an official/i)).not.toBeInTheDocument();
     expect(
       document.querySelector(
         'a[href="https://linkedin.com/in/b-harisanth-krishna"]',
