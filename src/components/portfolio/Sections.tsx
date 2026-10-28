@@ -575,7 +575,6 @@ export function Sections() {
                 ))}
               </ul>
               <p className="mt-5 max-w-[66ch] border-t border-border pt-4 text-sm leading-relaxed text-muted-foreground">
-                <span className="font-medium text-foreground">Evidence: </span>
                 {group.evidence}
               </p>
             </article>
@@ -867,22 +866,21 @@ export function Sections() {
                 Preparing for that limit taught me to make the message concise,
                 crisp and precise without losing its substance.
               </p>
-              <dl className="reflection-stages">
+              <div className="reflection-stages">
                 {(
                   [
-                    ["What happened", internshipReflection.reflection.reporting],
-                    ["My response", internshipReflection.reflection.responding],
-                    ["The connection", internshipReflection.reflection.relating],
-                    ["What I learned", internshipReflection.reflection.reasoning],
-                    ["Next time", internshipReflection.reflection.reconstructing],
+                    internshipReflection.reflection.reporting,
+                    internshipReflection.reflection.responding,
+                    internshipReflection.reflection.relating,
+                    internshipReflection.reflection.reasoning,
+                    internshipReflection.reflection.reconstructing,
                   ] as const
-                ).map(([stage, text]) => (
-                  <div className="reflection-stage" key={stage}>
-                    <dt className="t-meta text-muted-foreground">{stage}</dt>
-                    <dd className="text-sm leading-relaxed">{text}</dd>
-                  </div>
+                ).map((text) => (
+                  <p className="reflection-stage text-sm leading-relaxed" key={text}>
+                    {text}
+                  </p>
                 ))}
-              </dl>
+              </div>
             </div>
           </div>
         </Section>
