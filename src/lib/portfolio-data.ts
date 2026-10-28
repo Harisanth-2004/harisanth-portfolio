@@ -52,6 +52,27 @@ const ABOUT = {
   },
 };
 
+// Keep the complete education history visible in either portfolio mode so
+// switching tracks changes the narrative, not the visitor's access to facts.
+const EDUCATION: Education[] = [
+  {
+    degree: "Post Graduate Diploma in Management (PGDM)",
+    institution: "Muthoot Business School (MBS)",
+    period: "2026 — 2028",
+    note: "Currently pursuing",
+  },
+  {
+    degree: "B.Tech in Electrical and Electronics Engineering",
+    institution: "Muthoot Institute of Technology and Science (MITS), Varikoli",
+    period: "2022 — 2026",
+  },
+  {
+    degree: "Grade 12 — Higher Secondary (Science)",
+    institution: "St. Thomas Public School, Muvattupuzha",
+    period: "2021 — 2022",
+  },
+];
+
 export type Experience = {
   id: string;
   title: string;
@@ -150,19 +171,7 @@ export const CONTENT: Record<Mode, ModeContent> = {
         "Electrical and electronics engineer with experience in robotics, technical event delivery and industrial training.",
     },
     about: ABOUT.eng,
-    education: [
-      {
-        degree: "B.Tech in Electrical and Electronics Engineering",
-        institution:
-          "Muthoot Institute of Technology and Science (MITS), Varikoli",
-        period: "2022 — 2026",
-      },
-      {
-        degree: "Grade 12 — Higher Secondary (Science)",
-        institution: "St. Thomas Public School, Muvattupuzha",
-        period: "2021 — 2022",
-      },
-    ],
+    education: EDUCATION,
     experience: [
       {
         id: "industrial",
@@ -340,13 +349,7 @@ export const CONTENT: Record<Mode, ModeContent> = {
         "With a growing interest in marketing, I’m exploring how customer insight can shape stronger brand decisions.",
     },
     about: ABOUT.mgmt,
-    education: [
-      {
-        degree: "Post Graduate Diploma in Management (PGDM)",
-        institution: "Muthoot Business School (MBS)",
-        period: "2026 — 2028",
-      },
-    ],
+    education: EDUCATION,
     experience: [
       {
         id: "muthoot-work-integrated",
