@@ -17,7 +17,6 @@ export const SECTIONS = [
   { id: "goals", label: "Career goals" },
   { id: "reflections", label: "Personal reflections" },
   { id: "development", label: "Future development plan" },
-  { id: "evaluation", label: "Evaluation rubric" },
   { id: "contact", label: "Contact" },
 ] as const;
 
@@ -310,13 +309,6 @@ export const CONTENT: Record<Mode, ModeContent> = {
         note: "Five-day hands-on training in UAV design, assembly and applications.",
         image: "/certificates/uav-technology.jpg",
       },
-      {
-        name: "Power BI for Beginners",
-        issuer: "Simplilearn SkillUp",
-        issued: "Jun 2026",
-        note: "Course completion; not an official Microsoft certification.",
-        image: "/certificates/power-bi-beginners.jpg",
-      },
     ],
     achievements: [
       {
@@ -489,6 +481,13 @@ export const CONTENT: Record<Mode, ModeContent> = {
         image: "/certificates/marketing-management-ii.jpg",
       },
       { name: "Project Management Foundations", issuer: "LinkedIn Learning" },
+      {
+        name: "Power BI for Beginners",
+        issuer: "Simplilearn SkillUp",
+        issued: "Jun 2026",
+        note: "Course completion; not an official Microsoft certification.",
+        image: "/certificates/power-bi-beginners.jpg",
+      },
     ],
     achievements: [],
     careerGoals: {
@@ -508,8 +507,8 @@ export const CONTENT: Record<Mode, ModeContent> = {
     },
     futureDevelopment: [
       "Apply PGDM learning to the work-integrated role and keep a reflective record of responsibilities, feedback and learning while protecting confidential information.",
-      "Build stronger customer-research and analytical capability by extending the methods used in the Chennai and Bengaluru field survey; share findings only when approved and supported by evidence.",
-      "Develop brand communication through the MBS Media Club and current MarCom & Brand experience, with specific examples added as the work progresses.",
+      "Strengthen analytical thinking, research methods and problem-solving through coursework, projects and feedback.",
+      "Build communication, collaboration and leadership through academic, club and professional opportunities.",
       "Explore an IEDC chapter at MBS by discussing institutional support, student interest and a practical proposal. This remains a proposed initiative, not an established club.",
     ],
   },
