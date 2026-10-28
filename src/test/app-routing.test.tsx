@@ -99,21 +99,16 @@ describe("Portfolio homepage", () => {
       screen.getByRole("heading", { level: 1, name: /PGDM at MBS/ }),
     ).toBeInTheDocument();
     expect(
-      screen.getByText(/In the final presentation before PGDM/),
-    ).toBeInTheDocument();
+      screen.getAllByText(/In the final presentation before PGDM/).length,
+    ).toBeGreaterThan(0);
     const reflectionImage = screen.getByAltText(/final pre-PGDM presentation/i);
-    expect(reflectionImage.closest('[aria-hidden="true"]')).toBeInTheDocument();
+    expect(reflectionImage).toBeInTheDocument();
     const marketingInternship = screen
       .getByText("Marketing Intern")
       .closest("button");
     expect(marketingInternship).not.toBeNull();
     fireEvent.click(marketingInternship as HTMLButtonElement);
-    expect(
-      reflectionImage.closest('[aria-hidden="true"]'),
-    ).not.toBeInTheDocument();
-    expect(
-      reflectionImage.closest('[aria-hidden="false"]'),
-    ).toBeInTheDocument();
+    expect(reflectionImage).toBeInTheDocument();
     expect(screen.getByText("What happened")).toBeInTheDocument();
     expect(
       screen.getByText("Project Management Foundations"),
@@ -170,6 +165,29 @@ describe("Portfolio homepage", () => {
       screen.getByText(/Exploring the introduction of a student-led innovation/i),
     ).toBeInTheDocument();
     expect(screen.getByText("Proposed initiative")).toBeInTheDocument();
-  });
+    for (const sectionId of [
+      "about",
+      "education",
+      "skills",
+      "projects",
+      "goals",
+      "reflections",
+      "development",
+      "evaluation",
+    ]) {
+      expect(document.querySelector(`#${sectionId} [data-section-title]`)).toBeInTheDocument();
+    }
+    expect(screen.getAllByText("Evidence:").length).toBeGreaterThan(0);
+    expect(screen.getByText(/Current work-integrated role/)).toBeInTheDocument();
+    expect(screen.getByRole("table")).toBeInTheDocument();
+    expect(screen.getByText("Content Completeness & Organization")).toBeInTheDocument();
+    expect(screen.getByText("Progress & Initiative")).toBeInTheDocument();
+    expect(screen.getByText("Reflection & Personal Insights")).toBeInTheDocument();
+    expect(screen.getByText("Presentation Quality & Communication Skills")).toBeInTheDocument();
+    expect(screen.getByText("Visual Appeal & Digital Tools Usage")).toBeInTheDocument();
+    expect(screen.getByText("Professionalism & Relevance")).toBeInTheDocument();
+    expect(screen.getByText("Weights retained as provided.")).toBeInTheDocument();
+    expect(screen.queryByText(/The toolkit/)).not.toBeInTheDocument();
+  }, 10000);
 });
 

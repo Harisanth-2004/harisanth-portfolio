@@ -15,6 +15,9 @@ export const SECTIONS = [
   { id: "certifications", label: "Certifications" },
   { id: "achievements", label: "Achievements" },
   { id: "goals", label: "Career goals" },
+  { id: "reflections", label: "Personal reflections" },
+  { id: "development", label: "Future development plan" },
+  { id: "evaluation", label: "Evaluation rubric" },
   { id: "contact", label: "Contact" },
 ] as const;
 
@@ -97,7 +100,7 @@ export type ClubActivity = {
 export type SkillGroup = {
   group: string;
   items: string[];
-  placeholder?: boolean;
+  evidence: string;
 };
 export type Cert = {
   name: string;
@@ -143,6 +146,7 @@ export type ModeContent = {
   certifications: Cert[];
   achievements: Achievement[];
   careerGoals?: CareerGoals;
+  futureDevelopment?: string[];
 };
 
 export const CONTENT: Record<Mode, ModeContent> = {
@@ -240,20 +244,29 @@ export const CONTENT: Record<Mode, ModeContent> = {
     ],
     skills: [
       {
-        group: "Leadership & Coordination",
+        group: "Event & technical coordination",
         items: [
-          "Event Management",
-          "Team Leadership",
-          "Project Coordination",
-          "Technical Logistics",
+          "Technical team leadership",
+          "Event coordination",
+          "Programme delivery",
         ],
+        evidence: "YESS 2024 (4,000+ participants), CORE 2024 and Automaze; IEEE RAS SBC, MITS.",
       },
       {
-        group: "Creative",
-        items: ["Content Creation", "Design", "Visual Communication"],
+        group: "Budget & supplier coordination",
+        items: ["Budget tracking", "Procurement coordination", "Supplier payments"],
+        evidence: "Financial Manager for the SIEP Electric Dirt Bike Challenge; managed sponsorships, grants and project expenditure.",
       },
-      { group: "Tools", items: ["Power BI · foundational"] },
-      { group: "Languages", items: PERSON.languages },
+      {
+        group: "Visual communication",
+        items: ["Design team coordination", "Digital communication assets"],
+        evidence: "Design Team Lead, NSS MITS; led production of posters and digital assets.",
+      },
+      {
+        group: "Languages",
+        items: PERSON.languages,
+        evidence: "Cambridge Linguaskill Business assessment: English B2 (overall score 174); Malayalam and Hindi listed in the supplied résumé.",
+      },
     ],
     certifications: [
       {
@@ -432,29 +445,33 @@ export const CONTENT: Record<Mode, ModeContent> = {
     ],
     skills: [
       {
-        group: "Finance & Operations",
+        group: "Customer research & fieldwork",
         items: [
-          "Budget Management",
-          "Procurement Planning",
-          "Fund Tracking",
-          "Expenditure Reporting",
-          "Vendor Coordination",
+          "Customer-profile survey administration",
+          "Branch-level field coordination",
+          "Competitor research",
         ],
+        evidence: "104 customer forms collected across Chennai and Bengaluru; internship report also documents NBFC and digital-channel competitor analysis.",
       },
       {
-        group: "Marketing & Communication",
+        group: "Marketing & communication",
         items: [
-          "Marketing Strategy",
-          "Brand Communication",
-          "Digital Outreach",
-          "Stakeholder Engagement",
+          "Brand communication exposure",
+          "Digital outreach",
+          "Presentation and concise messaging",
         ],
+        evidence: "MarCom & Brand internship and current work-integrated role at Muthoot Finance; IEDC MITS marketing leadership and final internship presentation.",
       },
       {
-        group: "Data & Reporting",
-        items: ["Data Reporting", "Financial Record Maintenance"],
+        group: "Event and stakeholder coordination",
+        items: ["Sponsorship coordination", "Stakeholder communication", "Event marketing"],
+        evidence: "IEDC MITS Chief Marketing Officer; secured ₹10,000 sponsorship and coordinated KSUM and industry relationships.",
       },
-      { group: "Languages", items: PERSON.languages },
+      {
+        group: "Languages",
+        items: PERSON.languages,
+        evidence: "Cambridge Linguaskill Business assessment: English B2 (overall score 174); Malayalam and Hindi listed in the supplied résumé.",
+      },
     ],
     certifications: [
       {
@@ -489,6 +506,12 @@ export const CONTENT: Record<Mode, ModeContent> = {
         "Explore entrepreneurship as experience and opportunity develop.",
       ],
     },
+    futureDevelopment: [
+      "Apply PGDM learning to the work-integrated role and keep a reflective record of responsibilities, feedback and learning while protecting confidential information.",
+      "Build stronger customer-research and analytical capability by extending the methods used in the Chennai and Bengaluru field survey; share findings only when approved and supported by evidence.",
+      "Develop brand communication through the MBS Media Club and current MarCom & Brand experience, with specific examples added as the work progresses.",
+      "Explore an IEDC chapter at MBS by discussing institutional support, student interest and a practical proposal. This remains a proposed initiative, not an established club.",
+    ],
   },
 };
 

@@ -4,6 +4,7 @@ import {
   Award,
   Briefcase,
   CalendarDays,
+  ClipboardCheck,
   ChevronDown,
   Cpu,
   FolderOpen,
@@ -14,6 +15,7 @@ import {
   Moon,
   Sun,
   Target,
+  TrendingUp,
   Trophy,
   UserRound,
   UsersRound,
@@ -35,6 +37,9 @@ const SECTION_ICONS: Record<SectionId, LucideIcon> = {
   education: GraduationCap,
   experience: Briefcase,
   goals: CalendarDays,
+  reflections: Lightbulb,
+  development: TrendingUp,
+  evaluation: ClipboardCheck,
   clubs: UsersRound,
   projects: FolderOpen,
   skills: Lightbulb,
@@ -131,11 +136,20 @@ export function Navigator() {
     (section) =>
       (section.id !== "projects" ||
         CONTENT[mode === "mgmt" ? "mgmt" : "eng"].projects.length > 0) &&
-      (section.id !== "goals" || mode === "mgmt"),
+      (section.id !== "goals" || mode === "mgmt") &&
+      (section.id !== "reflections" || mode === "mgmt") &&
+      (section.id !== "development" || mode === "mgmt") &&
+      (section.id !== "evaluation" || mode === "mgmt"),
   ).map((section) =>
     section.id === "achievements" && mode === "mgmt"
       ? { ...section, label: "Campus life" }
-      : section,
+      : section.id === "about"
+        ? { ...section, label: "Introduction" }
+        : section.id === "education"
+          ? { ...section, label: "Educational Background" }
+          : section.id === "projects"
+            ? { ...section, label: "Projects and achievements" }
+            : section,
   );
   return (
     <>

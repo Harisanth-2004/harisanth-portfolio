@@ -5,6 +5,7 @@ import {
   Award,
   BriefcaseBusiness,
   CalendarDays,
+  ClipboardCheck,
   Cpu,
   Eye,
   EyeOff,
@@ -15,6 +16,7 @@ import {
   Mail,
   Megaphone,
   Target,
+  TrendingUp,
   Trophy,
   UserRound,
   UsersRound,
@@ -48,6 +50,9 @@ const CONTENT_ICONS: Record<SectionId, LucideIcon> = {
   education: GraduationCap,
   experience: BriefcaseBusiness,
   goals: Target,
+  reflections: Lightbulb,
+  development: TrendingUp,
+  evaluation: ClipboardCheck,
   clubs: UsersRound,
   projects: FolderOpen,
   skills: Lightbulb,
@@ -139,6 +144,7 @@ export function Sections() {
   const { mode, ready } = usePortfolio();
   const selected: Mode = mode === "mgmt" ? "mgmt" : "eng";
   const c = CONTENT[selected];
+  const internshipReflection = c.experience.find((item) => item.reflection);
   const root = useRef<HTMLDivElement>(null);
   // Independent disclosure state survives identity changes.
   const [expanded, setExpanded] = useState<Record<Mode, string[]>>({
@@ -201,21 +207,30 @@ export function Sections() {
   if (mode === "neutral") return null;
 
   const contentLinks: [string, string, SectionId][] = [
-    ["01", "About me", "about"],
-    ["02", "Career timeline", "experience"],
-    ["03", "Education", "education"],
-    ["04", "Club activities", "clubs"],
-    ["05", "Selected work", "projects"],
-    ["06", "What I bring", "skills"],
-    ["07", "Certifications", "certifications"],
-    ["08", selected === "mgmt" ? "Campus life" : "Achievements", "achievements"],
+    ["01", "Introduction", "about"],
+    ["02", "Educational Background", "education"],
+    ["03", "Skills", "skills"],
+    ["04", "Projects and achievements", "projects"],
   ];
-  if (selected === "mgmt") contentLinks.push(["09", "Career goals", "goals"]);
-  contentLinks.push([
-    selected === "mgmt" ? "10" : "09",
-    "Contact",
-    "contact",
-  ]);
+  if (selected === "mgmt") {
+    contentLinks.push(
+      ["05", "Career Goals", "goals"],
+      ["06", "Personal Reflections", "reflections"],
+      ["07", "Future Development Plan", "development"],
+      ["08", "Evaluation Rubric", "evaluation"],
+    );
+  } else {
+    contentLinks.push(["05", "Achievements", "achievements"]);
+  }
+  contentLinks.push(
+    ["09", "Experience", "experience"],
+    ["10", "Club activities", "clubs"],
+    ["11", "Certifications", "certifications"],
+    ...(selected === "mgmt"
+      ? [["12", "Campus life", "achievements"] as [string, string, SectionId]]
+      : []),
+    [selected === "mgmt" ? "13" : "12", "Contact", "contact"],
+  );
 
   return (
     <div ref={root} className="portfolio-content">
@@ -264,7 +279,7 @@ export function Sections() {
             })}
         </nav>
       </div>
-      <Section id="about" number="01" title="About me">
+      <Section id="about" number="01" title="Introduction">
         <div className="about-grid" data-reveal>
           <p className="t-lede max-w-[40ch]">{c.about.lede}</p>
           <div className="space-y-6">
@@ -289,7 +304,7 @@ export function Sections() {
           {PERSON.location} <span className="mx-3 text-signal">↗</span> {c.code}
         </p>
       </Section>
-      <Section id="education" number="02" title="The foundation">
+      <Section id="education" number="02" title="Educational Background">
         <div>
           {c.education.map((item, i) => (
             <article
@@ -372,45 +387,6 @@ export function Sections() {
                     </li>
                   ))}
                 </ul>
-                {item.reflection && (
-                  <div className="internship-reflection mt-8 border-t border-border pt-6">
-                    <div className="internship-reflection-photo">
-                      {item.reflectionPhoto && (
-                        <img
-                          src={item.reflectionPhoto}
-                          alt="Harisanth with the internship cohort and faculty at the final pre-PGDM presentation"
-                          width={1600}
-                          height={1200}
-                          loading="lazy"
-                          decoding="async"
-                        />
-                      )}
-                    </div>
-                    <div>
-                      <p className="t-meta mb-4 text-signal">
-                        Internship reflection
-                      </p>
-                      <dl className="reflection-stages">
-                        {(
-                          [
-                            ["What happened", item.reflection.reporting],
-                            ["My response", item.reflection.responding],
-                            ["The connection", item.reflection.relating],
-                            ["What I learned", item.reflection.reasoning],
-                            ["Next time", item.reflection.reconstructing],
-                          ] as const
-                        ).map(([stage, text]) => (
-                          <div className="reflection-stage" key={stage}>
-                            <dt className="t-meta text-muted-foreground">
-                              {stage}
-                            </dt>
-                            <dd className="text-sm leading-relaxed">{text}</dd>
-                          </div>
-                        ))}
-                      </dl>
-                    </div>
-                  </div>
-                )}
               </ExperienceDetails>
             </AccordionItem>
           ))}
@@ -481,7 +457,7 @@ export function Sections() {
         )}
       </Section>
       {c.projects.length > 0 && (
-        <Section id="projects" number="05" title="Selected work">
+        <Section id="projects" number="05" title="Projects and achievements">
           {c.projects.map((project, i) => (
             <article
               key={project.id}
@@ -580,7 +556,7 @@ export function Sections() {
           ))}
         </Section>
       )}
-      <Section id="skills" number="06" title="The toolkit">
+      <Section id="skills" number="06" title="Skills">
         <div className="grid gap-x-12 md:grid-cols-2">
           {c.skills.map((group, i) => (
             <article
@@ -601,6 +577,10 @@ export function Sections() {
                   </li>
                 ))}
               </ul>
+              <p className="mt-5 max-w-[66ch] border-t border-border pt-4 text-sm leading-relaxed text-muted-foreground">
+                <span className="font-medium text-foreground">Evidence: </span>
+                {group.evidence}
+              </p>
             </article>
           ))}
         </div>
@@ -861,6 +841,133 @@ export function Sections() {
                 ))}
               </ol>
             </article>
+          </div>
+        </Section>
+      )}
+      {selected === "mgmt" && internshipReflection?.reflection && (
+        <Section
+          id="reflections"
+          number="10"
+          title="Personal Reflections"
+        >
+          <div className="internship-reflection" data-reveal>
+            <div className="internship-reflection-photo">
+              {internshipReflection.reflectionPhoto && (
+                <img
+                  src={internshipReflection.reflectionPhoto}
+                  alt="Harisanth with the internship cohort and faculty at the final pre-PGDM presentation"
+                  width={1600}
+                  height={1200}
+                  loading="lazy"
+                  decoding="async"
+                />
+              )}
+            </div>
+            <div>
+              <p className="t-body mb-5 max-w-[65ch] text-muted-foreground">
+                In the final presentation before PGDM, we had only a few
+                minutes to communicate the work of a three-month internship.
+                Preparing for that limit taught me to make the message concise,
+                crisp and precise without losing its substance.
+              </p>
+              <dl className="reflection-stages">
+                {(
+                  [
+                    ["What happened", internshipReflection.reflection.reporting],
+                    ["My response", internshipReflection.reflection.responding],
+                    ["The connection", internshipReflection.reflection.relating],
+                    ["What I learned", internshipReflection.reflection.reasoning],
+                    ["Next time", internshipReflection.reflection.reconstructing],
+                  ] as const
+                ).map(([stage, text]) => (
+                  <div className="reflection-stage" key={stage}>
+                    <dt className="t-meta text-muted-foreground">{stage}</dt>
+                    <dd className="text-sm leading-relaxed">{text}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          </div>
+        </Section>
+      )}
+      {selected === "mgmt" && c.futureDevelopment && (
+        <Section
+          id="development"
+          number="11"
+          title="Future Development Plan"
+        >
+          <p className="t-body mb-7 max-w-[66ch] text-muted-foreground">
+            Priorities for the next stage of the PGDM and work-integrated
+            experience. I will add outcomes as they become concrete and
+            appropriate to share.
+          </p>
+          <ol className="development-plan">
+            {c.futureDevelopment.map((plan, index) => (
+              <li key={plan} data-reveal>
+                <span className="t-meta text-signal">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <p className="text-sm leading-relaxed sm:text-base">{plan}</p>
+              </li>
+            ))}
+          </ol>
+        </Section>
+      )}
+      {selected === "mgmt" && (
+        <Section id="evaluation" number="12" title="Evaluation Rubric">
+          <div className="rubric-wrap" data-reveal>
+            <table className="evaluation-rubric">
+              <caption>
+                Assessment framework from the e-portfolio brief. No score is
+                assigned here.
+              </caption>
+              <thead>
+                <tr>
+                  <th scope="col">Evaluation criteria</th>
+                  <th scope="col">Weightage</th>
+                  <th scope="col">Portfolio evidence</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Content Completeness &amp; Organization</th>
+                  <td data-label="Weightage">20%</td>
+                  <td data-label="Portfolio evidence">The required e-portfolio sections are present and linked from the contents.</td>
+                </tr>
+                <tr>
+                  <th scope="row">Progress &amp; Initiative</th>
+                  <td data-label="Weightage">20%</td>
+                  <td data-label="Portfolio evidence">Current work-integrated role, future development priorities and the proposed MBS IEDC initiative, clearly identified as in planning.</td>
+                </tr>
+                <tr>
+                  <th scope="row">Reflection &amp; Personal Insights</th>
+                  <td data-label="Weightage">20%</td>
+                  <td data-label="Portfolio evidence">A personal reflection grounded in the time-limited internship presentation and a specific plan for future presentations.</td>
+                </tr>
+                <tr>
+                  <th scope="row">Presentation Quality &amp; Communication Skills</th>
+                  <td data-label="Weightage">15%</td>
+                  <td data-label="Portfolio evidence">The internship presentation experience and its learning on concise, precise communication.</td>
+                </tr>
+                <tr>
+                  <th scope="row">Visual Appeal &amp; Digital Tools Usage</th>
+                  <td data-label="Weightage">15%</td>
+                  <td data-label="Portfolio evidence">Responsive portfolio presentation with keyboard-accessible navigation and working report and credential controls.</td>
+                </tr>
+                <tr>
+                  <th scope="row">Professionalism &amp; Relevance</th>
+                  <td data-label="Weightage">10%</td>
+                  <td data-label="Portfolio evidence">Relevant academic and work examples; confidential customer-level survey data and findings are not disclosed.</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th scope="row">Total</th>
+                  <td>100%</td>
+                  <td>Weights retained as provided.</td>
+                </tr>
+              </tfoot>
+            </table>
           </div>
         </Section>
       )}
