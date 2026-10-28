@@ -39,27 +39,15 @@ const ABOUT = {
   eng: {
     lede: "Electrical and electronics engineer with experience in technical events, robotics programmes and industrial training.",
     body: [
-      "At MITS, I coordinated robotics programmes and student events, secured $2,500 in grants, and led the technical team for YESS 2024, which welcomed more than 4,000 participants.",
-      "I mentored a team to a top-eight finish at SAUVC 2026; it was one of four teams selected from India.",
-    ],
-    facts: [
-      { k: "Degree", v: "B.Tech · Electrical & Electronics" },
-      { k: "Focus", v: "Technical programmes & operations" },
-      { k: "Leadership", v: "IEEE · IEDC · NSS · SIEP" },
-      { k: "Based in", v: "Kochi, Kerala" },
+      "At MITS, my work moved between technical design and the practical demands of student programmes: budgets, suppliers, logistics and delivery.",
+      "That mix is why I am drawn to roles where engineering judgement and dependable execution meet.",
     ],
   },
   mgmt: {
-    lede: "PGDM student at Muthoot Business School exploring the intersection of marketing, customer insight and financial services.",
+    lede: "PGDM student learning how customer and market insight can inform better business decisions.",
     body: [
-      "During a 12-week internship with Muthoot Finance’s MarCom & Brand team, I worked across competitor research, customer-profile fieldwork and campaign analysis. The experience gave me a practical view of how marketing connects to business decisions in financial services.",
-      "I have recently joined the same department through MBS’s work-integrated learning programme. As I continue the PGDM, I’m especially interested in evidence-led marketing, customer insight and fintech.",
-    ],
-    facts: [
-      { k: "Currently", v: "PGDM · Muthoot Business School" },
-      { k: "Department", v: "MarCom & Brand · Muthoot Finance" },
-      { k: "Focus", v: "Marketing & brand strategy" },
-      { k: "Based in", v: "Kochi, Kerala" },
+      "Moving from Electrical and Electronics Engineering into management has shifted my attention from how systems operate to how organisations understand the people they serve.",
+      "I’m interested in financial-services marketing, where brand promises meet practical customer needs.",
     ],
   },
 };
@@ -101,7 +89,6 @@ export type ClubActivity = {
 export type SkillGroup = {
   group: string;
   items: string[];
-  evidence: string;
 };
 export type Cert = {
   name: string;
@@ -116,6 +103,7 @@ export type Achievement = {
   suffix?: string;
   label: string;
   context: string;
+  image?: string;
   placeholder?: boolean;
 };
 export type Project = {
@@ -138,7 +126,7 @@ export type ModeContent = {
   label: string;
   short: string;
   hero: { meta: string; lines: string[]; summary: string };
-  about: { lede: string; body: string[]; facts: { k: string; v: string }[] };
+  about: { lede: string; body: string[] };
   education: Education[];
   experience: Experience[];
   clubs: ClubActivity[];
@@ -197,7 +185,7 @@ export const CONTENT: Record<Mode, ModeContent> = {
         role: "Technical Coordinator",
         period: "Feb 2024 — Feb 2025",
         summary:
-          "Secured $2,500 in grants; coordinated CORE 2024 and Automaze; led the technical team for YESS 2024 (4,000+ participants).",
+          "Prepared grant proposals and coordinated robotics programmes and technical events.",
       },
       {
         club: "IEDC MITS",
@@ -251,22 +239,18 @@ export const CONTENT: Record<Mode, ModeContent> = {
           "Event coordination",
           "Programme delivery",
         ],
-        evidence: "YESS 2024 (4,000+ participants), CORE 2024 and Automaze; IEEE RAS SBC, MITS.",
       },
       {
         group: "Budget & supplier coordination",
         items: ["Budget tracking", "Procurement coordination", "Supplier payments"],
-        evidence: "Financial Manager for the SIEP Electric Dirt Bike Challenge; managed sponsorships, grants and project expenditure.",
       },
       {
         group: "Visual communication",
         items: ["Design team coordination", "Digital communication assets"],
-        evidence: "Design Team Lead, NSS MITS; led production of posters and digital assets.",
       },
       {
         group: "Languages",
         items: PERSON.languages,
-        evidence: "Cambridge Linguaskill Business assessment: English B2 (overall score 174); Malayalam and Hindi listed in the supplied résumé.",
       },
     ],
     certifications: [
@@ -321,13 +305,6 @@ export const CONTENT: Record<Mode, ModeContent> = {
           "For student robotics programmes, via proposal writing and stakeholder engagement.",
       },
       {
-        value: 4000,
-        suffix: "+",
-        label: "Participants · YESS 2024",
-        context:
-          "Led the technical team for the flagship summit of IEEE Kerala Section.",
-      },
-      {
         value: 200,
         label: "Participants · CORE 2024",
         context:
@@ -344,6 +321,12 @@ export const CONTENT: Record<Mode, ModeContent> = {
         label: "SAUVC 2026",
         context: "Mentored team — one of four teams from India selected.",
       },
+      {
+        label: "Prakalp — Best Departmental Project",
+        context:
+          "Recognised for the B.Tech final-year project and presented by Chacko M. Jose, Executive Director, BPCL.",
+        image: "/images/prakalp-award.jpeg",
+      },
     ],
   },
   mgmt: {
@@ -354,7 +337,7 @@ export const CONTENT: Record<Mode, ModeContent> = {
       meta: "Muthoot Business School · 2026–2028",
       lines: ["PGDM at", "MBS."],
       summary:
-        "Strategy, marketing & brand, grounded in MarCom & Brand experience at Muthoot Finance.",
+        "With a growing interest in marketing, I’m exploring how customer insight can shape stronger brand decisions.",
     },
     about: ABOUT.mgmt,
     education: [
@@ -394,15 +377,15 @@ export const CONTENT: Record<Mode, ModeContent> = {
         reflectionPhoto: "/images/muthoot-internship-presentation.jpeg",
         reflection: {
           reporting:
-            "In the final presentation before PGDM, we had only a few minutes to cover the work of a three-month internship.",
+            "At the end of my three-month placement, we were asked to present its work in only a few minutes.",
           responding:
-            "The tight time limit made the need to choose and communicate the most relevant points immediately clear.",
+            "The time limit was demanding, and I had to decide what mattered most to an audience unfamiliar with the day-to-day work.",
           relating:
-            "It reinforced a discipline I use in marketing communication: understand the audience, focus the message and support it with relevant evidence.",
+            "This felt close to marketing communication: the message has to meet its audience where it is.",
           reasoning:
-            "Being concise without losing substance depends on prioritising, sequencing and stating each point precisely.",
+            "I learned that concise communication depends on prioritisation and sequence, not simply speaking faster.",
           reconstructing:
-            "For future presentations, I will define the main takeaway first, rehearse to the time limit and keep supporting detail ready for questions.",
+            "For future presentations, I’ll state the main takeaway first, rehearse to time and keep supporting details ready for questions.",
         },
       },
     ],
@@ -445,7 +428,6 @@ export const CONTENT: Record<Mode, ModeContent> = {
           "Branch-level field coordination",
           "Competitor research",
         ],
-        evidence: "104 customer forms collected across Chennai and Bengaluru; internship report also documents NBFC and digital-channel competitor analysis.",
       },
       {
         group: "Marketing & communication",
@@ -454,17 +436,14 @@ export const CONTENT: Record<Mode, ModeContent> = {
           "Digital outreach",
           "Presentation and concise messaging",
         ],
-        evidence: "MarCom & Brand internship and current work-integrated role at Muthoot Finance; IEDC MITS marketing leadership and final internship presentation.",
       },
       {
         group: "Event and stakeholder coordination",
         items: ["Sponsorship coordination", "Stakeholder communication", "Event marketing"],
-        evidence: "IEDC MITS Chief Marketing Officer; secured ₹10,000 sponsorship and coordinated KSUM and industry relationships.",
       },
       {
         group: "Languages",
         items: PERSON.languages,
-        evidence: "Cambridge Linguaskill Business assessment: English B2 (overall score 174); Malayalam and Hindi listed in the supplied résumé.",
       },
     ],
     certifications: [
@@ -495,22 +474,19 @@ export const CONTENT: Record<Mode, ModeContent> = {
     careerGoals: {
       shortTerm: [
         "Complete the PGDM with a strong academic foundation.",
-        "Build practical marketing experience through the work-integrated role and live projects.",
-        "Develop depth in digital marketing, brand communication and consumer insight.",
-        "Strengthen strategic thinking and analytical decision-making.",
-        "Build purposeful relationships across the business community.",
+        "Explore marketing roles in financial services through coursework and applied projects.",
+        "Develop a clear understanding of the functions and industries that best fit my strengths.",
       ],
       longTerm: [
-        "Grow into a strategic marketing or brand leadership role.",
-        "Lead teams that connect customer insight with sustainable business growth.",
-        "Build broad management capability across marketing, finance and strategy.",
-        "Explore entrepreneurship as experience and opportunity develop.",
+        "Build a career in marketing or brand management, ideally in financial services.",
+        "Grow toward leadership roles that connect customer understanding with sustainable business growth.",
+        "Keep entrepreneurship as a longer-term possibility as experience and opportunity develop.",
       ],
     },
     futureDevelopment: [
-      "Apply PGDM learning to the work-integrated role and keep a reflective record of responsibilities, feedback and learning while protecting confidential information.",
-      "Strengthen analytical thinking, research methods and problem-solving through coursework, projects and feedback.",
-      "Build communication, collaboration and leadership through academic, club and professional opportunities.",
+      "Apply PGDM concepts to current work, seek feedback on specific tasks and protect confidential information.",
+      "Practise research and analysis through coursework and applied projects, then use feedback to improve the next iteration.",
+      "Take on defined responsibilities in academic or club work to strengthen communication and collaboration through practice.",
       "Explore an IEDC chapter at MBS by discussing institutional support, student interest and a practical proposal. This remains a proposed initiative, not an established club.",
     ],
   },

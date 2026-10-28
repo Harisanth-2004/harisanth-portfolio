@@ -1,5 +1,4 @@
 import { useEffect, useRef } from "react";
-import { CircleDollarSign, Trophy, UsersRound } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CONTENT, PERSON } from "@/lib/portfolio-data";
 import { gsap, prefersReducedMotion } from "@/lib/motion";
@@ -254,36 +253,6 @@ export function Hero() {
               <span className="hero-cta-short">PGDM →</span>
             </HeroCta>
           </div>
-          <dl
-            data-stagger
-            className="t-meta mt-10 hidden grid-cols-3 gap-6 border-t border-border pt-4 text-muted-foreground lg:grid"
-          >
-            <div>
-              <dt className="inline-flex items-center gap-2">
-                <CircleDollarSign
-                  size={14}
-                  strokeWidth={1.5}
-                  aria-hidden="true"
-                />
-                Grants
-              </dt>
-              <dd className="mt-1 text-foreground">$2,500</dd>
-            </div>
-            <div>
-              <dt className="inline-flex items-center gap-2">
-                <UsersRound size={14} strokeWidth={1.5} aria-hidden="true" />
-                Largest event
-              </dt>
-              <dd className="mt-1 text-foreground">4,000+</dd>
-            </div>
-            <div>
-              <dt className="inline-flex items-center gap-2">
-                <Trophy size={14} strokeWidth={1.5} aria-hidden="true" />
-                SAUVC 2026
-              </dt>
-              <dd className="mt-1 text-foreground">Top 8</dd>
-            </div>
-          </dl>
         </div>
       </div>
 
@@ -366,3 +335,4 @@ function HeroCta({
     </Button>
   );
 }
+

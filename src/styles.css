@@ -771,6 +771,26 @@ html.dark[data-mode="mgmt"] {
   object-fit: cover;
   object-position: center 54%;
 }
+.tarang-gallery {
+  display: grid;
+  min-height: 18rem;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: 2px;
+  background: var(--background);
+}
+.tarang-gallery img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 18rem;
+  object-fit: cover;
+}
+.tarang-gallery img:first-child {
+  object-position: center 54%;
+}
+.tarang-gallery img:last-child {
+  object-position: center;
+}
 .siep-photo img {
   object-position: center 78%;
 }
@@ -811,6 +831,18 @@ html.dark[data-mode="mgmt"] {
   min-height: 17rem;
 }
 @media (max-width: 639px) {
+  .tarang-gallery {
+    grid-template-columns: minmax(0, 1fr);
+    min-height: 0;
+  }
+  .tarang-gallery img {
+    height: auto;
+    min-height: 0;
+    aspect-ratio: 4 / 3;
+  }
+  .tarang-gallery img:first-child {
+    aspect-ratio: 16 / 10;
+  }
   .ksum-gallery,
   .yess-gallery {
     grid-template-columns: minmax(0, 1fr);
@@ -859,6 +891,14 @@ html.dark[data-mode="mgmt"] {
 .milestone-card {
   min-height: 13rem;
   border-top: 2px solid color-mix(in oklab, var(--signal) 55%, var(--border));
+}
+.milestone-image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  margin-bottom: 1.25rem;
+  object-fit: cover;
+  object-position: center 52%;
 }
 .career-goals-grid {
   display: grid;

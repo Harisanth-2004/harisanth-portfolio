@@ -68,6 +68,12 @@ describe("Portfolio homepage", () => {
         /electrical and electronics engineer with experience in technical events/i,
       ),
     ).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { name: /Prakalp — Best Departmental Project/i }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByAltText(/receiving the Prakalp Best Departmental Project award/i),
+    ).toBeInTheDocument();
     const linguaskill = screen.getByText("Linguaskill").closest("article");
     expect(linguaskill).not.toBeNull();
     fireEvent.click(
@@ -95,15 +101,19 @@ describe("Portfolio homepage", () => {
     ).not.toBeInTheDocument();
     expect(
       screen.getByText(
-        /PGDM student at Muthoot Business School exploring the intersection/i,
+        /PGDM student learning how customer and market insight/i,
       ),
     ).toBeInTheDocument();
+    expect(screen.getByText(/With a growing interest in marketing/i)).toBeInTheDocument();
+    expect(
+      screen.queryByRole("heading", { name: /Prakalp — Best Departmental Project/i }),
+    ).not.toBeInTheDocument();
     expect(
       screen.getByRole("heading", { level: 1, name: /PGDM at MBS/ }),
     ).toBeInTheDocument();
     expect(
-      screen.getAllByText(/In the final presentation before PGDM/).length,
-    ).toBeGreaterThan(0);
+      screen.getByText(/At the end of my three-month placement/),
+    ).toBeInTheDocument();
     const reflectionImage = screen.getByAltText(/final pre-PGDM presentation/i);
     expect(reflectionImage).toBeInTheDocument();
     const marketingInternship = screen
@@ -117,10 +127,16 @@ describe("Portfolio homepage", () => {
     expect(screen.queryByText("The connection")).not.toBeInTheDocument();
     expect(screen.queryByText("What I learned")).not.toBeInTheDocument();
     expect(screen.queryByText("Next time")).not.toBeInTheDocument();
-    expect(screen.getByText(/only a few minutes to cover the work of a three-month internship/i)).toBeInTheDocument();
+    expect(screen.getByText(/present its work in only a few minutes/i)).toBeInTheDocument();
     expect(
       screen.getByText("Project Management Foundations"),
     ).toBeInTheDocument();
+    const reflectionToggle = screen.getByRole("button", { name: "Read reflection" });
+    expect(screen.queryByText(/Tarang had several rounds/)).not.toBeInTheDocument();
+    fireEvent.click(reflectionToggle);
+    expect(screen.getByText(/Tarang had several rounds/)).toBeInTheDocument();
+    expect(screen.getByText(/We were eliminated after that round/)).toBeInTheDocument();
+    expect(screen.getByAltText(/gravity-sorter prototype built by the team/i)).toBeInTheDocument();
     expect(
       screen.getByRole("heading", { name: "Customer Profiling Field Survey" }),
     ).toBeInTheDocument();
@@ -168,7 +184,7 @@ describe("Portfolio homepage", () => {
     expect(screen.getByText("Short-term goals")).toBeInTheDocument();
     expect(screen.getByText("Long-term goals")).toBeInTheDocument();
     expect(
-      screen.getByText(/work-integrated role and live projects/i),
+      screen.getByText(/Apply PGDM concepts to current work/i),
     ).toBeInTheDocument();
     expect(
       screen.getByText(/Exploring the introduction of a student-led innovation/i),
@@ -188,8 +204,8 @@ describe("Portfolio homepage", () => {
     expect(document.querySelector("#evaluation")).not.toBeInTheDocument();
     expect(screen.queryByText(/Evaluation Rubric/)).not.toBeInTheDocument();
     expect(screen.queryByText("Evidence:")).not.toBeInTheDocument();
-    expect(screen.getByText(/Strengthen analytical thinking, research methods/)).toBeInTheDocument();
-    expect(screen.getByText(/Build communication, collaboration and leadership/)).toBeInTheDocument();
+    expect(screen.getByText(/Practise research and analysis through coursework/)).toBeInTheDocument();
+    expect(screen.getByText(/defined responsibilities in academic or club work/)).toBeInTheDocument();
     expect(screen.queryByText(/Chennai and Bengaluru field survey/)).not.toBeInTheDocument();
     expect(screen.queryByText(/The toolkit/)).not.toBeInTheDocument();
   }, 10000);

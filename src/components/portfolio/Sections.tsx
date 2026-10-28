@@ -24,6 +24,7 @@ import {
 } from "lucide-react";
 import {
   Accordion,
+  AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
@@ -286,16 +287,6 @@ export function Sections() {
                 {p}
               </p>
             ))}
-            <dl className="grid grid-cols-2 gap-x-6 gap-y-6 border-t border-border pt-6">
-              {c.about.facts.map((fact) => (
-                <div key={fact.k}>
-                  <dt className="t-meta mb-2 text-muted-foreground">
-                    {fact.k}
-                  </dt>
-                  <dd className="text-sm">{fact.v}</dd>
-                </div>
-              ))}
-            </dl>
           </div>
         </div>
         <p className="t-meta mt-12 text-muted-foreground">
@@ -575,9 +566,6 @@ export function Sections() {
                   </li>
                 ))}
               </ul>
-              <p className="mt-5 max-w-[66ch] border-t border-border pt-4 text-sm leading-relaxed text-muted-foreground">
-                {group.evidence}
-              </p>
             </article>
           ))}
         </div>
@@ -716,11 +704,19 @@ export function Sections() {
             className="tarang-feature mb-8 grid overflow-hidden border border-border bg-surface/50 md:grid-cols-[1.45fr_.55fr]"
             data-reveal
           >
-            <div className="tarang-photo overflow-hidden">
+            <div className="tarang-gallery overflow-hidden">
               <img
                 src={tarangPhoto}
                 alt="Harisanth and fellow participants in front of the Tarang mural"
                 width={960}
+                height={1280}
+                loading="lazy"
+                decoding="async"
+              />
+              <img
+                src="/images/tarang-gravity-sorter.jpeg"
+                alt="The gravity-sorter prototype built by the team for Tarang"
+                width={1280}
                 height={1280}
                 loading="lazy"
                 decoding="async"
@@ -740,6 +736,40 @@ export function Sections() {
                 Kattangal, Kerala <span className="mx-2 text-signal">/</span> 09
                 Oct 2026
               </p>
+              <Accordion type="single" collapsible className="border-t border-border">
+                <AccordionItem value="tarang-reflection" className="border-0">
+                  <AccordionTrigger className="min-h-11 py-3 text-sm hover:no-underline">
+                    Read reflection
+                  </AccordionTrigger>
+                  <AccordionContent className="space-y-3 pb-4 text-sm leading-relaxed text-muted-foreground">
+                    <p>
+                      Tarang had several rounds. The first was a marketing quiz,
+                      which went well. In the second, we had to build something
+                      creative from a small kit of coloured paper, plastic
+                      covers, paper cups, a pencil, tape, glue, ice-cream sticks
+                      and a blade.
+                    </p>
+                    <p>
+                      We made a gravity sorter intended to send objects of
+                      different masses along separate paths. We imagined
+                      adapting it for a low-cost rainwater system: channel water
+                      one way and wet leaves another. I liked that the idea
+                      started with a practical problem rather than with how the
+                      model would look on a table.
+                    </p>
+                    <p>
+                      We were eliminated after that round. It stung because I
+                      thought the build challenge suited us. The quiz tested
+                      what we already knew; this round asked us to make
+                      something from the materials in front of us. We ran out
+                      of time to make the sorter work consistently and had not
+                      tested it enough to claim reliability. Next time I’ll make
+                      a rough working version early, test the core mechanism
+                      before adding detail, and keep the pitch concise.
+                    </p>
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
             </figcaption>
           </figure>
         )}
@@ -782,6 +812,17 @@ export function Sections() {
               className="milestone-card border border-border bg-surface/40 p-5 sm:p-6"
               data-reveal
             >
+              {item.image && (
+                <img
+                  className="milestone-image"
+                  src={item.image}
+                  alt="B.Tech project team receiving the Prakalp Best Departmental Project award"
+                  width={4032}
+                  height={3024}
+                  loading="lazy"
+                  decoding="async"
+                />
+              )}
               {item.value !== undefined && (
                 <p className="milestone-value font-display text-signal">
                   {item.prefix}
@@ -861,12 +902,6 @@ export function Sections() {
               )}
             </div>
             <div>
-              <p className="t-body mb-5 max-w-[65ch] text-muted-foreground">
-                In the final presentation before PGDM, we had only a few
-                minutes to communicate the work of a three-month internship.
-                Preparing for that limit taught me to make the message concise,
-                crisp and precise without losing its substance.
-              </p>
               <div className="reflection-stages">
                 {(
                   [
