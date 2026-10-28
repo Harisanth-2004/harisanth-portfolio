@@ -263,6 +263,7 @@ export function Hero() {
         inert={mode !== "mgmt"}
         className="invisible absolute inset-0 z-10"
       >
+        <Schematic className="management-schematic" />
         <figure aria-hidden="true" className="hero-portrait hero-portrait-mgmt">
           <img
             src={portrait}
