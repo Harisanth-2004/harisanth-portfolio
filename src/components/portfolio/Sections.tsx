@@ -14,6 +14,7 @@ import {
   Lightbulb,
   Mail,
   Megaphone,
+  Phone,
   Target,
   TrendingUp,
   Trophy,
@@ -919,14 +920,28 @@ export function Sections() {
           </p>
           <div className="mt-10">
             <p className="t-meta mb-3 text-muted-foreground">Find me</p>
-            <a
-              href={`https://${PERSON.linkedin}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="link-u inline-flex min-h-11 items-center gap-2 text-sm"
-            >
-              LinkedIn <ArrowUpRight className="size-4" />
-            </a>
+            <div className="flex flex-col items-start gap-2">
+              <a
+                href={`https://${PERSON.linkedin}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="link-u inline-flex min-h-11 items-center gap-2 text-sm"
+              >
+                LinkedIn <ArrowUpRight className="size-4" />
+              </a>
+              <a
+                href={`mailto:${PERSON.email}`}
+                className="link-u inline-flex min-h-11 items-center gap-2 text-sm"
+              >
+                <Mail className="size-4" aria-hidden="true" /> {PERSON.email}
+              </a>
+              <a
+                href={`tel:${PERSON.phone.replaceAll(" ", "")}`}
+                className="link-u inline-flex min-h-11 items-center gap-2 text-sm"
+              >
+                <Phone className="size-4" aria-hidden="true" /> {PERSON.phone}
+              </a>
+            </div>
             <p className="t-caption mt-3">{PERSON.location}</p>
           </div>
         </div>
