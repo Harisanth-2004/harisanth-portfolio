@@ -4,8 +4,61 @@ export function Schematic({
   variant = "hero",
 }: {
   className?: string;
-  variant?: "hero" | "card";
+  variant?: "hero" | "card" | "graph";
 }) {
+  if (variant === "graph") {
+    return (
+      <svg
+        viewBox="0 0 460 600"
+        className={className}
+        fill="none"
+        aria-hidden="true"
+        focusable="false"
+      >
+        {/* Fine vertical rules echo an editorial data plot without implying values. */}
+        {Array.from({ length: 14 }, (_, i) => {
+          const x = 18 + i * 32;
+          return (
+            <path
+              key={`rule-${x}`}
+              d={`M${x} 32 V568`}
+              stroke="currentColor"
+              strokeWidth="0.55"
+              opacity="0.25"
+              vectorEffect="non-scaling-stroke"
+            />
+          );
+        })}
+        <path
+          d="M0 480 L74 423 L132 441 L193 337 L251 352 L318 207 L373 166 L460 72"
+          stroke="currentColor"
+          strokeWidth="1.15"
+          vectorEffect="non-scaling-stroke"
+        />
+        {[
+          [74, 423],
+          [132, 441],
+          [193, 337],
+          [251, 352],
+          [318, 207],
+          [373, 166],
+          [460, 72],
+        ].map(([x, y]) => (
+          <circle
+            key={`${x}-${y}`}
+            cx={x}
+            cy={y}
+            r="3.2"
+            fill="var(--background)"
+            stroke="currentColor"
+            strokeWidth="1"
+            vectorEffect="non-scaling-stroke"
+          />
+        ))}
+      </svg>
+    );
+  }
+
   const paths =
     variant === "hero"
       ? [
@@ -72,3 +125,4 @@ export function Schematic({
     </svg>
   );
 }
+
