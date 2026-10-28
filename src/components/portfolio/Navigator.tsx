@@ -3,6 +3,7 @@ import {
   ArrowUpRight,
   Award,
   Briefcase,
+  CalendarDays,
   ChevronDown,
   Cpu,
   FolderOpen,
@@ -33,6 +34,7 @@ const SECTION_ICONS: Record<SectionId, LucideIcon> = {
   about: UserRound,
   education: GraduationCap,
   experience: Briefcase,
+  goals: CalendarDays,
   clubs: UsersRound,
   projects: FolderOpen,
   skills: Lightbulb,
@@ -127,8 +129,9 @@ export function Navigator() {
       : (SECTIONS.find((s) => s.id === active)?.label ?? "Introduction");
   const visibleSections = SECTIONS.filter(
     (section) =>
-      section.id !== "projects" ||
-      CONTENT[mode === "mgmt" ? "mgmt" : "eng"].projects.length > 0,
+      (section.id !== "projects" ||
+        CONTENT[mode === "mgmt" ? "mgmt" : "eng"].projects.length > 0) &&
+      (section.id !== "goals" || mode === "mgmt"),
   ).map((section) =>
     section.id === "achievements" && mode === "mgmt"
       ? { ...section, label: "Campus life" }
@@ -285,3 +288,4 @@ export function Navigator() {
     </>
   );
 }
+

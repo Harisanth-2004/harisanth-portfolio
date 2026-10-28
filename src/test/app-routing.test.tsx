@@ -33,6 +33,9 @@ describe("Portfolio homepage", () => {
       }),
     ).toBeInTheDocument();
     expect(screen.queryByText(/report pending/i)).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole("heading", { name: /Career goals/ }),
+    ).not.toBeInTheDocument();
     fireEvent.click(screen.getByRole("button", { name: "View report" }));
     expect(
       screen.getByTitle(
@@ -140,5 +143,18 @@ describe("Portfolio homepage", () => {
     ).toBeInTheDocument();
     expect(pgdm).toHaveAttribute("aria-pressed", "true");
     expect(btech).toHaveAttribute("aria-pressed", "false");
+    expect(
+      screen.getByRole("heading", { name: /Career goals/ }),
+    ).toBeInTheDocument();
+    expect(screen.getByText("Short-term goals")).toBeInTheDocument();
+    expect(screen.getByText("Long-term goals")).toBeInTheDocument();
+    expect(
+      screen.getByText(/work-integrated role and live projects/i),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(/Exploring the introduction of a student-led innovation/i),
+    ).toBeInTheDocument();
+    expect(screen.getByText("Proposed initiative")).toBeInTheDocument();
   });
 });
+

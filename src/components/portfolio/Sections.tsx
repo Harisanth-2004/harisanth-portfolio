@@ -4,6 +4,7 @@ import {
   ArrowUpRight,
   Award,
   BriefcaseBusiness,
+  CalendarDays,
   Cpu,
   Eye,
   EyeOff,
@@ -46,6 +47,7 @@ const CONTENT_ICONS: Record<SectionId, LucideIcon> = {
   about: UserRound,
   education: GraduationCap,
   experience: BriefcaseBusiness,
+  goals: Target,
   clubs: UsersRound,
   projects: FolderOpen,
   skills: Lightbulb,
@@ -198,6 +200,23 @@ export function Sections() {
   // the visitor chooses B.Tech or PGDM.
   if (mode === "neutral") return null;
 
+  const contentLinks: [string, string, SectionId][] = [
+    ["01", "About me", "about"],
+    ["02", "Career timeline", "experience"],
+    ["03", "Education", "education"],
+    ["04", "Club activities", "clubs"],
+    ["05", "Selected work", "projects"],
+    ["06", "What I bring", "skills"],
+    ["07", "Certifications", "certifications"],
+    ["08", selected === "mgmt" ? "Campus life" : "Achievements", "achievements"],
+  ];
+  if (selected === "mgmt") contentLinks.push(["09", "Career goals", "goals"]);
+  contentLinks.push([
+    selected === "mgmt" ? "10" : "09",
+    "Contact",
+    "contact",
+  ]);
+
   return (
     <div ref={root} className="portfolio-content">
       <div className="contents-sheet border-t border-border py-12 sm:py-16">
@@ -215,23 +234,7 @@ export function Sections() {
         </div>
         <h2 className="contents-title font-grotesk font-semibold">CONTENTS</h2>
         <nav aria-label="Contents" className="contents-links">
-          {(
-            [
-              ["01", "About me", "about"],
-              ["02", "Career timeline", "experience"],
-              ["03", "Education", "education"],
-              ["04", "Club activities", "clubs"],
-              ["05", "Selected work", "projects"],
-              ["06", "What I bring", "skills"],
-              ["07", "Certifications", "certifications"],
-              [
-                "08",
-                selected === "mgmt" ? "Campus life" : "Achievements",
-                "achievements",
-              ],
-              ["09", "Contact", "contact"],
-            ] as const
-          )
+          {contentLinks
             .filter(([, , id]) => id !== "projects" || c.projects.length > 0)
             .map(([number, title, id]) => {
               const Icon = contentsIcon(id, selected);
@@ -817,7 +820,55 @@ export function Sections() {
           ))}
         </div>
       </Section>
-      <Section id="contact" number="09" title="Let’s connect">
+      {selected === "mgmt" && c.careerGoals && (
+        <Section id="goals" number="09" title="Career goals">
+          <div className="career-goals-grid">
+            <article className="career-goal-panel" data-reveal>
+              <header className="career-goal-heading">
+                <CalendarDays size={20} strokeWidth={1.6} aria-hidden="true" />
+                <div>
+                  <h3 className="t-title">Short-term goals</h3>
+                  <p className="t-meta mt-1 text-muted-foreground">1–3 years</p>
+                </div>
+              </header>
+              <ol className="career-goal-list">
+                {c.careerGoals.shortTerm.map((goal, index) => (
+                  <li key={goal}>
+                    <span className="t-meta text-signal">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <span>{goal}</span>
+                  </li>
+                ))}
+              </ol>
+            </article>
+            <article className="career-goal-panel" data-reveal>
+              <header className="career-goal-heading">
+                <Target size={20} strokeWidth={1.6} aria-hidden="true" />
+                <div>
+                  <h3 className="t-title">Long-term goals</h3>
+                  <p className="t-meta mt-1 text-muted-foreground">5–10 years</p>
+                </div>
+              </header>
+              <ol className="career-goal-list">
+                {c.careerGoals.longTerm.map((goal, index) => (
+                  <li key={goal}>
+                    <span className="t-meta text-signal">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <span>{goal}</span>
+                  </li>
+                ))}
+              </ol>
+            </article>
+          </div>
+        </Section>
+      )}
+      <Section
+        id="contact"
+        number={selected === "mgmt" ? "10" : "09"}
+        title="Let’s connect"
+      >
         <div data-reveal>
           <p className="t-lede max-w-[34ch]">
             Engineering, management, and the interesting space in between.
@@ -851,3 +902,4 @@ export function Sections() {
     </div>
   );
 }
+

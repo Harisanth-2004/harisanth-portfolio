@@ -14,6 +14,7 @@ export const SECTIONS = [
   { id: "skills", label: "Skills" },
   { id: "certifications", label: "Certifications" },
   { id: "achievements", label: "Achievements" },
+  { id: "goals", label: "Career goals" },
   { id: "contact", label: "Contact" },
 ] as const;
 
@@ -123,6 +124,10 @@ export type Project = {
   status?: string;
   report?: string;
 };
+export type CareerGoals = {
+  shortTerm: string[];
+  longTerm: string[];
+};
 
 export type ModeContent = {
   code: string;
@@ -137,6 +142,7 @@ export type ModeContent = {
   skills: SkillGroup[];
   certifications: Cert[];
   achievements: Achievement[];
+  careerGoals?: CareerGoals;
 };
 
 export const CONTENT: Record<Mode, ModeContent> = {
@@ -400,6 +406,13 @@ export const CONTENT: Record<Mode, ModeContent> = {
         period: "Current",
         summary: "Current member of the MBS Media Club.",
       },
+      {
+        club: "IEDC at MBS",
+        role: "Proposed initiative",
+        period: "In planning",
+        summary:
+          "Exploring the introduction of a student-led innovation and entrepreneurship chapter at MBS. The club is still in the planning stage.",
+      },
     ],
     projects: [
       {
@@ -460,6 +473,21 @@ export const CONTENT: Record<Mode, ModeContent> = {
       { name: "Project Management Foundations", issuer: "LinkedIn Learning" },
     ],
     achievements: [],
+    careerGoals: {
+      shortTerm: [
+        "Complete the PGDM with a strong academic foundation.",
+        "Build practical marketing experience through the work-integrated role and live projects.",
+        "Develop depth in digital marketing, brand communication and consumer insight.",
+        "Strengthen strategic thinking and analytical decision-making.",
+        "Build purposeful relationships across the business community.",
+      ],
+      longTerm: [
+        "Grow into a strategic marketing or brand leadership role.",
+        "Lead teams that connect customer insight with sustainable business growth.",
+        "Build broad management capability across marketing, finance and strategy.",
+        "Explore entrepreneurship as experience and opportunity develop.",
+      ],
+    },
   },
 };
 
@@ -469,3 +497,4 @@ export const COMPETITORS = [
   "Kerala Bank",
   "Muthoot FinCorp",
 ];
+
