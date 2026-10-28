@@ -5,7 +5,6 @@ import {
   Award,
   BriefcaseBusiness,
   CalendarDays,
-  ClipboardCheck,
   Cpu,
   Eye,
   EyeOff,
@@ -52,7 +51,6 @@ const CONTENT_ICONS: Record<SectionId, LucideIcon> = {
   goals: Target,
   reflections: Lightbulb,
   development: TrendingUp,
-  evaluation: ClipboardCheck,
   clubs: UsersRound,
   projects: FolderOpen,
   skills: Lightbulb,
@@ -217,19 +215,18 @@ export function Sections() {
       ["05", "Career Goals", "goals"],
       ["06", "Personal Reflections", "reflections"],
       ["07", "Future Development Plan", "development"],
-      ["08", "Evaluation Rubric", "evaluation"],
     );
   } else {
     contentLinks.push(["05", "Achievements", "achievements"]);
   }
   contentLinks.push(
-    ["09", "Experience", "experience"],
-    ["10", "Club activities", "clubs"],
-    ["11", "Certifications", "certifications"],
+    [selected === "mgmt" ? "08" : "06", "Experience", "experience"],
+    [selected === "mgmt" ? "09" : "07", "Club activities", "clubs"],
+    [selected === "mgmt" ? "10" : "08", "Certifications", "certifications"],
     ...(selected === "mgmt"
-      ? [["12", "Campus life", "achievements"] as [string, string, SectionId]]
+      ? [["11", "Campus life", "achievements"] as [string, string, SectionId]]
       : []),
-    [selected === "mgmt" ? "13" : "12", "Contact", "contact"],
+    [selected === "mgmt" ? "12" : "09", "Contact", "contact"],
   );
 
   return (
@@ -913,67 +910,9 @@ export function Sections() {
           </ol>
         </Section>
       )}
-      {selected === "mgmt" && (
-        <Section id="evaluation" number="12" title="Evaluation Rubric">
-          <div className="rubric-wrap" data-reveal>
-            <table className="evaluation-rubric">
-              <caption>
-                Assessment framework from the e-portfolio brief. No score is
-                assigned here.
-              </caption>
-              <thead>
-                <tr>
-                  <th scope="col">Evaluation criteria</th>
-                  <th scope="col">Weightage</th>
-                  <th scope="col">Portfolio evidence</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">Content Completeness &amp; Organization</th>
-                  <td data-label="Weightage">20%</td>
-                  <td data-label="Portfolio evidence">The required e-portfolio sections are present and linked from the contents.</td>
-                </tr>
-                <tr>
-                  <th scope="row">Progress &amp; Initiative</th>
-                  <td data-label="Weightage">20%</td>
-                  <td data-label="Portfolio evidence">Current work-integrated role, future development priorities and the proposed MBS IEDC initiative, clearly identified as in planning.</td>
-                </tr>
-                <tr>
-                  <th scope="row">Reflection &amp; Personal Insights</th>
-                  <td data-label="Weightage">20%</td>
-                  <td data-label="Portfolio evidence">A personal reflection grounded in the time-limited internship presentation and a specific plan for future presentations.</td>
-                </tr>
-                <tr>
-                  <th scope="row">Presentation Quality &amp; Communication Skills</th>
-                  <td data-label="Weightage">15%</td>
-                  <td data-label="Portfolio evidence">The internship presentation experience and its learning on concise, precise communication.</td>
-                </tr>
-                <tr>
-                  <th scope="row">Visual Appeal &amp; Digital Tools Usage</th>
-                  <td data-label="Weightage">15%</td>
-                  <td data-label="Portfolio evidence">Responsive portfolio presentation with keyboard-accessible navigation and working report and credential controls.</td>
-                </tr>
-                <tr>
-                  <th scope="row">Professionalism &amp; Relevance</th>
-                  <td data-label="Weightage">10%</td>
-                  <td data-label="Portfolio evidence">Relevant academic and work examples; confidential customer-level survey data and findings are not disclosed.</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <th scope="row">Total</th>
-                  <td>100%</td>
-                  <td>Weights retained as provided.</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div>
-        </Section>
-      )}
       <Section
         id="contact"
-        number={selected === "mgmt" ? "10" : "09"}
+        number={selected === "mgmt" ? "12" : "09"}
         title="Let’s connect"
       >
         <div data-reveal>
