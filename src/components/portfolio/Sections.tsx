@@ -5,6 +5,8 @@ import {
   Award,
   BriefcaseBusiness,
   CalendarDays,
+  Camera,
+  CarFront,
   Cpu,
   Eye,
   EyeOff,
@@ -14,6 +16,7 @@ import {
   Lightbulb,
   Mail,
   Megaphone,
+  Music2,
   Phone,
   Target,
   TrendingUp,
@@ -54,6 +57,7 @@ const CONTENT_ICONS: Record<SectionId, LucideIcon> = {
   reflections: Lightbulb,
   development: TrendingUp,
   clubs: UsersRound,
+  hobbies: Camera,
   projects: FolderOpen,
   skills: Lightbulb,
   certifications: Award,
@@ -177,12 +181,13 @@ export function Sections() {
                 return;
               gsap.fromTo(
                 element,
-                { y: 8 },
+                { y: 5, opacity: 0.94 },
                 {
                   y: 0,
-                  duration: 0.24,
-                  ease: "power2.out",
-                  clearProps: "transform",
+                  opacity: 1,
+                  duration: 0.32,
+                  ease: "power3.out",
+                  clearProps: "transform,opacity",
                   scrollTrigger: {
                     trigger: element,
                     start: "top 96%",
@@ -199,7 +204,8 @@ export function Sections() {
   }, [mode, ready]);
 
   useEffect(() => {
-    ScrollTrigger.refresh();
+    const refreshTimer = window.setTimeout(() => ScrollTrigger.refresh(), 260);
+    return () => window.clearTimeout(refreshTimer);
   }, [mode, expanded]);
 
   // Keep the introductory cover distinct: a portfolio is revealed only after
@@ -224,11 +230,12 @@ export function Sections() {
   contentLinks.push(
     [selected === "mgmt" ? "08" : "06", "Experience", "experience"],
     [selected === "mgmt" ? "09" : "07", "Club activities", "clubs"],
-    [selected === "mgmt" ? "10" : "08", "Certifications", "certifications"],
+    [selected === "mgmt" ? "10" : "08", "Hobbies & interests", "hobbies"],
+    [selected === "mgmt" ? "11" : "09", "Certifications", "certifications"],
     ...(selected === "mgmt"
-      ? [["11", "Campus life", "achievements"] as [string, string, SectionId]]
+      ? [["12", "Campus life", "achievements"] as [string, string, SectionId]]
       : []),
-    [selected === "mgmt" ? "12" : "09", "Contact", "contact"],
+    [selected === "mgmt" ? "13" : "10", "Contact", "contact"],
   );
 
   return (
@@ -306,9 +313,28 @@ export function Sections() {
               </span>
               <div>
                 <h3 className="t-title max-w-[32ch]">{item.degree}</h3>
-                <p className="t-body mt-3 text-muted-foreground">
-                  {item.institution}
-                </p>
+                <div className="institution-lockup mt-3">
+                  <span
+                    className={`institution-mark ${item.logoShape === "wide" ? "institution-mark-wide" : ""}`}
+                    aria-hidden="true"
+                  >
+                    {item.logo ? (
+                      <img
+                        src={item.logo}
+                        alt=""
+                        loading="lazy"
+                        decoding="async"
+                        onError={(event) => {
+                          event.currentTarget.hidden = true;
+                        }}
+                      />
+                    ) : null}
+                    <span>{item.monogram}</span>
+                  </span>
+                  <p className="t-body text-muted-foreground">
+                    {item.institution}
+                  </p>
+                </div>
                 {item.note && <p className="t-caption mt-2">{item.note}</p>}
               </div>
               <span className="t-meta hidden text-signal sm:block">
@@ -445,8 +471,42 @@ export function Sections() {
           </figure>
         )}
       </Section>
+      <Section id="hobbies" number="05" title="Hobbies & interests">
+        <div className="hobbies-grid grid gap-3 md:grid-cols-3">
+          {[
+            {
+              title: "Photography",
+              detail: "I enjoy noticing light, framing and the details in everyday scenes.",
+              Icon: Camera,
+            },
+            {
+              title: "Music",
+              detail: "Listening to music is one of my favourite ways to reset and recharge.",
+              Icon: Music2,
+            },
+            {
+              title: "Cars",
+              detail: "I have a lasting interest in cars, from their design to the engineering behind them.",
+              Icon: CarFront,
+            },
+          ].map(({ title, detail, Icon }, index) => (
+            <article
+              key={title}
+              className="hobby-card border border-border bg-surface/40 p-5 sm:p-6"
+              data-reveal
+            >
+              <div className="flex items-center justify-between border-b border-border pb-4">
+                <span className="t-meta text-signal">0{index + 1} / PERSONAL</span>
+                <Icon size={19} strokeWidth={1.6} aria-hidden="true" className="text-signal" />
+              </div>
+              <h3 className="t-title mt-5">{title}</h3>
+              <p className="t-body mt-3 text-muted-foreground">{detail}</p>
+            </article>
+          ))}
+        </div>
+      </Section>
       {c.projects.length > 0 && (
-        <Section id="projects" number="05" title="Projects and achievements">
+        <Section id="projects" number="06" title="Projects and achievements">
           {c.projects.map((project, i) => (
             <article
               key={project.id}
@@ -545,7 +605,7 @@ export function Sections() {
           ))}
         </Section>
       )}
-      <Section id="skills" number="06" title="Skills">
+      <Section id="skills" number="07" title="Skills">
         <div className="grid gap-x-12 md:grid-cols-2">
           {c.skills.map((group, i) => (
             <article
@@ -570,7 +630,7 @@ export function Sections() {
           ))}
         </div>
       </Section>
-      <Section id="certifications" number="07" title="Certifications">
+      <Section id="certifications" number="08" title="Certifications">
         <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
           <p className="t-meta text-muted-foreground">
             {c.code} / {String(c.certifications.length).padStart(2, "0")}{" "}
@@ -653,7 +713,7 @@ export function Sections() {
       </Section>
       <Section
         id="achievements"
-        number="08"
+        number="09"
         title={selected === "mgmt" ? "Campus & community" : "A few milestones"}
       >
         {selected === "eng" && (
@@ -843,7 +903,7 @@ export function Sections() {
         </div>
       </Section>
       {selected === "mgmt" && c.careerGoals && (
-        <Section id="goals" number="09" title="Career goals">
+        <Section id="goals" number="10" title="Career goals">
           <div className="career-goals-grid">
             <article className="career-goal-panel" data-reveal>
               <header className="career-goal-heading">
@@ -889,7 +949,7 @@ export function Sections() {
       {selected === "mgmt" && internshipReflection?.reflection && (
         <Section
           id="reflections"
-          number="10"
+          number="11"
           title="Personal Reflections"
         >
           <div className="internship-reflection" data-reveal>
@@ -928,7 +988,7 @@ export function Sections() {
       {selected === "mgmt" && c.futureDevelopment && (
         <Section
           id="development"
-          number="11"
+          number="12"
           title="Future Development Plan"
         >
           <p className="t-body mb-7 max-w-[66ch] text-muted-foreground">
@@ -950,7 +1010,7 @@ export function Sections() {
       )}
       <Section
         id="contact"
-        number={selected === "mgmt" ? "12" : "09"}
+        number={selected === "mgmt" ? "13" : "10"}
         title="Let’s connect"
       >
         <div data-reveal>
