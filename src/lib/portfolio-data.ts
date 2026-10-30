@@ -10,6 +10,7 @@ export const SECTIONS = [
   { id: "education", label: "Education" },
   { id: "experience", label: "Experience" },
   { id: "clubs", label: "Club activities" },
+  { id: "hobbies", label: "Hobbies & interests" },
   { id: "projects", label: "Projects" },
   { id: "skills", label: "Skills" },
   { id: "certifications", label: "Certifications" },
@@ -47,6 +48,7 @@ const ABOUT = {
     lede: "PGDM student learning how customer and market insight can inform better business decisions.",
     body: [
       "Moving from Electrical and Electronics Engineering into management has shifted my attention from how systems operate to how organisations understand the people they serve.",
+      "B.Tech also taught me that a technical outcome depends on more than the engineering itself. Projects need coordination, time and resource allocation, and steady delivery. Seeing that connection helped me understand why I wanted to study management.",
       "I’m interested in financial-services marketing, where brand promises meet practical customer needs.",
     ],
   },
@@ -60,16 +62,23 @@ const EDUCATION: Education[] = [
     institution: "Muthoot Business School (MBS)",
     period: "2026 — 2028",
     note: "Currently pursuing",
+    logo: "/institutions/muthoot-business-school.svg",
+    monogram: "MBS",
   },
   {
     degree: "B.Tech in Electrical and Electronics Engineering",
     institution: "Muthoot Institute of Technology and Science (MITS), Varikoli",
     period: "2022 — 2026",
+    logo: "https://mgmits.ac.in/frontend/images/logo-4.png",
+    monogram: "MITS",
   },
   {
     degree: "Grade 12 — Higher Secondary (Science)",
     institution: "St. Thomas Public School, Muvattupuzha",
     period: "2021 — 2022",
+    logo: "/institutions/st-thomas-public-school.svg",
+    logoShape: "wide",
+    monogram: "ST",
   },
 ];
 
@@ -100,6 +109,9 @@ export type Education = {
   institution: string;
   period: string;
   note?: string;
+  logo?: string;
+  logoShape?: "square" | "wide";
+  monogram: string;
 };
 export type ClubActivity = {
   club: string;
