@@ -304,6 +304,13 @@ export const CONTENT: Record<Mode, ModeContent> = {
         note: "Five-day hands-on training in UAV design, assembly and applications.",
         image: "/certificates/uav-technology.jpg",
       },
+      {
+        name: "Oracle APEX Boot Camp",
+        issuer: "Maathra Technology & Consultancy · apexvarsity.com",
+        issued: "Nov 2023",
+        note: "One-day boot camp · Oracle APEX development",
+        image: "/certificates/oracle-apex-boot-camp.jpg",
+      },
     ],
     achievements: [
       {
@@ -473,7 +480,13 @@ export const CONTENT: Record<Mode, ModeContent> = {
         image: "/certificates/power-bi-beginners.jpg",
       },
     ],
-    achievements: [],
+    achievements: [
+      {
+        label: "Elected Class Representative",
+        context:
+          "Chosen by cohort vote during the final pre-PGDM presentation at Muthoot Business School.",
+      },
+    ],
     careerGoals: {
       shortTerm: [
         "Complete the PGDM with a strong academic foundation.",
