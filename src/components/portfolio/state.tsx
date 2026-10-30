@@ -8,6 +8,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
+import { flushSync } from "react-dom";
 import type { Mode, SectionId } from "@/lib/portfolio-data";
 
 export type ViewMode = "neutral" | Mode;
@@ -36,12 +37,17 @@ export function PortfolioProvider({ children }: { children: ReactNode }) {
   const [navExpanded, setNavExpanded] = useState(false);
   const reading = useRef<{ element: HTMLElement; offset: number } | null>(null);
   const currentMode = useRef<ViewMode>("mgmt");
-  const themeTransitionTimer = useRef<ReturnType<typeof setTimeout> | null>(
-    null,
-  );
-  const modeTransitionTimer = useRef<ReturnType<typeof setTimeout> | null>(
-    null,
-  );
+  const transitionView = useCallback((update: () => void) => {
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const transitionDocument = document as Document & {
+      startViewTransition?: (callback: () => void) => unknown;
+    };
+    if (reduce || !transitionDocument.startViewTransition) {
+      flushSync(update);
+      return;
+    }
+    transitionDocument.startViewTransition(() => flushSync(update));
+  }, []);
 
   useEffect(() => {
     const root = document.documentElement;
@@ -51,18 +57,6 @@ export function PortfolioProvider({ children }: { children: ReactNode }) {
 
   const setMode = useCallback((m: ViewMode) => {
     if (currentMode.current === m) return;
-    const root = document.documentElement;
-    if (modeTransitionTimer.current) clearTimeout(modeTransitionTimer.current);
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      delete root.dataset["modeTransitioning"];
-      modeTransitionTimer.current = null;
-    } else {
-      root.dataset["modeTransitioning"] = "true";
-      modeTransitionTimer.current = setTimeout(() => {
-        delete root.dataset["modeTransitioning"];
-        modeTransitionTimer.current = null;
-      }, 340);
-    }
     // Preserve the section-relative reading position when content heights change.
     const sections = Array.from(
       document.querySelectorAll<HTMLElement>("section[id]"),
@@ -84,8 +78,8 @@ export function PortfolioProvider({ children }: { children: ReactNode }) {
       };
     }
     currentMode.current = m;
-    setModeState(m);
-  }, []);
+    transitionView(() => setModeState(m));
+  }, [transitionView]);
 
   useLayoutEffect(() => {
     if (!ready) return;
@@ -103,42 +97,16 @@ export function PortfolioProvider({ children }: { children: ReactNode }) {
 
   const toggleTheme = useCallback(() => {
     const next = theme === "dark" ? "light" : "dark";
-    const root = document.documentElement;
-    if (themeTransitionTimer.current)
-      clearTimeout(themeTransitionTimer.current);
-
-    const reducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-    if (reducedMotion) {
-      delete root.dataset["themeTransitioning"];
-      themeTransitionTimer.current = null;
-    } else {
-      root.dataset["themeTransitioning"] = "true";
-      themeTransitionTimer.current = setTimeout(() => {
-        delete root.dataset["themeTransitioning"];
-        themeTransitionTimer.current = null;
-      }, 360);
-    }
-
-    root.classList.toggle("dark", next === "dark");
-    try {
-      localStorage.setItem("bhk-theme", next);
-    } catch {
-      /* Theme still works without storage. */
-    }
-    setTheme(next);
-  }, [theme]);
-
-  useEffect(
-    () => () => {
-      if (themeTransitionTimer.current)
-        clearTimeout(themeTransitionTimer.current);
-      if (modeTransitionTimer.current)
-        clearTimeout(modeTransitionTimer.current);
-    },
-    [],
-  );
+    transitionView(() => {
+      document.documentElement.classList.toggle("dark", next === "dark");
+      try {
+        localStorage.setItem("bhk-theme", next);
+      } catch {
+        /* Theme still works without storage. */
+      }
+      setTheme(next);
+    });
+  }, [theme, transitionView]);
 
   return (
     <PortfolioContext.Provider
