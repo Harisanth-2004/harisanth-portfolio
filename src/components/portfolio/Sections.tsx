@@ -302,44 +302,35 @@ export function Sections() {
       </Section>
       <Section id="education" number="02" title="Educational Background">
         <div>
-          {c.education.map((item, i) => (
+          {c.education.map((item) => (
             <article
               key={item.degree}
               data-reveal
               className="education-row border border-border bg-surface/40 px-5 py-6 sm:px-6 sm:py-8"
             >
-              <span className="t-meta text-muted-foreground">
-                {item.period}
+              <span className="institution-mark" aria-hidden="true">
+                {item.logo ? (
+                  <img
+                    src={item.logo}
+                    alt=""
+                    loading="lazy"
+                    decoding="async"
+                    className={item.logoShape === "wide" ? "institution-logo-wide" : ""}
+                    onError={(event) => {
+                      event.currentTarget.hidden = true;
+                    }}
+                  />
+                ) : null}
+                <span>{item.monogram}</span>
               </span>
-              <div>
-                <h3 className="t-title max-w-[32ch]">{item.degree}</h3>
-                <div className="institution-lockup mt-3">
-                  <span
-                    className={`institution-mark ${item.logoShape === "wide" ? "institution-mark-wide" : ""}`}
-                    aria-hidden="true"
-                  >
-                    {item.logo ? (
-                      <img
-                        src={item.logo}
-                        alt=""
-                        loading="lazy"
-                        decoding="async"
-                        onError={(event) => {
-                          event.currentTarget.hidden = true;
-                        }}
-                      />
-                    ) : null}
-                    <span>{item.monogram}</span>
-                  </span>
-                  <p className="t-body text-muted-foreground">
-                    {item.institution}
-                  </p>
-                </div>
-                {item.note && <p className="t-caption mt-2">{item.note}</p>}
+              <div className="education-copy">
+                <h3 className="education-institution">{item.institution}</h3>
+                <p className="education-degree">{item.degree}</p>
+                <p className="education-meta">
+                  <span>{item.period}</span>
+                  {item.note && <span>{item.note}</span>}
+                </p>
               </div>
-              <span className="t-meta hidden text-signal sm:block">
-                {String(i + 1).padStart(2, "0")}
-              </span>
             </article>
           ))}
         </div>
