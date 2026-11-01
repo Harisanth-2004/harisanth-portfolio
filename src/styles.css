@@ -198,9 +198,6 @@ html.dark[data-mode="mgmt"] {
     line-height: 1.6;
     overflow-x: clip;
     -webkit-font-smoothing: antialiased;
-    transition:
-      background-color 0.2s var(--ease-inout),
-      color 0.2s var(--ease-inout);
   }
   ::selection {
     background: var(--signal);
@@ -212,12 +209,6 @@ html.dark[data-mode="mgmt"] {
   }
   section[id] {
     scroll-margin-top: 5rem;
-  }
-  * {
-    transition-property:
-      color, background-color, border-color, outline-color, fill, stroke;
-    transition-duration: 200ms;
-    transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
   }
 }
 
@@ -370,6 +361,49 @@ html.dark[data-mode="mgmt"] {
 .education-row {
   display: grid;
   gap: 18px;
+}
+.institution-lockup {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+.institution-mark {
+  position: relative;
+  display: grid;
+  width: 3.25rem;
+  height: 3.25rem;
+  flex: 0 0 3.25rem;
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--background);
+  color: var(--signal);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: -0.04em;
+}
+.institution-mark img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 0.2rem;
+  background: var(--background);
+}
+.institution-mark img[src*="muthoot-business-school"] {
+  transform: scale(1.45);
+}
+.institution-mark-wide {
+  width: 7rem;
+  height: 3rem;
+  flex-basis: 7rem;
+}
+.institution-mark img:not([hidden]) + span {
+  display: none;
+}
+.hobby-card {
+  min-height: 12rem;
 }
 .experience-summary {
   display: grid;
@@ -1267,47 +1301,29 @@ html.dark[data-mode="mgmt"] {
   }
 }
 
-/* Theme tokens change together so light/dark switches feel like one deliberate transition. */
-:root[data-theme-transitioning],
-:root[data-theme-transitioning] body,
-:root[data-theme-transitioning] body *,
-:root[data-theme-transitioning] body::before,
-:root[data-theme-transitioning] body::after,
-:root[data-theme-transitioning] body *::before,
-:root[data-theme-transitioning] body *::after,
-:root[data-mode-transitioning],
-:root[data-mode-transitioning] body,
-:root[data-mode-transitioning] body *,
-:root[data-mode-transitioning] body::before,
-:root[data-mode-transitioning] body::after,
-:root[data-mode-transitioning] body *::before,
-:root[data-mode-transitioning] body *::after {
-  transition:
-    color 320ms cubic-bezier(0.16, 1, 0.3, 1),
-    background-color 320ms cubic-bezier(0.16, 1, 0.3, 1),
-    border-color 320ms cubic-bezier(0.16, 1, 0.3, 1),
-    outline-color 320ms cubic-bezier(0.16, 1, 0.3, 1),
-    text-decoration-color 320ms cubic-bezier(0.16, 1, 0.3, 1),
-    fill 320ms cubic-bezier(0.16, 1, 0.3, 1),
-    stroke 320ms cubic-bezier(0.16, 1, 0.3, 1),
-    box-shadow 320ms cubic-bezier(0.16, 1, 0.3, 1);
+/* Crossfade page snapshots so a theme or portfolio-mode change avoids a
+   paint-heavy transition on every individual element. */
+::view-transition-group(root) {
+  animation-duration: 260ms;
+}
+::view-transition-old(root) {
+  animation: page-snapshot-out 150ms ease-out both;
+}
+::view-transition-new(root) {
+  animation: page-snapshot-in 260ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes page-snapshot-out {
+  to { opacity: 0; }
+}
+@keyframes page-snapshot-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 @media (prefers-reduced-motion: reduce) {
-  :root[data-theme-transitioning],
-  :root[data-theme-transitioning] body,
-  :root[data-theme-transitioning] body *,
-  :root[data-theme-transitioning] body::before,
-  :root[data-theme-transitioning] body::after,
-  :root[data-theme-transitioning] body *::before,
-  :root[data-theme-transitioning] body *::after,
-  :root[data-mode-transitioning],
-  :root[data-mode-transitioning] body,
-  :root[data-mode-transitioning] body *,
-  :root[data-mode-transitioning] body::before,
-  :root[data-mode-transitioning] body::after,
-  :root[data-mode-transitioning] body *::before,
-  :root[data-mode-transitioning] body *::after {
-    transition: none !important;
+  ::view-transition-group(root),
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 0.01ms !important;
   }
 }
 
