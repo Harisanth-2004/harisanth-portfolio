@@ -49,6 +49,23 @@ import yessTeamPhoto from "@/assets/yess-2024-technical-team.jpg";
 import ksumSelfiePhoto from "@/assets/ksum-iedc-team-selfie.jpg";
 import ksumCohortPhoto from "@/assets/ksum-iedc-cohort-jul-2025.jpg";
 
+const PHOTOGRAPHS = [
+  { src: "qutub-minar-flight.jpeg", alt: "Qutub Minar rising into open sky as a plane passes nearby.", caption: "Qutub Minar / flight", width: 960, height: 1280 },
+  { src: "red-fort-detail.jpeg", alt: "Red sandstone walls and towers in warm evening light.", caption: "Red sandstone / evening", width: 960, height: 1280 },
+  { src: "lotus-temple-bird.jpeg", alt: "The Lotus Temple framed against blue sky, with a bird above it.", caption: "Lotus Temple / bird", width: 960, height: 1280 },
+  { src: "stone-pavilion.jpeg", alt: "A rooftop pavilion and stone architecture in late sunlight.", caption: "Rooftop pavilion", width: 960, height: 1280 },
+  { src: "pendant-lights.jpeg", alt: "Pendant lights receding through a dim interior.", caption: "Pendant lights", width: 576, height: 1280 },
+  { src: "sunlit-arched-facade.jpeg", alt: "An ornate arched stone facade lit by the low sun.", caption: "Arched facade / late light", width: 960, height: 1280 },
+  { src: "window-palms.jpeg", alt: "Palm leaves seen through a window from a dark room.", caption: "Window / palms", width: 608, height: 1080 },
+  { src: "plant-shelves.jpeg", alt: "Layered indoor plant shelves beneath a pendant lamp.", caption: "Plants / shelves", width: 576, height: 1280 },
+  { src: "fort-paragon-sign.jpeg", alt: "The Fort Paragon sign partly framed by dense greenery.", caption: "Fort Paragon / foliage", width: 960, height: 1280 },
+  { src: "dark-suv-night-wide.jpeg", alt: "A dark SUV at night, shown in a vertical 90-degree rotation.", caption: "Dark SUV / rotated frame", width: 577, height: 1280 },
+  { src: "suv-headlamp.jpeg", alt: "Close view of a black SUV's headlamp, grille and reflections.", caption: "Headlamp / reflections", width: 576, height: 1280 },
+  { src: "dark-suv-night-frame-two.jpeg", alt: "A second dark SUV night photograph shown in a vertical 90-degree rotation.", caption: "Dark SUV / second rotated frame", width: 577, height: 1280 },
+  { src: "1930s-sign.jpeg", alt: "A circular wooden sign for a nostalgic restaurant, lit from above.", caption: "1930s / wall sign", width: 576, height: 1280 },
+  { src: "hanging-garden.jpeg", alt: "Hanging foliage and warm lights inside a leafy restaurant.", caption: "Hanging garden", width: 719, height: 1280 },
+];
+
 const CONTENT_ICONS: Record<SectionId, LucideIcon> = {
   about: UserRound,
   education: GraduationCap,
@@ -467,7 +484,7 @@ export function Sections() {
           {[
             {
               title: "Photography",
-              detail: "I enjoy noticing light, framing and the details in everyday scenes.",
+              detail: "Off-center frames, close details and familiar places seen differently.",
               Icon: Camera,
             },
             {
@@ -494,6 +511,32 @@ export function Sections() {
               <p className="t-body mt-3 text-muted-foreground">{detail}</p>
             </article>
           ))}
+        </div>
+        <div className="photography-edit mt-12 border-t border-border pt-6" data-reveal>
+          <div className="mb-5 flex items-end justify-between gap-4">
+            <h3 className="t-title">Selected photographs</h3>
+            <span className="t-meta text-muted-foreground">PERSONAL WORK / 01—14</span>
+          </div>
+          <div className="photography-grid">
+            {PHOTOGRAPHS.map((photo, index) => (
+              <figure className="photography-frame" key={photo.src}>
+                <div className="photography-image-frame">
+                  <img
+                    src={`/photography/${photo.src}`}
+                    width={photo.width}
+                    height={photo.height}
+                    alt={photo.alt}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+                <figcaption className="t-meta">
+                  <span className="photography-index">{String(index + 1).padStart(2, "0")} / </span>
+                  {photo.caption}
+                </figcaption>
+              </figure>
+            ))}
+          </div>
         </div>
       </Section>
       {c.projects.length > 0 && (
@@ -1051,4 +1094,3 @@ export function Sections() {
     </div>
   );
 }
-

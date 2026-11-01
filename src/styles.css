@@ -431,6 +431,47 @@ html.dark[data-mode="mgmt"] {
 .hobby-card {
   min-height: 12rem;
 }
+.photography-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  gap: clamp(0.75rem, 1.6vw, 1.25rem);
+}
+.photography-frame {
+  min-width: 0;
+  margin: 0;
+}
+.photography-image-frame {
+  display: grid;
+  aspect-ratio: 4 / 5;
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+.photography-image-frame img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.photography-frame figcaption {
+  padding-top: 0.5rem;
+  color: var(--muted-foreground);
+}
+.photography-index {
+  color: var(--signal);
+}
+@media (min-width: 640px) {
+  .photography-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media (min-width: 1024px) {
+  .photography-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
 .experience-summary {
   display: grid;
   gap: 16px;
@@ -1407,4 +1448,3 @@ html.dark[data-mode="mgmt"] {
     opacity: 0.12;
   }
 }
-
