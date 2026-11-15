@@ -4,7 +4,7 @@ import { CONTENT, PERSON } from "@/lib/portfolio-data";
 import { gsap, prefersReducedMotion } from "@/lib/motion";
 import { Schematic } from "./Schematic";
 import { scrollToSection, usePortfolio } from "./state";
-import portrait from "@/assets/harisanth-portrait-cutout.png";
+import portrait from "@/assets/harisanth-portrait-studio.jpeg";
 
 function Lines({
   lines,
@@ -218,8 +218,8 @@ export function Hero() {
           <img
             src={portrait}
             alt=""
-            width={800}
-            height={800}
+            width={999}
+            height={1280}
             loading="eager"
             decoding="async"
           />
@@ -268,8 +268,8 @@ export function Hero() {
           <img
             src={portrait}
             alt=""
-            width={800}
-            height={800}
+            width={999}
+            height={1280}
             loading="eager"
             decoding="async"
           />

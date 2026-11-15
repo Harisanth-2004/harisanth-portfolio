@@ -7,6 +7,7 @@ import {
   CalendarDays,
   Camera,
   CarFront,
+  ChevronDown,
   Cpu,
   Eye,
   EyeOff,
@@ -179,6 +180,7 @@ export function Sections() {
     eng: [],
     mgmt: [],
   });
+  const [photographyOpen, setPhotographyOpen] = useState(false);
 
   useEffect(() => {
     if (!ready || !root.current) return;
@@ -498,45 +500,85 @@ export function Sections() {
               Icon: CarFront,
             },
           ].map(({ title, detail, Icon }, index) => (
-            <article
-              key={title}
-              className="hobby-card border border-border bg-surface/40 p-5 sm:p-6"
-              data-reveal
-            >
-              <div className="flex items-center justify-between border-b border-border pb-4">
-                <span className="t-meta text-signal">0{index + 1} / PERSONAL</span>
-                <Icon size={19} strokeWidth={1.6} aria-hidden="true" className="text-signal" />
-              </div>
-              <h3 className="t-title mt-5">{title}</h3>
-              <p className="t-body mt-3 text-muted-foreground">{detail}</p>
-            </article>
+            title === "Photography" ? (
+              <button
+                key={title}
+                type="button"
+                className="hobby-card hobby-card-trigger w-full cursor-pointer border border-border bg-surface/40 p-5 text-left sm:p-6"
+                data-reveal
+                aria-expanded={photographyOpen}
+                aria-controls="photography-gallery"
+                onClick={() => setPhotographyOpen((open) => !open)}
+              >
+                <span className="flex items-center justify-between border-b border-border pb-4">
+                  <span className="t-meta text-signal">0{index + 1} / PERSONAL</span>
+                  <span className="flex items-center gap-3 text-signal">
+                    <Icon size={19} strokeWidth={1.6} aria-hidden="true" />
+                    <ChevronDown
+                      size={16}
+                      strokeWidth={1.6}
+                      aria-hidden="true"
+                      className={`photography-chevron ${photographyOpen ? "is-open" : ""}`}
+                    />
+                  </span>
+                </span>
+                <span className="t-title mt-5 block">{title}</span>
+                <span className="t-body mt-3 block text-muted-foreground">{detail}</span>
+                <span className="t-meta mt-5 block text-signal" aria-hidden="true">
+                  {photographyOpen ? "Close photo series" : "View photo series"}
+                </span>
+              </button>
+            ) : (
+              <article
+                key={title}
+                className="hobby-card border border-border bg-surface/40 p-5 sm:p-6"
+                data-reveal
+              >
+                <div className="flex items-center justify-between border-b border-border pb-4">
+                  <span className="t-meta text-signal">0{index + 1} / PERSONAL</span>
+                  <Icon size={19} strokeWidth={1.6} aria-hidden="true" className="text-signal" />
+                </div>
+                <h3 className="t-title mt-5">{title}</h3>
+                <p className="t-body mt-3 text-muted-foreground">{detail}</p>
+              </article>
+            )
           ))}
         </div>
-        <div className="photography-edit mt-12 border-t border-border pt-6" data-reveal>
-          <div className="mb-5 flex items-end justify-between gap-4">
-            <h3 className="t-title">Selected photographs</h3>
-            <span className="t-meta text-muted-foreground">PERSONAL WORK / 01—14</span>
-          </div>
-          <div className="photography-grid">
-            {PHOTOGRAPHS.map((photo, index) => (
-              <figure className="photography-frame" key={photo.src}>
-                <div className="photography-image-frame">
-                  <img
-                    src={`/photography/${photo.src}`}
-                    width={photo.width}
-                    height={photo.height}
-                    alt={photo.alt}
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </div>
-                <figcaption className="t-meta">
-                  <span className="photography-index">{String(index + 1).padStart(2, "0")} / </span>
-                  {photo.caption}
-                </figcaption>
-              </figure>
-            ))}
-          </div>
+        <div
+          id="photography-gallery"
+          className="photography-edit mt-8 border-t border-border pt-6"
+          role="region"
+          aria-label="Selected photographs"
+          hidden={!photographyOpen}
+        >
+          {photographyOpen && (
+            <>
+              <div className="mb-5 flex items-end justify-between gap-4">
+                <h3 className="t-title">Selected photographs</h3>
+                <span className="t-meta text-muted-foreground">PERSONAL WORK / 01—14</span>
+              </div>
+              <div className="photography-grid">
+                {PHOTOGRAPHS.map((photo, index) => (
+                  <figure className="photography-frame" key={photo.src}>
+                    <div className="photography-image-frame">
+                      <img
+                        src={`/photography/${photo.src}`}
+                        width={photo.width}
+                        height={photo.height}
+                        alt={photo.alt}
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </div>
+                    <figcaption className="t-meta">
+                      <span className="photography-index">{String(index + 1).padStart(2, "0")} / </span>
+                      {photo.caption}
+                    </figcaption>
+                  </figure>
+                ))}
+              </div>
+            </>
+          )}
         </div>
       </Section>
       {c.projects.length > 0 && (
@@ -1094,3 +1136,4 @@ export function Sections() {
     </div>
   );
 }
+

@@ -431,6 +431,17 @@ html.dark[data-mode="mgmt"] {
 .hobby-card {
   min-height: 12rem;
 }
+.hobby-card-trigger {
+  appearance: none;
+  color: inherit;
+  font: inherit;
+}
+.photography-chevron {
+  transition: transform 180ms var(--ease-expo);
+}
+.photography-chevron.is-open {
+  transform: rotate(180deg);
+}
 .photography-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1448,3 +1459,4 @@ html.dark[data-mode="mgmt"] {
     opacity: 0.12;
   }
 }
+
