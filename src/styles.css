@@ -997,6 +997,30 @@ html.dark[data-mode="mgmt"] {
     transform: none;
   }
 }
+@media (min-width: 640px) and (max-width: 1023px) {
+  .hero-portrait {
+    display: block;
+    top: auto;
+    right: 4vw;
+    bottom: 4%;
+    left: auto;
+    width: clamp(12rem, 31vw, 20rem);
+    height: auto;
+    aspect-ratio: 600 / 769;
+    transform: none;
+  }
+  .hero-scrim {
+    top: 8%;
+    right: auto;
+    bottom: auto;
+    left: 4vw;
+    width: min(55vw, 500px);
+    padding: 0 0 1.25rem;
+  }
+  .hero-scrim-management {
+    justify-content: flex-start;
+  }
+}
 .milestone-card {
   min-height: 13rem;
   border-top: 2px solid color-mix(in oklab, var(--signal) 55%, var(--border));
