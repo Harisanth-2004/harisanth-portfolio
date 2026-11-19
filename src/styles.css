@@ -998,13 +998,16 @@ html.dark[data-mode="mgmt"] {
   }
 }
 @media (min-width: 640px) and (max-width: 1023px) {
+  .portfolio-hero {
+    min-height: min(620px, calc(100svh - 65px));
+  }
   .hero-portrait {
     display: block;
     top: auto;
     right: 4vw;
-    bottom: 4%;
+    bottom: 10%;
     left: auto;
-    width: clamp(12rem, 31vw, 20rem);
+    width: clamp(12.5rem, 34vw, 22rem);
     height: auto;
     aspect-ratio: 600 / 754;
     transform: none;
