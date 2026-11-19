@@ -1006,7 +1006,7 @@ html.dark[data-mode="mgmt"] {
     left: auto;
     width: clamp(12rem, 31vw, 20rem);
     height: auto;
-    aspect-ratio: 600 / 656;
+    aspect-ratio: 600 / 754;
     transform: none;
   }
   .hero-scrim {

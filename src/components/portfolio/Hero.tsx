@@ -219,7 +219,7 @@ export function Hero() {
             src={portrait}
             alt=""
             width={600}
-            height={656}
+            height={754}
             loading="eager"
             decoding="async"
           />
@@ -269,7 +269,7 @@ export function Hero() {
             src={portrait}
             alt=""
             width={600}
-            height={656}
+            height={754}
             loading="eager"
             decoding="async"
           />
