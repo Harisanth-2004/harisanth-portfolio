@@ -597,6 +597,9 @@ html.dark[data-mode="mgmt"] {
     min-height: 720px;
     max-height: 1100px;
   }
+  .contents-sheet {
+    display: none;
+  }
   .portfolio-content {
     padding-left: 24%;
     padding-right: 5%;
@@ -1313,7 +1316,8 @@ html.dark[data-mode="mgmt"] {
 }
 @media (min-width: 640px) {
   .portfolio-hero {
-    min-height: min(680px, calc(100svh - 65px));
+    height: clamp(620px, calc(100svh - 120px), 680px);
+    min-height: 620px;
   }
   .portfolio-cover .cover-meta {
     top: 46%;
